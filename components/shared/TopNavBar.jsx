@@ -3,7 +3,7 @@ import { Bell, MessageSquareText } from "lucide-react";
 
 const TopNavbar = () => {
   return (
-    <nav className="px-4 py-3 bg-white  shadow-sm flex items-center justify-between sticky top-0 z-50">
+    <nav className="px-4 py-3 bg-white  shadow-sm flex items-center justify-between sticky top-0 z-50 rounded-bl-md rounded-br-md">
       <div className="flex gap-2 items-center">
         <Image alt="logo" src={"/logo/logo.png"} width={40} height={40} />
         <p className="text-primary-600 text-[22px] font-bold">Favmine.com</p>

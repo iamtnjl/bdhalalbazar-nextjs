@@ -11,7 +11,7 @@ const ProductCard = () => {
           className="cursor-pointer group-hover:scale-[1.01] group-hover:opacity-75 rounded-md"
           width={600}
           height={600}
-          src={"/images/img-1.jpg"}
+          src={"/placeholders/no-image-square.jpg"}
           loading="lazy"
           decoding="async"
           alt="popular-product"
@@ -39,7 +39,7 @@ const ProductCard = () => {
                   <p className="text-lg text-gray-600 line-through">$100</p>
                   <p className="text-lg text-primary font-bold ">$85</p>
                 </div>
-                <Button variant="teal">Order Now!</Button>
+                <Button variant="primary">Order Now!</Button>
               </div>
             </div>
           </div>

@@ -41,7 +41,7 @@ export default function Carousel() {
   };
 
   return (
-    <div className="relative w-full max-w-3xl mx-auto rounded-lg mt-6 overflow-hidden">
+    <div className="relative w-full max-w-3xl mx-auto rounded-lg overflow-hidden mt-6">
       {/* Swipe Container with Fixed Height */}
       <div className="w-full h-[30vh] md:h-[40vh] overflow-hidden relative">
         <Swipe
@@ -76,7 +76,7 @@ export default function Carousel() {
         </Swipe>
 
         {/* Left Arrow - Centered */}
-        <ArrowLeft
+        {/* <ArrowLeft
           height={48}
           width={48}
           onClick={() => {
@@ -84,10 +84,10 @@ export default function Carousel() {
             handleUserInteraction();
           }}
           className="absolute left-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-700 z-20 bg-white/50 p-2 rounded-full hover:text-gray-600 transition"
-        />
+        /> */}
 
         {/* Right Arrow - Centered */}
-        <ArrowRight
+        {/* <ArrowRight
           height={48}
           width={48}
           onClick={() => {
@@ -95,7 +95,7 @@ export default function Carousel() {
             handleUserInteraction();
           }}
           className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-700 z-20 bg-white/50 p-2 rounded-full hover:text-gray-600 transition"
-        />
+        /> */}
       </div>
 
       {/* Dots Indicator */}

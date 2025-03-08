@@ -85,7 +85,7 @@ const ProductSlider = () => {
             className="cursor-pointer group-hover:scale-[1.01] group-hover:opacity-75 rounded-md"
             width={600}
             height={600}
-            src={"/images/img-1.jpg"}
+            src={"/placeholders/no-image-square.jpg"}
             loading="lazy"
             decoding="async"
             alt="popular-product"
@@ -126,7 +126,7 @@ const ProductSlider = () => {
             className="cursor-pointer group-hover:scale-[1.01] group-hover:opacity-75 rounded-md"
             width={600}
             height={600}
-            src={"/images/img-1.jpg"}
+            src={"/placeholders/no-image-square.jpg"}
             loading="lazy"
             decoding="async"
             alt="popular-product"
@@ -167,7 +167,7 @@ const ProductSlider = () => {
             className="cursor-pointer group-hover:scale-[1.01] group-hover:opacity-75 rounded-md"
             width={600}
             height={600}
-            src={"/images/img-1.jpg"}
+            src={"/placeholders/no-image-square.jpg"}
             loading="lazy"
             decoding="async"
             alt="popular-product"
@@ -208,7 +208,7 @@ const ProductSlider = () => {
             className="cursor-pointer group-hover:scale-[1.01] group-hover:opacity-75 rounded-md"
             width={600}
             height={600}
-            src={"/images/img-1.jpg"}
+            src={"/placeholders/no-image-square.jpg"}
             loading="lazy"
             decoding="async"
             alt="popular-product"
@@ -249,7 +249,7 @@ const ProductSlider = () => {
             className="cursor-pointer group-hover:scale-[1.01] group-hover:opacity-75 rounded-md"
             width={600}
             height={600}
-            src={"/images/img-1.jpg"}
+            src={"/images/img-1.jpg/placeholders/no-image-square.jpg"}
             loading="lazy"
             decoding="async"
             alt="popular-product"
@@ -290,7 +290,7 @@ const ProductSlider = () => {
             className="cursor-pointer group-hover:scale-[1.01] group-hover:opacity-75 rounded-md"
             width={600}
             height={600}
-            src={"/images/img-1.jpg"}
+            src={"/placeholders/no-image-square.jpg"}
             loading="lazy"
             decoding="async"
             alt="popular-product"
