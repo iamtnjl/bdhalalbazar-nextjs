@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Search, X } from "lucide-react";
 
-function SearchByKey({ onChange, value, onReset, params, placeholders }) {
+function SearchByKey({ onChange, value, onReset, placeholders }) {
   const [currentPlaceholder, setCurrentPlaceholder] = useState("");
   const typingSpeed = 100;
 
@@ -51,13 +51,13 @@ function SearchByKey({ onChange, value, onReset, params, placeholders }) {
           onChange={onChange}
         />
         <div className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
-          {/* {params.search.length > 0 ? ( */}
-          <X
-            onClick={onReset}
-            className="h-5 w-5 text-gray-500 font-semibold"
-            aria-hidden="true"
-          />
-          {/* ) : null} */}
+          {value.length > 0 ? (
+            <X
+              onClick={onReset}
+              className="h-5 w-5 text-gray-500 font-semibold"
+              aria-hidden="true"
+            />
+          ) : null}
         </div>
       </div>
     </div>

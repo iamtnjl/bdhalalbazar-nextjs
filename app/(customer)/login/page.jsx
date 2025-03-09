@@ -47,7 +47,6 @@ const Login = () => {
       }
       setSubmitting(true);
       const handleSuccess = ({ data }) => {
-        console.log(data);
         setJWTokenAndRedirect(data.access, () => {
           setBackendErrors({});
           if (previousURL) {

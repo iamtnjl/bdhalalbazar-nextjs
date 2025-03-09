@@ -31,15 +31,15 @@ function CustomerAuthGuardHOC(props) {
   });
 
   const {
-    meStore: { we },
+    meStore: { me },
   } = props;
 
-  const fetchWe = () => {
+  const fetchMe = () => {
     const { meStore } = props;
 
     const handleSuccess = ({ data }) => {
-      meStore.setWe(data);
-      meStore.fetchWe();
+      meStore.setMe(data.user);
+      meStore.fetchMe();
     };
 
     const handleFailure = () => {
@@ -48,10 +48,7 @@ function CustomerAuthGuardHOC(props) {
       router.push(`/login?${queryParams}`);
     };
 
-    return APIKit.we.organization
-      .getOrganization()
-      .then(handleSuccess)
-      .catch(handleFailure);
+    return APIKit.me.getProfile().then(handleSuccess).catch(handleFailure);
   };
 
   useEffect(() => {
@@ -59,7 +56,7 @@ function CustomerAuthGuardHOC(props) {
 
     if (accessToken) {
       setJWTokenAndRedirect(accessToken)
-        .then(fetchWe)
+        .then(fetchMe)
         .then(
           setState((prevState) => ({
             ...prevState,
@@ -67,17 +64,17 @@ function CustomerAuthGuardHOC(props) {
           }))
         )
         .catch((error) => {
-          router.push("/merchant-logout");
+          router.push("/login");
           throw error;
         });
     } else {
       const nextURL = { next: pathname };
       const queryParams = new URLSearchParams(nextURL).toString();
-      router.push(`/merchant-login?${queryParams}`);
+      router.push(`/login?${queryParams}`);
     }
   }, []);
 
-  return state.hasCheckedLocalStorageToken && we?.phone ? props.children : null;
+  return state.hasCheckedLocalStorageToken && me?.phone ? props.children : null;
 }
 
 export default inject("meStore")(observer(CustomerAuthGuardHOC));

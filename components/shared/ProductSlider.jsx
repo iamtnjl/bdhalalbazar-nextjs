@@ -1,14 +1,14 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { Autoplay, Pagination, Navigation, Virtual } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import Button from "./Button";
+import { useQuery } from "@tanstack/react-query";
+import APIKit from "@/common/helpers/APIKit";
+import ProductCard from "./ProductCard";
 
 const ProductSlider = () => {
   const [cardHeight, setCardHeight] = useState(0);
@@ -42,6 +42,10 @@ const ProductSlider = () => {
       }
     };
   }, []);
+  const { data: productsData } = useQuery({
+    queryKey: ["/products"],
+    queryFn: () => APIKit.public.getProducts().then(({ data }) => data),
+  });
   return (
     <Swiper
       modules={[Virtual, Autoplay, Pagination, Navigation]}
@@ -79,253 +83,11 @@ const ProductSlider = () => {
       // className="mySwiper !pt-8 !pb-16 !mx-2 [&>.swiper-pagination-bullets]:lg:hidden [&>.swiper-button-prev]:hidden [&>.swiper-button-next]:hidden [&>.swiper-button-prev]:lg:block [&>.swiper-button-next]:lg:block"
       Virtual
     >
-      <SwiperSlide className="bg-white p-2 rounded-md shadow-sm">
-        <Link href="/register" className="group">
-          <Image
-            className="cursor-pointer group-hover:scale-[1.01] group-hover:opacity-75 rounded-md"
-            width={600}
-            height={600}
-            src={"/placeholders/no-image-square.jpg"}
-            loading="lazy"
-            decoding="async"
-            alt="popular-product"
-          />
-          <div className="flex flex-col items-start pt-3 w-full">
-            <div className="flex items-center gap-3 w-full">
-              <div className="flex items-start justify-between w-full">
-                <div className="flex flex-col truncate pointer-events-none">
-                  <h3 className="font-medium text-gray-900 truncate">
-                    Product Name
-                  </h3>
-                  <h3 className="text-xs font-normal text-gray-600">
-                    Manufacturer Name
-                  </h3>
-
-                  <h3 className="text-xs font-normal text-gray-600">
-                    Color: Black
-                  </h3>
-                  <h3 className="text-xs font-normal text-gray-600">
-                    {"Delivery: 24H (Dhaka)"}
-                  </h3>
-                </div>
-                <div className="flex flex-col items-end gap-1">
-                  <div className="flex items-center gap-2">
-                    <p className="text-lg text-gray-600 line-through">$100</p>
-                    <p className="text-lg text-primary font-bold ">$85</p>
-                  </div>
-                  <Button variant="teal">Order Now!</Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Link>
-      </SwiperSlide>
-      <SwiperSlide className="bg-white p-2 rounded-md shadow-sm">
-        <Link href="/register" className="group">
-          <Image
-            className="cursor-pointer group-hover:scale-[1.01] group-hover:opacity-75 rounded-md"
-            width={600}
-            height={600}
-            src={"/placeholders/no-image-square.jpg"}
-            loading="lazy"
-            decoding="async"
-            alt="popular-product"
-          />
-          <div className="flex flex-col items-start pt-3 w-full">
-            <div className="flex items-center gap-3 w-full">
-              <div className="flex items-start justify-between w-full">
-                <div className="flex flex-col truncate pointer-events-none">
-                  <h3 className="font-medium text-gray-900 truncate">
-                    Product Name
-                  </h3>
-                  <h3 className="text-xs font-normal text-gray-600">
-                    Manufacturer Name
-                  </h3>
-
-                  <h3 className="text-xs font-normal text-gray-600">
-                    Color: Black
-                  </h3>
-                  <h3 className="text-xs font-normal text-gray-600">
-                    {"Delivery: 24H (Dhaka)"}
-                  </h3>
-                </div>
-                <div className="flex flex-col items-end gap-1">
-                  <div className="flex items-center gap-2">
-                    <p className="text-lg text-gray-600 line-through">$100</p>
-                    <p className="text-lg text-primary font-bold ">$85</p>
-                  </div>
-                  <Button variant="teal">Order Now!</Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Link>
-      </SwiperSlide>
-      <SwiperSlide className="bg-white p-2 rounded-md shadow-sm">
-        <Link href="/register" className="group">
-          <Image
-            className="cursor-pointer group-hover:scale-[1.01] group-hover:opacity-75 rounded-md"
-            width={600}
-            height={600}
-            src={"/placeholders/no-image-square.jpg"}
-            loading="lazy"
-            decoding="async"
-            alt="popular-product"
-          />
-          <div className="flex flex-col items-start pt-3 w-full">
-            <div className="flex items-center gap-3 w-full">
-              <div className="flex items-start justify-between w-full">
-                <div className="flex flex-col truncate pointer-events-none">
-                  <h3 className="font-medium text-gray-900 truncate">
-                    Product Name
-                  </h3>
-                  <h3 className="text-xs font-normal text-gray-600">
-                    Manufacturer Name
-                  </h3>
-
-                  <h3 className="text-xs font-normal text-gray-600">
-                    Color: Black
-                  </h3>
-                  <h3 className="text-xs font-normal text-gray-600">
-                    {"Delivery: 24H (Dhaka)"}
-                  </h3>
-                </div>
-                <div className="flex flex-col items-end gap-1">
-                  <div className="flex items-center gap-2">
-                    <p className="text-lg text-gray-600 line-through">$100</p>
-                    <p className="text-lg text-primary font-bold ">$85</p>
-                  </div>
-                  <Button variant="teal">Order Now!</Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Link>
-      </SwiperSlide>
-      <SwiperSlide className="bg-white p-2 rounded-md shadow-sm">
-        <Link href="/register" className="group">
-          <Image
-            className="cursor-pointer group-hover:scale-[1.01] group-hover:opacity-75 rounded-md"
-            width={600}
-            height={600}
-            src={"/placeholders/no-image-square.jpg"}
-            loading="lazy"
-            decoding="async"
-            alt="popular-product"
-          />
-          <div className="flex flex-col items-start pt-3 w-full">
-            <div className="flex items-center gap-3 w-full">
-              <div className="flex items-start justify-between w-full">
-                <div className="flex flex-col truncate pointer-events-none">
-                  <h3 className="font-medium text-gray-900 truncate">
-                    Product Name
-                  </h3>
-                  <h3 className="text-xs font-normal text-gray-600">
-                    Manufacturer Name
-                  </h3>
-
-                  <h3 className="text-xs font-normal text-gray-600">
-                    Color: Black
-                  </h3>
-                  <h3 className="text-xs font-normal text-gray-600">
-                    {"Delivery: 24H (Dhaka)"}
-                  </h3>
-                </div>
-                <div className="flex flex-col items-end gap-1">
-                  <div className="flex items-center gap-2">
-                    <p className="text-lg text-gray-600 line-through">$100</p>
-                    <p className="text-lg text-primary font-bold ">$85</p>
-                  </div>
-                  <Button variant="teal">Order Now!</Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Link>
-      </SwiperSlide>
-      <SwiperSlide className="bg-white p-2 rounded-md shadow-sm">
-        <Link href="/register" className="group">
-          <Image
-            className="cursor-pointer group-hover:scale-[1.01] group-hover:opacity-75 rounded-md"
-            width={600}
-            height={600}
-            src={"/images/img-1.jpg/placeholders/no-image-square.jpg"}
-            loading="lazy"
-            decoding="async"
-            alt="popular-product"
-          />
-          <div className="flex flex-col items-start pt-3 w-full">
-            <div className="flex items-center gap-3 w-full">
-              <div className="flex items-start justify-between w-full">
-                <div className="flex flex-col truncate pointer-events-none">
-                  <h3 className="font-medium text-gray-900 truncate">
-                    Product Name
-                  </h3>
-                  <h3 className="text-xs font-normal text-gray-600">
-                    Manufacturer Name
-                  </h3>
-
-                  <h3 className="text-xs font-normal text-gray-600">
-                    Color: Black
-                  </h3>
-                  <h3 className="text-xs font-normal text-gray-600">
-                    {"Delivery: 24H (Dhaka)"}
-                  </h3>
-                </div>
-                <div className="flex flex-col items-end gap-1">
-                  <div className="flex items-center gap-2">
-                    <p className="text-lg text-gray-600 line-through">$100</p>
-                    <p className="text-lg text-primary font-bold ">$85</p>
-                  </div>
-                  <Button variant="teal">Order Now!</Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Link>
-      </SwiperSlide>
-      <SwiperSlide className="bg-white p-2 rounded-md shadow-sm">
-        <Link href="/register" className="group">
-          <Image
-            className="cursor-pointer group-hover:scale-[1.01] group-hover:opacity-75 rounded-md"
-            width={600}
-            height={600}
-            src={"/placeholders/no-image-square.jpg"}
-            loading="lazy"
-            decoding="async"
-            alt="popular-product"
-          />
-          <div className="flex flex-col items-start pt-3 w-full">
-            <div className="flex items-center gap-3 w-full">
-              <div className="flex items-start justify-between w-full">
-                <div className="flex flex-col truncate pointer-events-none">
-                  <h3 className="font-medium text-gray-900 truncate">
-                    Product Name
-                  </h3>
-                  <h3 className="text-xs font-normal text-gray-600">
-                    Manufacturer Name
-                  </h3>
-
-                  <h3 className="text-xs font-normal text-gray-600">
-                    Color: Black
-                  </h3>
-                  <h3 className="text-xs font-normal text-gray-600">
-                    {"Delivery: 24H (Dhaka)"}
-                  </h3>
-                </div>
-                <div className="flex flex-col items-end gap-1">
-                  <div className="flex items-center gap-2">
-                    <p className="text-lg text-gray-600 line-through">$100</p>
-                    <p className="text-lg text-primary font-bold ">$85</p>
-                  </div>
-                  <Button variant="teal">Order Now!</Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Link>
-      </SwiperSlide>
-
+      {productsData?.results.map((item, i) => (
+        <SwiperSlide key={i}>
+          <ProductCard product={item} />
+        </SwiperSlide>
+      ))}
       <div
         style={{ height: cardHeight, width: "auto" }}
         className="absolute z-10 hidden px-6 transition-all transform -translate-x-4 -translate-y-full opacity-0 cursor-pointer group lg:flex lg:items-center hover:opacity-100 duration-400 hover:bg-gradient-to-r hover:from-black/60 hover:via-black/20 hover:to-transparent review-swiper-button-prev"

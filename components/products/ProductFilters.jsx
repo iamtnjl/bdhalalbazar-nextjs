@@ -5,32 +5,29 @@ import { useQuery } from "@tanstack/react-query";
 import APIKit from "@/common/helpers/APIKit";
 import Button from "../shared/Button";
 import SearchAndSelect from "../from/SearchAndSelect";
-import { formatFilterOptions } from "@/common/helpers/UtilKit";
+import {
+  formatFilterOptions,
+  loadOptions,
+  transformOptionsData,
+} from "@/common/helpers/UtilKit";
+import PaginatedSelect from "../from/PaginatedSelect";
+import { useFilters } from "@/providers/FiltersProvider";
 
-const ProductFilters = ({ setFilerModal }) => {
-  const { data: categoriesData } = useQuery({
-    queryKey: ["/categories"],
-    queryFn: () => APIKit.tags.getCategoriesList().then(({ data }) => data),
-  });
-
-  const { data: brandsData } = useQuery({
-    queryKey: ["/brands"],
-    queryFn: () => APIKit.tags.getBrandsList().then(({ data }) => data),
-  });
-
-  const { data: colorsData } = useQuery({
-    queryKey: ["/colors"],
-    queryFn: () => APIKit.tags.getColorList().then(({ data }) => data),
-  });
-
-  const { data: materialsData, isLoading } = useQuery({
-    queryKey: ["/materials"],
-    queryFn: () => APIKit.tags.getMaterialList().then(({ data }) => data),
-  });
-
-  if (isLoading) {
-    return "Loading...";
-  }
+const ProductFilters = (props) => {
+  const {
+    params,
+    updateParams,
+    closeFilterModal,
+    triggerURLUpdate,
+    setFilterModal,
+  } = useFilters();
+  const {
+    selectedCategories,
+    selectedBrands,
+    selectedColors,
+    selectedMaterials,
+  } = props;
+  console.log(params);
   return (
     <div>
       <div className="flex items-center justify-between border-b border-gray-200 pb-2">
@@ -42,7 +39,7 @@ const ProductFilters = ({ setFilerModal }) => {
           <button
             type="button"
             className="rounded-md text-gray-700 hover:text-gray-600"
-            onClick={() => setFilerModal(false)}
+            onClick={() => closeFilterModal()}
           >
             <svg
               className="h-6 w-6"
@@ -62,65 +59,70 @@ const ProductFilters = ({ setFilerModal }) => {
         </div>
       </div>
       <div className="flex flex-col gap-4 pt-4 pb-8">
-        <SearchAndSelect
+        <PaginatedSelect
           label="Select Categories"
-          name="status-filter"
-          options={formatFilterOptions(categoriesData?.results)}
-          // onChange={(selectedOption) => {
-          //   setParams((prevParams) => ({
-          //     ...prevParams,
-          //     status: selectedOption?.value,
-          //   }));
-          // }}
-          // isClearable={params.status}
-          placeholder="Select your desired categories"
+          placeholder="Select categories"
+          loadOptions={(inputValue, _, page) =>
+            loadOptions(inputValue, _, page, APIKit.tags.getCategoriesList)
+          }
+          additional={{ page: 1 }}
+          isMulti={true}
+          onChange={(items) => updateParams("categories", items)}
+          value={selectedCategories?.filter((option) =>
+            params?.categories?.includes(option.value)
+          )}
         />
-        <SearchAndSelect
+        <PaginatedSelect
           label="Select Brands"
-          name="status-filter"
-          options={formatFilterOptions(brandsData?.results)}
-          // onChange={(selectedOption) => {
-          //   setParams((prevParams) => ({
-          //     ...prevParams,
-          //     status: selectedOption?.value,
-          //   }));
-          // }}
-          // isClearable={params.status}
-          placeholder="Select your favourite brands"
+          placeholder="Select brands"
+          loadOptions={(inputValue, _, page) =>
+            loadOptions(inputValue, _, page, APIKit.tags.getBrandsList)
+          }
+          additional={{ page: 1 }}
+          isMulti={true}
+          onChange={(items) => updateParams("brands", items)}
+          value={selectedBrands?.filter((option) =>
+            params?.brands?.includes(option.value)
+          )}
         />
-        <SearchAndSelect
+        <PaginatedSelect
           label="Select Colors"
-          name="status-filter"
-          options={formatFilterOptions(colorsData?.results)}
-          // onChange={(selectedOption) => {
-          //   setParams((prevParams) => ({
-          //     ...prevParams,
-          //     status: selectedOption?.value,
-          //   }));
-          // }}
-          // isClearable={params.status}
-          placeholder="Choose your favourite colors"
+          placeholder="Select colors"
+          loadOptions={(inputValue, _, page) =>
+            loadOptions(inputValue, _, page, APIKit.tags.getColorList)
+          }
+          additional={{ page: 1 }}
+          isMulti={true}
+          onChange={(items) => updateParams("colors", items)}
+          value={selectedColors?.filter((option) =>
+            params?.colors?.includes(option.value)
+          )}
         />
-        <SearchAndSelect
+        <PaginatedSelect
           label="Select Materials"
-          name="status-filter"
-          options={formatFilterOptions(materialsData?.results)}
-          // onChange={(selectedOption) => {
-          //   setParams((prevParams) => ({
-          //     ...prevParams,
-          //     status: selectedOption?.value,
-          //   }));
-          // }}
-          // isClearable={params.status}
-          placeholder="Select you essential materials"
+          placeholder="Select materials"
+          loadOptions={(inputValue, _, page) =>
+            loadOptions(inputValue, _, page, APIKit.tags.getMaterialList)
+          }
+          additional={{ page: 1 }}
+          isMulti={true}
+          onChange={(items) => updateParams("materials", items)}
+          value={selectedMaterials?.filter((option) =>
+            params?.materials?.includes(option.value)
+          )}
         />
       </div>
 
       <div className="flex flex-shrink-0 justify-end border-t border-gray-200 pt-4 items-center gap-4">
-        <Button variant="white" onClick={() => setFilerModal(false)}>
+        <Button variant="white" onClick={() => closeFilterModal()}>
           Cancel
         </Button>
-        <Button variant="primary" onClick={() => setFilerModal(false)}>
+        <Button
+          variant="primary"
+          onClick={() => {
+            triggerURLUpdate();
+          }}
+        >
           Apply Filters
         </Button>
       </div>

@@ -52,18 +52,6 @@ export function sanitizeParams(params) {
   return sanitizedObj;
 }
 
-// Format currency using the Browser Intl API
-export function formatCurrency(data) {
-  // Created an instance
-  const formatCurrency = new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "BDT",
-  });
-
-  // Return the formatted currency
-  return formatCurrency.format(data).slice(4);
-}
-
 // Check current roles permission
 export function checkAccess(currentRole = "", permittedRoles = []) {
   const hasAccess = permittedRoles
@@ -80,3 +68,97 @@ export function formatFilterOptions(data) {
     value: item.slug,
   }));
 }
+
+export function formatCurrency(amount, separator = " ") {
+  return parseInt(amount)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, separator);
+}
+
+export function isEqual(obj1, obj2) {
+  if (obj1 === obj2) return true; // Same reference
+
+  if (
+    typeof obj1 !== "object" ||
+    typeof obj2 !== "object" ||
+    obj1 === null ||
+    obj2 === null
+  ) {
+    return false; // If not objects, they must be strictly equal
+  }
+
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
+
+  if (keys1.length !== keys2.length) return false; // Different number of keys
+
+  for (let key of keys1) {
+    if (!keys2.includes(key) || !isEqual(obj1[key], obj2[key])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+export function createUrlSearchParams(paramsObj) {
+  const searchParams = new URLSearchParams();
+
+  for (const key in paramsObj) {
+    if (Object.prototype.hasOwnProperty.call(paramsObj, key)) {
+      const value = paramsObj[key];
+      if (value === undefined || value === null || value === "") {
+        continue;
+      }
+      if (Array.isArray(value)) {
+        const filteredArray = value.filter((item) => item !== "");
+        if (filteredArray.length > 0) {
+          searchParams.append(key, filteredArray.join(","));
+        }
+      } else {
+        searchParams.append(key, value);
+      }
+    }
+  }
+  return searchParams.toString();
+}
+
+export function arrayToParams(arr) {
+  if (Array.isArray(arr) && arr.length > 0) {
+    return arr.join(",");
+  }
+  return arr;
+}
+
+export const transformOptionsData = (data) => {
+  const transformedData = {
+    options: [
+      ...data?.results.map((item) => {
+        return {
+          label: item.name,
+          value: item.slug,
+        };
+      }),
+    ],
+    hasMore: !!data.next,
+  };
+
+  return transformedData;
+};
+
+export const loadOptions = async (inputValue, _, { page }, promise) => {
+  try {
+    const response = await promise(
+      sanitizeParams({ search: inputValue, page })
+    );
+    const transformed = transformOptionsData(response.data);
+    return {
+      options: transformed.options,
+      hasMore: transformed.hasMore,
+      additional: { page: page + 1 },
+    };
+  } catch (error) {
+    console.error("Error fetching organizations:", error);
+    return { options: [], hasMore: false };
+  }
+};

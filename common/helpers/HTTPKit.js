@@ -30,7 +30,6 @@ const setClientToken = (token) => {
       client.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       clientIsAuthenticated = true;
       isReady();
-      console.info(`Setting JSONWebToken in client: ${token}`);
       resolve(client);
     } catch (error) {
       reject(error);
@@ -47,7 +46,7 @@ const isReady = () => {
 
   try {
     if (clientIsAuthenticated) {
-      console.log("Client is already authenticated, resolving client...");
+      console.log("Client is authenticated, resolving client...");
       defer.resolve(client);
     } else {
       const token = localStorage.get(AUTH_TOKEN_KEY);

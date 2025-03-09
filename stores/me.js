@@ -21,13 +21,13 @@ class MeStore {
     });
   }
 
-  fetch = () => {
+  fetchMe = () => {
     // Call this explicitly when new data from server is needed
     const onSuccess = ({ data }) => {
       this.setMe(data);
     };
     const onFailure = (error) => {};
-    return APIKit.me.getMe().then(onSuccess).catch(onFailure);
+    return APIKit.me.getProfile().then(onSuccess).catch(onFailure);
   };
 
   fetchWe = () => {

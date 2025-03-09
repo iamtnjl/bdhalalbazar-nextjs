@@ -10,23 +10,36 @@ const APIKit = {
   setClientToken: HTTPKit.setClientToken,
 
   // Public API's
-  public: {},
+  public: {
+    getProducts: (params) => {
+      const url = "/public/products";
+      return client.get(url, { params });
+    },
+    getProductDetails: (id) => {
+      const url = `/public/products/${id}`;
+      return client.get(url);
+    },
+    cart: (payload) => {
+      const url = `/cart`;
+      return client.post(url, payload);
+    },
+  },
   tags: {
-    getCategoriesList: () => {
+    getCategoriesList: (params) => {
       const url = "/public/categories";
-      return client.get(url);
+      return client.get(url, { params });
     },
-    getBrandsList: () => {
+    getBrandsList: (params) => {
       const url = "/public/brands";
-      return client.get(url);
+      return client.get(url, { params });
     },
-    getColorList: () => {
+    getColorList: (params) => {
       const url = "/public/colors";
-      return client.get(url);
+      return client.get(url, { params });
     },
-    getMaterialList: () => {
+    getMaterialList: (params) => {
       const url = "/public/materials";
-      return client.get(url);
+      return client.get(url, { params });
     },
   },
 
