@@ -19,9 +19,17 @@ const APIKit = {
       const url = `/public/products/${id}`;
       return client.get(url);
     },
+    getCart: () => {
+      const url = `/public/cart`;
+      return client.get(url);
+    },
     cart: (payload) => {
-      const url = `/cart`;
+      const url = `/public/cart`;
       return client.post(url, payload);
+    },
+    deleteCart: (id) => {
+      const url = `/public/cart/${id}`;
+      return client.delete(url);
     },
   },
   tags: {

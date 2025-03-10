@@ -31,6 +31,7 @@ export default function TextInputField(props) {
         className={className}
         value={value}
         onChange={onChange}
+        {...props}
       />
       <ErrorByFieldName field={name} errors={errors} />
     </div>

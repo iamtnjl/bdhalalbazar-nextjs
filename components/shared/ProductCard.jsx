@@ -1,12 +1,18 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Button from "./Button";
 import Image from "next/image";
 import Link from "next/link";
 import { formatCurrency } from "@/common/helpers/UtilKit";
-import { ShoppingCart, Truck } from "lucide-react";
+import { Minus, Plus, ShoppingCart, Truck } from "lucide-react";
+import { useCart } from "@/providers/CartProvider";
+import TextInputField from "../from/TextInputField";
+import QuantityButton from "./QuantityButton";
 
 const ProductCard = ({ product }) => {
-  
+  const { addToCart, updateQuantity, cart } = useCart();
+  const cartItem = cart.find((item) => item.productId === product._id);
+
   return (
     <div className="bg-white p-2 rounded-md shadow-sm">
       <Link href={`/products/${product._id}`} className="group">
@@ -51,10 +57,21 @@ const ProductCard = ({ product }) => {
                     {formatCurrency(product?.price, ",")}
                   </p>
                 </div>
-                <Button variant="primary">
-                  <ShoppingCart className="w-[18px] h-[18px] mr-2 mb-[3px]" />
-                  Add to Cart
-                </Button>
+                {!cartItem ? (
+                  <Button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      e.preventDefault();
+                      addToCart(product._id, 1);
+                    }}
+                    variant="primary"
+                  >
+                    <ShoppingCart className="w-[18px] h-[18px] mr-2 mb-[3px]" />
+                    Add to Cart
+                  </Button>
+                ) : (
+                  <QuantityButton cartItem={cartItem} product={product} />
+                )}
               </div>
             </div>
           </div>
