@@ -1,23 +1,27 @@
-"use client";
+import dynamic from "next/dynamic";
 
-import { FiltersProvider } from "@/providers/FiltersProvider";
+// Dynamically import the FiltersProvider with SSR disabled
+const FiltersProvider = dynamic(
+  () => import("../../../providers/FiltersProvider"),
+  {
+    ssr: false,
+  }
+);
 
 const ProductsLayout = ({ children }) => {
   return (
-    <>
-      <FiltersProvider
-        initialParams={{
-          search: "",
-          sort_by: "",
-          categories: [],
-          colors: [],
-          brands: [],
-          materials: [],
-        }}
-      >
-        {children}
-      </FiltersProvider>
-    </>
+    <FiltersProvider
+      initialParams={{
+        search: "",
+        sort_by: "",
+        categories: [],
+        colors: [],
+        brands: [],
+        materials: [],
+      }}
+    >
+      {children}
+    </FiltersProvider>
   );
 };
 

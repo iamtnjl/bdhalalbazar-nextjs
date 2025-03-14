@@ -21,7 +21,7 @@ const PhoneInputField = (props) => {
           autoComplete="none"
           name={name}
           type="text"
-          className="mt-1 block w-full appearance-none rounded-md border border-gray-300 pr-3 py-2 placeholder-gray-400 shadow-sm focus:border-teal-500 focus:outline-none focus:ring-teal-500 text-sm pl-14"
+          className="mt-1 block w-full appearance-none rounded-md border border-gray-300 pr-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 text-sm pl-14"
           onChange={onChange}
           onFocus={onFocus}
           placeholder={placeholder}

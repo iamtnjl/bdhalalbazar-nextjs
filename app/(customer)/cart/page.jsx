@@ -8,6 +8,7 @@ import ProductCartItem from "./components/ProductCartItem";
 import { formatCurrency } from "@/common/helpers/UtilKit";
 import { useCart } from "@/providers/CartProvider";
 import Button from "@/components/shared/Button";
+import { useRouter } from "next/navigation";
 
 const Cart = () => {
   const { data, isLoading, refetch } = useQuery({
@@ -16,6 +17,8 @@ const Cart = () => {
     keepPreviousData: true,
   });
 
+  const router = useRouter();
+
   if (isLoading) {
     return "Loading....";
   }
@@ -23,7 +26,7 @@ const Cart = () => {
   return (
     <div className="px-2 py-4">
       {data?.cart_products?.length > 0 ? (
-        <div >
+        <div>
           {data?.products?.length === 1 ? (
             <h2 className="text-sm font-bold text-gray-700 mb-2">
               {data?.products?.length} Product added
@@ -80,7 +83,11 @@ const Cart = () => {
               <p>৳ {formatCurrency(data?.grand_total, ",")}</p>
             </div>
           </div>
-          <Button variant="primary" extraClassName="w-full mt-10">
+          <Button
+            onClick={() => router.push("/checkout")}
+            variant="primary"
+            extraClassName="w-full mt-10"
+          >
             Checkout Now!
           </Button>
         </div>

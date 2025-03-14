@@ -22,7 +22,7 @@ const sortOptions = [
   { label: "Oldest", value: "oldest" },
 ];
 
-const PublicProducts = () => {
+const ProductContainer = () => {
   const {
     params,
     filterModal,
@@ -30,7 +30,6 @@ const PublicProducts = () => {
     isFilterApplied,
     paramsInURL,
     updateParams,
-    triggerURLUpdate,
     removeFilterItems,
   } = useFilters();
 
@@ -153,4 +152,4 @@ const PublicProducts = () => {
   );
 };
 
-export default PublicProducts;
+export default ProductContainer;

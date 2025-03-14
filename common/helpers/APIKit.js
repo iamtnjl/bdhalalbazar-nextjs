@@ -31,6 +31,10 @@ const APIKit = {
       const url = `/public/cart/${id}`;
       return client.delete(url);
     },
+    placeOrder: (payload) => {
+      const url = `/public/order`;
+      return client.post(url, payload);
+    },
   },
   tags: {
     getCategoriesList: (params) => {
@@ -67,6 +71,18 @@ const APIKit = {
   me: {
     getProfile: () => {
       const url = `/me`;
+      return client.get(url);
+    },
+    getAddresses: () => {
+      const url = `/me/addresses`;
+      return client.get(url);
+    },
+    getOrders: (params) => {
+      const url = `/me/orders`;
+      return client.get(url, { params });
+    },
+    getOrderDetails: (id) => {
+      const url = `/me/orders/${id}`;
       return client.get(url);
     },
   },

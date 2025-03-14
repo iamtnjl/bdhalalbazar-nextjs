@@ -1,3 +1,4 @@
+"use client"
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 import APIKit from "../helpers/APIKit";

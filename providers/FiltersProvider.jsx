@@ -7,7 +7,7 @@ import { createUrlSearchParams, isEqual } from "../common/helpers/UtilKit.js";
 
 const FiltersParamsContext = createContext();
 
-export function FiltersProvider({ children, initialParams = {} }) {
+export default function FiltersProvider({ children, initialParams = {} }) {
   const pathName = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -95,13 +95,15 @@ export function FiltersProvider({ children, initialParams = {} }) {
             : items,
         };
 
-        if (fieldNameOrFields === "sort_by") {
+        if (fieldNameOrFields === "sort_by" || fieldNameOrFields === "status") {
           // Immediately update URL for sort_by
           triggerURLUpdate(newParams);
-        } else if (fieldNameOrFields === "search") {
+        } else if (
+          fieldNameOrFields === "search" ||
+          fieldNameOrFields === "order_id"
+        ) {
           // Debounce search updates
-          if (window.searchTimeout) clearTimeout(window.searchTimeout);
-          window.searchTimeout = setTimeout(() => {
+          setTimeout(() => {
             triggerURLUpdate(newParams);
           }, 300);
         }

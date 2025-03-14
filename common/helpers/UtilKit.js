@@ -162,3 +162,18 @@ export const loadOptions = async (inputValue, _, { page }, promise) => {
     return { options: [], hasMore: false };
   }
 };
+
+export function formatDateTime(dateTimeString, includeTime) {
+  if (!dateTimeString) return null; // Return null if no date is provided
+
+  const date = new Date(dateTimeString);
+
+  const options = {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    ...(includeTime && { hour: "numeric", minute: "numeric", hour12: true }),
+  };
+
+  return date.toLocaleString("en-US", options);
+}

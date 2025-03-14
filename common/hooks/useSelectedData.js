@@ -1,3 +1,4 @@
+"use client"
 import { useQuery } from "@tanstack/react-query";
 
 import { arrayToParams, formatFilterOptions } from "@/common/helpers/UtilKit";

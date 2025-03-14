@@ -58,7 +58,7 @@ const UserPanel = ({ meStore: { me } }) => {
           <ArrowRight height={20} width={20} className="text-primary" />
         </Link>
         <Link
-          href="/edit-profile"
+          href="/me/edit-profile"
           className=" px-4 py-2 cursor-pointer bg-white rounded-md w-full hover:text-primary  flex items-center justify-between border border-gray-200"
         >
           <p className="text-lg font-medium  text-gray-700 hover:text-primary">

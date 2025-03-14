@@ -43,7 +43,7 @@ function SearchByKey({ onChange, value, onReset, placeholders }) {
         <input
           id="search-company"
           autoComplete="false"
-          className="block w-full rounded-lg border border-gray-300 bg-white py-3 pl-10 pr-3 leading-5 text-gray-900 placeholder-gray-500 focus:border-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-sky-600 sm:text-sm"
+          className="block w-full rounded-lg border border-gray-300 bg-white py-[10px] pl-10 pr-3 leading-5 text-gray-900 placeholder-gray-500 focus:border-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-sky-600 sm:text-sm"
           placeholder={currentPlaceholder}
           type="search-company"
           name="search-company"
@@ -51,7 +51,7 @@ function SearchByKey({ onChange, value, onReset, placeholders }) {
           onChange={onChange}
         />
         <div className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
-          {value.length > 0 ? (
+          {value?.length > 0 ? (
             <X
               onClick={onReset}
               className="h-5 w-5 text-gray-500 font-semibold"

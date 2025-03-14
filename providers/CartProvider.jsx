@@ -78,9 +78,16 @@ export const CartProvider = ({ children }) => {
     }
   };
 
+  // Clear cart completely
+  const clearCart = () => {
+    setCart([]);
+    localStorage.removeItem("cart");
+    queryClient.invalidateQueries({ queryKey: ["/cart"] });
+  };
+
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, updateQuantity, removeFromCart }}
+      value={{ cart, addToCart, updateQuantity, removeFromCart, clearCart }}
     >
       {children}
     </CartContext.Provider>
