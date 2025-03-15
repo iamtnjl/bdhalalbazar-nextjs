@@ -16,10 +16,7 @@ import toast from "react-hot-toast";
 import { setJWTokenAndRedirect } from "@/components/HOC/UserAuthGuard";
 
 const yupSchema = object({
-  phone: string()
-    .required("Please enter your phone number")
-    .min(10, "Phone number should be 11 characters without country code")
-    .max(11, "Phone Number should not be more than 11 characters"),
+  phone: string().required("Please enter your phone number"),
   password: string()
     .required("Please enter a password")
     .min(6, "Password must be minimum 6 characters or more"),
@@ -34,17 +31,10 @@ const LoginForm = () => {
   const searchParams = useSearchParams();
   const previousURL = searchParams.get("next");
   const router = useRouter();
-  let phoneNumber = "";
-
   const formik = useFormik({
     initialValues,
     validationSchema: yupSchema,
     onSubmit: (values, { setSubmitting }) => {
-      if (values.phone.charAt(0) === "0") {
-        phoneNumber = "+880" + values.phone.substring(1);
-      } else {
-        phoneNumber = "+880" + values.phone;
-      }
       setSubmitting(true);
       const handleSuccess = ({ data }) => {
         setJWTokenAndRedirect(data.access, () => {
@@ -64,7 +54,7 @@ const LoginForm = () => {
       };
 
       const payload = {
-        user_id: phoneNumber,
+        user_id: values.phone,
         password: values.password,
       };
 

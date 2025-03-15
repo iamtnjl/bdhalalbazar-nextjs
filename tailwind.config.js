@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        vibes: ["Great Vibes", "cursive"],
+      },
       colors: {
         primary: "#372aac",
         "primary-bg": "#eef2ff",

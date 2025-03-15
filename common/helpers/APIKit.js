@@ -62,7 +62,7 @@ const APIKit = {
       return client.post(url, payload);
     },
     register: (payload) => {
-      const url = "auth/registration";
+      const url = "auth/register";
       return client.post(url, payload);
     },
   },

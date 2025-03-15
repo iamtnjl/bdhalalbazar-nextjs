@@ -28,8 +28,8 @@ const PhoneInputField = (props) => {
           onBlur={onBlur}
           value={value}
         />
-        <span className="text-grey-400 text-sm absolute top-[9px] left-2">
-          +880
+        <span className="text-grey-400 text-sm absolute top-[9px] left-3">
+          +48
         </span>
       </div>
       <ErrorByFieldName field={name} errors={errors} />
