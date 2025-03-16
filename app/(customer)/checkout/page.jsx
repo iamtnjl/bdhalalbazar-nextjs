@@ -58,6 +58,7 @@ const CheckOut = () => {
   const { data, refetch } = useQuery({
     queryKey: [`/carts`],
     queryFn: () => APIKit.public.getCart({ deviceId }).then(({ data }) => data),
+    enabled: !!deviceId,
   });
 
   async function fetchUserData() {

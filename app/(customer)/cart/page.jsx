@@ -26,6 +26,8 @@ const Cart = () => {
     queryKey: ["/cart"],
     queryFn: () => APIKit.public.getCart({ deviceId }).then(({ data }) => data),
     keepPreviousData: true,
+    enabled: !!deviceId,
+    retry: false,
   });
 
   const router = useRouter();

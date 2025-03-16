@@ -78,7 +78,7 @@ export const CartProvider = ({ children }) => {
         return newCart;
       });
 
-      await APIKit.public.deleteCart({ deviceId, productId });
+      await APIKit.public.deleteCart(deviceId, productId);
       queryClient.invalidateQueries({ queryKey: ["/cart"] });
     } catch (error) {
       console.error("Failed to remove item from cart:", error);

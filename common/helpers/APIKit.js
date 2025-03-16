@@ -27,8 +27,8 @@ const APIKit = {
       const url = `/public/cart`;
       return client.post(url, payload);
     },
-    deleteCart: (id) => {
-      const url = `/public/cart/${id}`;
+    deleteCart: (deviceId, productId) => {
+      const url = `public/cart/${deviceId}/product/${productId}`;
       return client.delete(url);
     },
     placeOrder: (payload) => {
