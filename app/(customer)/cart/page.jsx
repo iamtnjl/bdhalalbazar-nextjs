@@ -9,7 +9,7 @@ import { formatCurrency } from "@/common/helpers/UtilKit";
 import { useCart } from "@/providers/CartProvider";
 import Button from "@/components/shared/Button";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Cart = () => {
   const [deviceId, setDeviceId] = useState(null);
