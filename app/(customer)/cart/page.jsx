@@ -10,7 +10,8 @@ import { useCart } from "@/providers/CartProvider";
 import Button from "@/components/shared/Button";
 import { useRouter } from "next/navigation";
 
-const deviceId = localStorage.getItem("deviceId");
+const deviceId =
+  typeof window !== undefined && localStorage.getItem("deviceId");
 
 const Cart = () => {
   const { data, isLoading, refetch } = useQuery({
