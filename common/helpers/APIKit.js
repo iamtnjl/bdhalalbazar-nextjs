@@ -73,6 +73,10 @@ const APIKit = {
       const url = `/me`;
       return client.get(url);
     },
+    patchProfile: (payload) => {
+      const url = `/me`;
+      return client.patch(url, payload);
+    },
     getAddresses: () => {
       const url = `/me/addresses`;
       return client.get(url);

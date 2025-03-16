@@ -4,7 +4,7 @@ import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useFormik } from "formik";
 import { toast } from "react-hot-toast";
-import { object, string } from "yup";
+import { object, ref, string } from "yup";
 import TextInputField from "@/components/from/TextInputField";
 import FormikErrorBox from "@/components/from/FormikErrorBox";
 import Button from "@/components/shared/Button";
@@ -12,52 +12,44 @@ import APIKit from "@/common/helpers/APIKit";
 import { pickDifference } from "@/common/helpers/UtilKit";
 import PhoneInputField from "@/components/from/PhoneInputField";
 import PasswordInputField from "@/components/from/PasswordInputField";
+import { useRouter } from "next/navigation";
 
-const formValidationSchema = object({
-  first_name: string().required("Please enter your first name"),
-  last_name: string().required("Please enter your last name"),
-  email: string()
-    .email("Please enter a valid email")
-    .required("Please enter your email"),
+const yupSchema = object({
+  password: string().min(8, "At least 8 characters"),
+  retype_password: string()
+    .min(8, "At least 8 characters")
+    .oneOf([ref("password")], "Passwords doesn't match"),
 });
 
-function EditProfile({
-  firstName,
-  lastName,
-  email,
-  bengali_name,
-  setOpenProfileEditDrawer,
-  refetchProfile,
-  phone,
-  ...props
-}) {
+function EditProfile({ ...props }) {
   const [backendErrors, setBackendErrors] = useState({});
-  const [passwordChangeDrawer, setPasswordChangeDrawer] = useState(false);
-  const initialValues = {
-    first_name: firstName || "",
-    last_name: lastName || "",
-    email: email || "",
-    bengali_name: bengali_name || "",
-    phone: phone || "",
-  };
-
+  const router = useRouter();
   const { setMe } = props.meStore;
+  const { me } = props.meStore;
+  const initialValues = {
+    name: me.name || "",
+    email: me.email || "",
+    phone: me.phone || "",
+    phone: me.phone || "",
+    password: "",
+    retype_password: "",
+  };
 
   const formik = useFormik({
     initialValues,
-    validationSchema: formValidationSchema,
+    validationSchema: yupSchema,
     onSubmit: (values, { setSubmitting }) => {
       setSubmitting(true);
       const handleSuccess = ({ data }) => {
         setBackendErrors({});
-        setMe(data);
-        refetchProfile();
-        setOpenProfileEditDrawer(false);
+        setMe(data.user);
+        router.push("/me");
       };
+
       const handleFailure = (error) => {
         console.warn(error?.response);
         setBackendErrors(error?.response?.data);
-        throw new Error(error?.response?.data, { cause: error });
+        throw error;
       };
 
       const payload = pickDifference(initialValues, values);
