@@ -17,11 +17,10 @@ const OrderDetails = () => {
     keepPreviousData: true,
   });
 
-  if(isLoading){
-    return "Loading..."
+  if (isLoading) {
+    return "Loading...";
   }
 
-  console.log(data);
   return (
     <div className="px-2 py-4">
       <div className="flex flex-col gap-4 -m-4 p-4">

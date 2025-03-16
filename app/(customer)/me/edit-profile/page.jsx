@@ -140,12 +140,9 @@ function EditProfile({ ...props }) {
           />
           <FormikErrorBox formik={formik} field="retype_password" />
         </div>
-
-        <div className="px-4 text-center">
-          <Button type="submit" extraClassName="w-full mt-9" variant="primary">
-            Update
-          </Button>
-        </div>
+        <Button type="submit" extraClassName="w-full mt-9" variant="primary">
+          Update
+        </Button>
       </form>
     </>
   );
