@@ -12,11 +12,14 @@ import Button from "../shared/Button";
 import ImageLightbox from "./ImageLightbox";
 import { formatCurrency } from "@/common/helpers/UtilKit";
 import { ShoppingCart } from "lucide-react";
+import { useCart } from "@/providers/CartProvider";
+import QuantityButton from "../shared/QuantityButton";
 
 export default function ProductDetailsContainer({ data }) {
   // Lightbox states
   const [open, setOpen] = useState(false);
   const [currentImageIndex, setCurrentIndex] = useState(0);
+  const { addToCart, cart } = useCart();
 
   const pics = data?.images?.map((image) => {
     return {
@@ -25,6 +28,9 @@ export default function ProductDetailsContainer({ data }) {
       alt: "",
     };
   });
+
+  const isAddedToCart = cart.some((item) => item.productId === data?._id);
+  const cartItem = cart.find((item) => item.productId === data?._id);
 
   return (
     <div>
@@ -125,10 +131,17 @@ export default function ProductDetailsContainer({ data }) {
               </h1>
             </div>
             <div className="flex gap-2">
-              <Button variant="primary">
-                <ShoppingCart className="w-[18px] h-[18px] mr-2 mb-[3px]" />
-                Add to Cart
-              </Button>
+              {!isAddedToCart ? (
+                <Button
+                  onClick={() => addToCart(data?._id, 1)}
+                  variant="primary"
+                >
+                  <ShoppingCart className="w-[18px] h-[18px] mr-2 mb-[3px]" />
+                  Add to Cart
+                </Button>
+              ) : (
+                <QuantityButton cartItem={cartItem} product={data} />
+              )}
             </div>
             <section>
               <h2 className="text-md text-gray-700 font-semibold">

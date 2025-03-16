@@ -14,9 +14,6 @@ const QuantityButton = ({ cartItem, product, fromCartPage, refetch }) => {
           e.stopPropagation();
           e.preventDefault();
           updateQuantity(product._id, cartItem.quantity - 1);
-          if (fromCartPage) {
-            refetch();
-          }
         }}
       >
         <Minus size={20} className="text-gray-500" />
@@ -32,9 +29,6 @@ const QuantityButton = ({ cartItem, product, fromCartPage, refetch }) => {
           e.stopPropagation();
           e.preventDefault();
           updateQuantity(product._id, cartItem.quantity + 1);
-          if (fromCartPage) {
-            refetch();
-          }
         }}
       >
         <Plus size={20} className="text-white" />
