@@ -33,7 +33,7 @@ const yupAddressAddSchema = object({
 });
 
 const deviceId =
-  typeof window !== undefined && localStorage.getItem("deviceId");
+  typeof window !== "undefined" && localStorage.getItem("deviceId");
 
 const CheckOut = () => {
   const [showForm, setShowForm] = useState(false);
