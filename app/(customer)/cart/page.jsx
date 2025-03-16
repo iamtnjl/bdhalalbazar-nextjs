@@ -11,8 +11,15 @@ import Button from "@/components/shared/Button";
 import { useRouter } from "next/navigation";
 
 const Cart = () => {
-  const deviceId =
-    typeof window !== "undefined" && localStorage.getItem("deviceId");
+  const [deviceId, setDeviceId] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      let storedDeviceId = localStorage.getItem("deviceId");
+
+      setDeviceId(storedDeviceId);
+    }
+  }, []);
 
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["/cart"],

@@ -33,8 +33,15 @@ const yupAddressAddSchema = object({
 });
 
 const CheckOut = () => {
-  const deviceId =
-    typeof window !== "undefined" && localStorage.getItem("deviceId");
+  const [deviceId, setDeviceId] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      let storedDeviceId = localStorage.getItem("deviceId");
+
+      setDeviceId(storedDeviceId);
+    }
+  }, []);
 
   const [showForm, setShowForm] = useState(false);
   const [showAddress, setShowAddress] = useState(false);
