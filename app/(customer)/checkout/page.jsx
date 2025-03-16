@@ -32,6 +32,8 @@ const yupAddressAddSchema = object({
   aria: string(),
 });
 
+const deviceId = localStorage.getItem("deviceId");
+
 const CheckOut = () => {
   const [showForm, setShowForm] = useState(false);
   const [showAddress, setShowAddress] = useState(false);
@@ -47,7 +49,7 @@ const CheckOut = () => {
   // Get Cart
   const { data, refetch } = useQuery({
     queryKey: [`/carts`],
-    queryFn: () => APIKit.public.getCart().then(({ data }) => data),
+    queryFn: () => APIKit.public.getCart({ deviceId }).then(({ data }) => data),
   });
 
   async function fetchUserData() {
@@ -148,7 +150,7 @@ const CheckOut = () => {
     const promise = APIKit.public
       .placeOrder(payload)
       .then(({ data }) => {
-       router.push(`/me/orders/${data.order._id}`)
+        router.push(`/me/orders/${data.order._id}`);
         clearCart();
       })
       .catch((err) => {

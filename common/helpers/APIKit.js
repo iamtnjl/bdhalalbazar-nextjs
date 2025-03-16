@@ -19,9 +19,9 @@ const APIKit = {
       const url = `/public/products/${id}`;
       return client.get(url);
     },
-    getCart: () => {
+    getCart: (params) => {
       const url = `/public/cart`;
-      return client.get(url);
+      return client.get(url, { params });
     },
     cart: (payload) => {
       const url = `/public/cart`;

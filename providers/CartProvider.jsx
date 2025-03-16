@@ -5,80 +5,83 @@ import APIKit from "@/common/helpers/APIKit";
 const CartContext = createContext(null);
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    // Ensure cart data persists on reload
+    return JSON.parse(localStorage.getItem("cart") || "[]");
+  });
+  const [deviceId, setDeviceId] = useState(null);
   const queryClient = useQueryClient();
 
-  // Load cart from local storage and sync with backend
   useEffect(() => {
-    const savedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    let storedDeviceId = localStorage.getItem("deviceId");
 
-    if (savedCart.length > 0) {
-      setCart(savedCart);
-
-      // Sync entire cart with backend on mount
-      APIKit.public
-        .cart(savedCart)
-        .catch(() => console.error("Failed to sync cart with backend"));
+    if (!storedDeviceId) {
+      storedDeviceId = crypto.randomUUID();
+      localStorage.setItem("deviceId", storedDeviceId);
     }
+
+    setDeviceId(storedDeviceId);
   }, []);
 
-  // Save cart to local storage, sync with backend, and invalidate query
   useEffect(() => {
+    if (!deviceId) return;
+
     localStorage.setItem("cart", JSON.stringify(cart));
 
     if (cart.length > 0) {
       APIKit.public
-        .cart(cart)
+        .cart({ deviceId, cart })
         .then(() => {
           queryClient.invalidateQueries({ queryKey: ["/cart"] });
         })
         .catch(() => console.error("Failed to sync cart with backend"));
     }
-  }, [cart, queryClient]);
+  }, [cart, deviceId, queryClient]);
 
-  // Add to Cart (Optimistic Update)
   const addToCart = (productId, quantity = 1) => {
-    const newCart = [...cart];
-    const existingItem = newCart.find((item) => item.productId === productId);
+    setCart((prevCart) => {
+      const newCart = [...prevCart];
+      const existingItem = newCart.find((item) => item.productId === productId);
 
-    if (existingItem) {
-      existingItem.quantity += quantity;
-    } else {
-      newCart.push({ productId, quantity });
-    }
+      if (existingItem) {
+        existingItem.quantity += quantity;
+      } else {
+        newCart.push({ productId, quantity });
+      }
 
-    setCart(newCart);
+      localStorage.setItem("cart", JSON.stringify(newCart));
+      return newCart;
+    });
   };
 
-  // Update quantity (Optimistic Update)
   const updateQuantity = (productId, quantity) => {
     if (quantity < 1) return removeFromCart(productId);
 
-    const newCart = cart.map((item) =>
-      item.productId === productId ? { ...item, quantity } : item
-    );
+    setCart((prevCart) => {
+      const newCart = prevCart.map((item) =>
+        item.productId === productId ? { ...item, quantity } : item
+      );
 
-    setCart(newCart);
+      localStorage.setItem("cart", JSON.stringify(newCart));
+      return newCart;
+    });
   };
 
-  // Remove from cart
   const removeFromCart = async (productId) => {
     try {
-      // Optimistically update local cart
-      const newCart = cart.filter((item) => item.productId !== productId);
-      setCart(newCart);
+      setCart((prevCart) => {
+        const newCart = prevCart.filter((item) => item.productId !== productId);
+        localStorage.setItem("cart", JSON.stringify(newCart));
+        return newCart;
+      });
 
-      // Call delete API
-      await APIKit.public.deleteCart(productId);
-
-      // Invalidate "cart" query to refetch updated cart data
+      await APIKit.public.deleteCart({ deviceId, productId });
       queryClient.invalidateQueries({ queryKey: ["/cart"] });
     } catch (error) {
       console.error("Failed to remove item from cart:", error);
     }
   };
 
-  // Clear cart completely
   const clearCart = () => {
     setCart([]);
     localStorage.removeItem("cart");
