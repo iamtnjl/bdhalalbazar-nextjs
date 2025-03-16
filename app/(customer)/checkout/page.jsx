@@ -32,10 +32,10 @@ const yupAddressAddSchema = object({
   aria: string(),
 });
 
-const deviceId =
-  typeof window !== "undefined" && localStorage.getItem("deviceId");
-
 const CheckOut = () => {
+  const deviceId =
+    typeof window !== "undefined" && localStorage.getItem("deviceId");
+
   const [showForm, setShowForm] = useState(false);
   const [showAddress, setShowAddress] = useState(false);
   const [selected, setSelected] = useState({});
