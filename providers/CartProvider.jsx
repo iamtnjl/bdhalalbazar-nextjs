@@ -5,30 +5,33 @@ import APIKit from "@/common/helpers/APIKit";
 const CartContext = createContext(null);
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState(() => {
-    // Ensure cart data persists on reload
-    return JSON.parse(localStorage.getItem("cart") || "[]");
-  });
+  const [cart, setCart] = useState([]);
   const [deviceId, setDeviceId] = useState(null);
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    let storedDeviceId = localStorage.getItem("deviceId");
+    // Ensure this runs only on the client side
+    if (typeof window !== "undefined") {
+      const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+      setCart(storedCart);
 
-    if (!storedDeviceId) {
-      storedDeviceId = crypto.randomUUID();
-      localStorage.setItem("deviceId", storedDeviceId);
+      let storedDeviceId = localStorage.getItem("deviceId");
+
+      if (!storedDeviceId) {
+        storedDeviceId = crypto.randomUUID();
+        localStorage.setItem("deviceId", storedDeviceId);
+      }
+
+      setDeviceId(storedDeviceId);
     }
-
-    setDeviceId(storedDeviceId);
   }, []);
 
   useEffect(() => {
     if (!deviceId) return;
 
-    localStorage.setItem("cart", JSON.stringify(cart));
-
     if (cart.length > 0) {
+      localStorage.setItem("cart", JSON.stringify(cart));
+
       APIKit.public
         .cart({ deviceId, cart })
         .then(() => {
