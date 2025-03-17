@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       fontFamily: {
         vibes: ["Great Vibes", "cursive"],
+        lansui: ["Lansui", "cursive"],
       },
       colors: {
         primary: "#0f766e",
