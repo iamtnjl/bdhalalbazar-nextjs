@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${figtree.className} max-w-3xl mx-auto bg-primary-bg pb-[80px] overflow-y-scroll`}
       >
-        <title>HalalBazar.net</title>
+        <title>BDHalalBazar.com</title>
         <meta
           name="description"
           content="HalalBazar.net is your go-to online marketplace for halal products, offering a wide range of certified items for all your needs."
