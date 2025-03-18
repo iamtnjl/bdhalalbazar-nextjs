@@ -17,6 +17,7 @@ const Orders = () => {
     queryFn: () =>
       APIKit.me.getOrders(sanitizeParams(paramsInURL)).then(({ data }) => data),
     keepPreviousData: true,
+    retry: false,
   });
 
   if (isLoading) {
