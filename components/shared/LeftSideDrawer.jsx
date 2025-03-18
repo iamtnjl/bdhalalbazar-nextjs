@@ -3,6 +3,7 @@ import Button from "./Button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Fragment } from "react";
+import { AUTH_TOKEN_KEY } from "@/common/helpers/KeyChain";
 
 export default function LeftSideDrawer({ open, setOpen, children }) {
   const router = useRouter();

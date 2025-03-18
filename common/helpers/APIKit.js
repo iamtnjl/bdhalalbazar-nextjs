@@ -96,7 +96,22 @@ const APIKit = {
   },
 
   //Admin API's
-  we: {},
+  we: {
+    orders: {
+      getOrders: () => {
+        const url = `/we/orders/`;
+        return client.get(url);
+      },
+      getOrderDetails: (id) => {
+        const url = `/we/orders/${id}`;
+        return client.get(url);
+      },
+      updateOrderStatus: (id, payload) => {
+        const url = `/we/orders/${id}`;
+        return client.patch(url, payload);
+      },
+    },
+  },
 };
 
 export default APIKit;

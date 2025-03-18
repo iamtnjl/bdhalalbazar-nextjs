@@ -28,6 +28,7 @@
     "react-select": "^5.10.1",
     "react-select-async-paginate": "^0.7.9",
     "react-spring-lightbox": "^1.8.0",
+    "react-to-print": "2.14.12",
     "styled-components": "^6.1.15",
     "swiper": "^11.2.5",
     "yup": "^1.6.1"
