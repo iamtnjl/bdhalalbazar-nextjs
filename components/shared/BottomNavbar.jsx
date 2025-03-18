@@ -17,13 +17,17 @@ const BottomNavbar = () => {
       setDeviceId(storedDeviceId);
     }
   }, []);
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["/cart"],
     queryFn: () => APIKit.public.getCart({ deviceId }).then(({ data }) => data),
     keepPreviousData: true,
     enabled: !!deviceId,
     retry: false,
   });
+
+  if(isLoading){
+    return "Loading..."
+  }
   return (
     <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-3xl bg-white shadow-md flex items-center gap-2 justify-between px-4 pb-1 pt-2 z-50">
       <Link
