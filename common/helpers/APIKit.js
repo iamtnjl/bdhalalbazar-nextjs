@@ -81,6 +81,10 @@ const APIKit = {
       const url = `/me/addresses`;
       return client.get(url);
     },
+    postAddresses: (payload) => {
+      const url = `/me/addresses`;
+      return client.post(url, payload);
+    },
     getOrders: (params) => {
       const url = `/me/orders`;
       return client.get(url, { params });
