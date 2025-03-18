@@ -55,9 +55,9 @@ const BottomNavbar = () => {
               pathname === "/cart" ? "text-primary" : "text-gray-700"
             }`}
           />
-          {data?.cart_products.length > 0 ? (
+          {data?.cart_products?.length > 0 ? (
             <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full">
-              {data?.cart_products.length}
+              {data?.cart_products?.length}
             </span>
           ) : null}
         </div>
