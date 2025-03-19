@@ -111,6 +111,12 @@ const APIKit = {
         return client.patch(url, payload);
       },
     },
+    products: {
+      getAllProduct: (params) => {
+        const url = `/we/products`;
+        return client.get(url, { params });
+      },
+    },
   },
 };
 
