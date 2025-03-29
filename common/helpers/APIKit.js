@@ -81,6 +81,10 @@ const APIKit = {
       const url = `/me/addresses`;
       return client.get(url);
     },
+    postAddresses: (payload) => {
+      const url = `/me/addresses`;
+      return client.post(url, payload);
+    },
     getOrders: (params) => {
       const url = `/me/orders`;
       return client.get(url, { params });
@@ -92,7 +96,32 @@ const APIKit = {
   },
 
   //Admin API's
-  we: {},
+  we: {
+    orders: {
+      getOrders: () => {
+        const url = `/we/orders/`;
+        return client.get(url);
+      },
+      getOrderDetails: (id) => {
+        const url = `/we/orders/${id}`;
+        return client.get(url);
+      },
+      updateOrderStatus: (id, payload) => {
+        const url = `/we/orders/${id}`;
+        return client.patch(url, payload);
+      },
+    },
+    products: {
+      getAllProduct: (params) => {
+        const url = `/we/products`;
+        return client.get(url, { params });
+      },
+      createProduct: (payload) => {
+        const url = `/we/products`;
+        return client.post(url, payload, defaultFileUploadConfig);
+      },
+    },
+  },
 };
 
 export default APIKit;

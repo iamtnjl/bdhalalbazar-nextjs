@@ -25,11 +25,10 @@ import { useRouter } from "next/navigation";
 const yupAddressAddSchema = object({
   name: string().required("Please enter your name"),
   phone: string().required("Please enter your phone"),
-  label: string(),
   street: string(),
-  district: string(),
-  division: string(),
-  aria: string(),
+  city: string(),
+  zip: string(),
+  
 });
 
 const CheckOut = () => {
@@ -105,11 +104,10 @@ const CheckOut = () => {
     initialValues: {
       name: user?.user?.name || "",
       phone: user?.user?.phone || "",
-      label: addresses[0]?.label || "",
+      email: user?.user?.email || "",
       street: addresses[0]?.street || "",
-      district: addresses[0]?.district || "",
-      division: addresses[0]?.division || "",
-      area: addresses[0]?.area || "",
+      city: addresses[0]?.city || "",
+      zip: addresses[0]?.zip || "",
     },
     validationSchema: yupAddressAddSchema,
     onSubmit: (values, { setSubmitting }) => {
@@ -145,12 +143,11 @@ const CheckOut = () => {
     const payload = {
       name: formik.values.name,
       phone: formik.values.phone,
+      email: formik.values.email,
       address: {
-        label: formik.values.label,
-        district: formik.values.district,
-        division: formik.values.division,
         street: formik.values.street,
-        area: formik.values.area,
+        zip: formik.values.zip,
+        city: formik.values.city,
       },
       cart_id: data._id,
       payment_method: paymentMethod.slug,
@@ -200,6 +197,17 @@ const CheckOut = () => {
                 placeholder="E.g: John Doe"
               />
               <FormikErrorBox formik={formik} field="name" />
+            </div>
+            <div>
+              <TextInputField
+                name="email"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                label="Email (Optional)"
+                placeholder="someone@example.com"
+              />
+              <FormikErrorBox formik={formik} field="email" />
             </div>
             <div>
               <PhoneInputField

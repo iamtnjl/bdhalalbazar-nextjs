@@ -12,13 +12,7 @@ const CustomerDetailsFormCard = ({ address }) => {
   }
 
   const deliveryAddress =
-    address?.street +
-    ", " +
-    address?.area +
-    ", " +
-    address?.district +
-    ", " +
-    address?.division;
+    address?.street + ", " + address?.city + ", " + address?.zip;
 
   return (
     <div>
@@ -29,9 +23,7 @@ const CustomerDetailsFormCard = ({ address }) => {
               Customer Details
             </h2>
             <div className="rounded-lg border border-gray-300 py-3 px-4 flex flex-col gap-2 text-grey-700">
-              <span className="text-base font-bold">
-                {data?.user?.name}
-              </span>
+              <span className="text-base font-bold">{data?.user?.name}</span>
               <span className="text-base">{data?.user?.phone}</span>
               <p className="text-sm text-grey-400">
                 This name & phone will be visible to the deliverer.

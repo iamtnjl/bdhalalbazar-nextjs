@@ -48,6 +48,14 @@ const UserPanel = ({ meStore: { me } }) => {
           <label className="text-gray-500 font-medium text-base">Phone</label>
           <p className="text-gray-700 font-bold text-lg">{me.phone}</p>
         </div>
+        {me.address.length > 0 ? (
+          <div className="flex flex-col mt-3">
+            <label className="text-gray-500 font-medium text-base">
+              Address
+            </label>
+            <p className="text-gray-700 font-bold text-lg">{`${me.address[0].street}, ${me.address[0].city}, ${me.address[0].zip}`}</p>
+          </div>
+        ) : null}
       </div>
 
       <div className="flex flex-col gap-2">

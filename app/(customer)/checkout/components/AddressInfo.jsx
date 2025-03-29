@@ -1,11 +1,22 @@
-function AddressInfo({ selected, addresses, setShowAddress }) {
+function AddressInfo({ addresses, setShowAddress }) {
+  console.log(addresses);
   return (
     <>
-      {selected.label ? (
-        <div className="bg-white border-primary ring-2 ring-primary px-4 py-3 rounded-md border  text-gray-700">
+      {addresses?.length > 0 && (
+        <div className="bg-white border-primary ring-2 px-4 py-3 rounded-md ring-primary">
           <div className="flex justify-between">
             <div className=" flex gap-2 items-center">
-              <h3 className="text-base font-bold">{selected?.label}</h3>
+              <h3 className="text-base font-bold">
+                {addresses ? (
+                  <div className="flex flex-wrap ">
+                    <p>{`${addresses[0]?.street}, `}</p>
+                    <p>{`${addresses[0]?.city}, `}</p>
+                    <p>{`${addresses[0]?.zip}`}</p>
+                  </div>
+                ) : (
+                  <p>No Addresses Found</p>
+                )}
+              </h3>
             </div>
             <button
               className="text-primary font-semibold"
@@ -14,40 +25,7 @@ function AddressInfo({ selected, addresses, setShowAddress }) {
               Edit
             </button>
           </div>
-          <div className="flex flex-wrap justify-start gap-1 mt-2">
-            <p>
-              {`${selected?.house_street}, ${selected?.upazila?.name}, ${selected?.district?.name}, ${selected?.division?.name}, ${selected?.country}`}
-            </p>
-          </div>
         </div>
-      ) : (
-        addresses?.length > 0 && (
-          <div className="bg-white border-primary ring-2 px-4 py-3 rounded-md ring-primary">
-            <div className="flex justify-between">
-              <div className=" flex gap-2 items-center">
-                <h3 className="text-base font-bold">{addresses[0]?.label}</h3>
-              </div>
-              <button
-                className="text-primary font-semibold"
-                onClick={() => setShowAddress(true)}
-              >
-                Edit
-              </button>
-            </div>
-            <div className="flex flex-wrap justify-start gap-1 mt-2">
-              {addresses ? (
-                <>
-                  <p>{addresses[0]?.street},</p>
-                  <p>{addresses[0]?.area},</p>
-                  <p>{addresses[0]?.district},</p>
-                  <p>{addresses[0]?.division},</p>
-                </>
-              ) : (
-                <p>No Addresses Found</p>
-              )}
-            </div>
-          </div>
-        )
       )}
     </>
   );
