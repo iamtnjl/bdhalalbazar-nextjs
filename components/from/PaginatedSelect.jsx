@@ -1,17 +1,16 @@
-import dynamic from "next/dynamic";
+import { withAsyncPaginate, AsyncPaginate } from "react-select-async-paginate";
+import CreatableSelect from "react-select/creatable";
 
-const AsyncPaginate = dynamic(
-  () => import("react-select-async-paginate").then((mod) => mod.AsyncPaginate),
-  {
-    ssr: false,
-  }
-);
+function PaginatedSelect({ label, loadOptions, value, onChange, onCreateOption, ...props }) {
+  // Dynamically determine whether to use Creatable or AsyncPaginate
+  const SelectComponent = onCreateOption
+    ? withAsyncPaginate(CreatableSelect)
+    : AsyncPaginate;
 
-function PaginatedSelect({ label, loadOptions, value, onChange, ...props }) {
   const customStyles = {
     control: (provided, state) => ({
       ...provided,
-      borderColor: !state.isFocused ? provided.borderColor : "#372aac",
+      borderColor: state.isFocused ? "#372aac" : provided.borderColor,
       "&:hover": { borderColor: "none" },
       boxShadow: state.isFocused ? "0 0 0 1px #372aac" : provided.boxShadow,
       paddingTop: "2px",
@@ -49,6 +48,7 @@ function PaginatedSelect({ label, loadOptions, value, onChange, ...props }) {
       },
     }),
   };
+
   return (
     <div className="flex flex-col gap-1 w-full">
       <label
@@ -57,19 +57,19 @@ function PaginatedSelect({ label, loadOptions, value, onChange, ...props }) {
       >
         {label}
       </label>
-      <AsyncPaginate
+      <SelectComponent
         cacheOptions
         debounceTimeout={300}
         styles={customStyles}
         value={value}
         loadOptions={loadOptions}
-        additional={{
-          page: 1,
-        }}
+        additional={{ page: 1 }}
         onChange={onChange}
+        {...(onCreateOption && { onCreateOption })} // Only add if provided
         {...props}
       />
     </div>
   );
 }
+
 export default PaginatedSelect;

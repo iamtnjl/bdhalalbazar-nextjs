@@ -1,12 +1,16 @@
+"use client"
+
 import { formatCurrency } from "@/common/helpers/UtilKit";
 import {
   DocumentTextIcon,
   PencilSquareIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const WeProductCard = ({ item }) => {
+  const router = useRouter()
   return (
     <div className="col-span-1 rounded-lg bg-white shadow border">
       {/* Product Details */}
@@ -52,8 +56,9 @@ const WeProductCard = ({ item }) => {
             <h3 className="truncate text-sm font-medium text-gray-500 ">
               Weight
             </h3>
-            <div className="mt-1 truncate text-sm font-semibold text-gray-900">
+            <div className="mt-1 truncate text-sm font-semibold text-gray-900 flex gap-2 items-center">
               <span>{item?.weight || "N/A"}</span>
+              <span>{item?.unit || "N/A"}</span>
             </div>
           </div>
         </div>
@@ -95,9 +100,9 @@ const WeProductCard = ({ item }) => {
           <div className="-ml-px flex w-0 flex-1">
             <button
               className={`flex justify-start items-center w-full px-4 py-3 text-sm font-medium text-gray-700 gap-2 border-t`}
-              //   onClick={() => {
-              //     editProductOnClick(product);
-              //   }}
+                onClick={() => {
+                  router.push(`/we/products/edit?id=${item?._id}`)
+                }}
             >
               <PencilSquareIcon className="h-5 w-5 text-gray-400" />
               Edit

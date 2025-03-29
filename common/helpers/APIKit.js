@@ -116,6 +116,10 @@ const APIKit = {
         const url = `/we/products`;
         return client.get(url, { params });
       },
+      createProduct: (payload) => {
+        const url = `/we/products`;
+        return client.post(url, payload, defaultFileUploadConfig);
+      },
     },
   },
 };
