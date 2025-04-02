@@ -67,7 +67,7 @@ export default function Carousel() {
                   alt={`Slide ${index}`}
                   src={image.src}
                   fill
-                  className="w-full aspect-1 object-cover object-center rounded-xl"
+                  className="w-full aspect-1 object-center rounded-xl"
                 />
               </div>
             ))}
