@@ -28,7 +28,7 @@ export default function Carousel() {
 
     const interval = setInterval(() => {
       nextSlide();
-    }, 3000);
+    }, 6000);
 
     return () => clearInterval(interval);
   }, [currentSlide, isPaused]);
