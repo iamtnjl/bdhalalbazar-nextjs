@@ -5,10 +5,9 @@ import Swipe from "react-easy-swipe";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const images = [
-  { src: "/images/img-1.jpg" },
-  { src: "/images/img-2.jpg" },
-  { src: "/images/img-3.jpg" },
-  { src: "/images/img-4.jpg" },
+  { src: "/banners/2.png" },
+  { src: "/banners/1.png" },
+  { src: "/banners/3.png" },
 ];
 
 export default function Carousel() {

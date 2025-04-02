@@ -44,7 +44,7 @@ const ProductCard = ({ product }) => {
                 </h3>
                 <h3 className="flex items-center gap-1 text-xs font-normal text-gray-600">
                   <Truck hanging={15} width={15} className="text-gray-500" />
-                  {"24H (Dhaka) | 3Days (Out Dhaka)"}
+                  {"1 Hour (Pabna Sadar)"}
                 </h3>
               </div>
               <div className="flex flex-col items-end gap-2">
