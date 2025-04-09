@@ -112,9 +112,12 @@ export default function ProductDetailsContainer({ data }) {
 
         {/* Product info */}
         {data?.name ? (
-          <div className="mt-10 space-y-6">
+          <div className="mt-10 space-y-4">
             <h1 className="text-2xl font-semibold tracking-tight text-gray-900">
               {data.name}
+            </h1>
+            <h1 className="text-base font-semibold tracking-tight text-gray-600">
+              {`Weight: ${data.weight} ${data.unit}`}
             </h1>
             <div className="flex items-end gap-2">
               <h1 className="text-xl font-semibold tracking-tight  text-gray-600">
@@ -156,55 +159,71 @@ export default function ProductDetailsContainer({ data }) {
               </h2>
             </section>
             <section>
-              <h2 className="text-md text-gray-700 font-semibold">Brand</h2>
-              <h2 className="text-sm font-medium text-gray-700">
-                {data?.brand.length > 0 ? (
-                  <>{data.brand.map((brand) => brand.name).join(", ")}</>
-                ) : (
-                  <p className="text-gray-500">No Brand</p>
-                )}
-              </h2>
+              {data?.brand.length > 0 ? (
+                <>
+                  <h2 className="text-md text-gray-700 font-semibold">Brand</h2>
+                  <h2 className="text-sm font-medium text-gray-700">
+                    {data.brand.map((brand) => brand.name).join(", ")}
+                  </h2>
+                </>
+              ) : null}
             </section>
             <section className="text-sm text-gray-700">
-              <h2 className="text-md text-gray-700 font-semibold">
-                Categories
-              </h2>
-              <div className="flex items-center flex-wrap pt-2 gap-1 text-sm ">
-                {data?.categories.map((item, key) => (
-                  <div
-                    key={key}
-                    className="w-fit text-xs bg-gray-200 px-3 py-1 font-semibold md:font-medium rounded-full text-gray-700"
-                  >
-                    {item.name}
+              {data?.categories.length > 0 ? (
+                <>
+                  <h2 className="text-md text-gray-700 font-semibold">
+                    Categories
+                  </h2>
+                  <div className="flex items-center flex-wrap pt-2 gap-1 text-sm ">
+                    {data?.categories.map((item, key) => (
+                      <div
+                        key={key}
+                        className="w-fit text-xs bg-gray-200 px-3 py-1 font-semibold md:font-medium rounded-full text-gray-700"
+                      >
+                        {item.name}
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </>
+              ) : null}
             </section>
             <section className="text-sm text-gray-700">
-              <h2 className="text-md text-gray-700 font-semibold">Colors</h2>
-              <div className="flex items-center flex-wrap pt-2 gap-1 text-sm ">
-                {data?.colors.map((item, key) => (
-                  <div
-                    key={key}
-                    className="w-fit text-xs bg-gray-200 px-3 py-1 font-semibold md:font-medium rounded-full text-gray-700"
-                  >
-                    {item.name}
+              {data.colors.length > 0 ? (
+                <>
+                  <h2 className="text-md text-gray-700 font-semibold">
+                    Colors
+                  </h2>
+                  <div className="flex items-center flex-wrap pt-2 gap-1 text-sm ">
+                    {data?.colors.map((item, key) => (
+                      <div
+                        key={key}
+                        className="w-fit text-xs bg-gray-200 px-3 py-1 font-semibold md:font-medium rounded-full text-gray-700"
+                      >
+                        {item.name}
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </>
+              ) : null}
             </section>
             <section className="text-sm text-gray-700">
-              <h2 className="text-md text-gray-700 font-semibold">Materials</h2>
-              <div className="flex items-center flex-wrap pt-2 gap-1 text-sm ">
-                {data?.materials.map((item, key) => (
-                  <div
-                    key={key}
-                    className="w-fit text-xs bg-gray-200 px-3 py-1 font-semibold md:font-medium rounded-full text-gray-700"
-                  >
-                    {item.name}
+              {data?.materials.length > 0 ? (
+                <>
+                  <h2 className="text-md text-gray-700 font-semibold">
+                    Materials
+                  </h2>
+                  <div className="flex items-center flex-wrap pt-2 gap-1 text-sm ">
+                    {data?.materials.map((item, key) => (
+                      <div
+                        key={key}
+                        className="w-fit text-xs bg-gray-200 px-3 py-1 font-semibold md:font-medium rounded-full text-gray-700"
+                      >
+                        {item.name}
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </>
+              ) : null}
             </section>
           </div>
         ) : null}
