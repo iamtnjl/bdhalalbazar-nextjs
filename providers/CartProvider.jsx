@@ -55,6 +55,7 @@ export const CartProvider = ({ children }) => {
       localStorage.setItem("cart", JSON.stringify(newCart));
       return newCart;
     });
+    queryClient.invalidateQueries({ queryKey: ["/cart"] });
   };
 
   const updateQuantity = (productId, quantity) => {
