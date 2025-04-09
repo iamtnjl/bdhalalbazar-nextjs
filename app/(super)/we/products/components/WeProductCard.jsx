@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { formatCurrency } from "@/common/helpers/UtilKit";
 import {
@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 
 const WeProductCard = ({ item }) => {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <div className="col-span-1 rounded-lg bg-white shadow border">
       {/* Product Details */}
@@ -18,8 +18,6 @@ const WeProductCard = ({ item }) => {
         <div className="flex-1 truncate">
           <p className="truncate text-sm font-medium text-gray-900">
             {item.name}
-            {item?.unit && <span>-</span>}
-            <span className="text-base">{`${item.unit || ""}` || ""}</span>
           </p>
           <div className="flex items-center space-x-3 mt-1">
             <h3 className="truncate text-sm text-grey-500">
@@ -86,26 +84,16 @@ const WeProductCard = ({ item }) => {
       {/* Actions */}
       <div>
         <div className="-mt-px flex divide-x divide-gray-200">
-          <div className="flex w-0 flex-1">
-            <button
-              className="flex justify-start items-center w-full px-4 py-3 text-sm font-medium text-gray-700 gap-2 border-t"
-              onClick={() => {
-                //   viewProductOnClick(product);
-              }}
-            >
-              <DocumentTextIcon className="h-5 w-5 text-gray-400" />
-              View Product
-            </button>
-          </div>
+          
           <div className="-ml-px flex w-0 flex-1">
             <button
-              className={`flex justify-start items-center w-full px-4 py-3 text-sm font-medium text-gray-700 gap-2 border-t`}
-                onClick={() => {
-                  router.push(`/we/products/edit?id=${item?._id}`)
-                }}
+              className={`flex justify-center items-center w-full px-4 py-3 text-sm font-medium text-gray-700 gap-2 border-t`}
+              onClick={() => {
+                router.push(`/we/products/edit?id=${item?._id}`);
+              }}
             >
               <PencilSquareIcon className="h-5 w-5 text-gray-400" />
-              Edit
+             <span className="text-gray-700 text-sm font-bold "> Edit Product</span>
             </button>
           </div>
         </div>

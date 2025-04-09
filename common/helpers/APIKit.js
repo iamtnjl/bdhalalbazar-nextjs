@@ -41,17 +41,33 @@ const APIKit = {
       const url = "/public/categories";
       return client.get(url, { params });
     },
+    createCategory: (payload) => {
+      const url = "/we/categories";
+      return client.post(url, payload);
+    },
     getBrandsList: (params) => {
       const url = "/public/brands";
       return client.get(url, { params });
+    },
+    createBrand: (payload) => {
+      const url = "/we/brands";
+      return client.post(url, payload);
     },
     getColorList: (params) => {
       const url = "/public/colors";
       return client.get(url, { params });
     },
+    createColor: (payload) => {
+      const url = "/we/colors";
+      return client.post(url, payload);
+    },
     getMaterialList: (params) => {
       const url = "/public/materials";
       return client.get(url, { params });
+    },
+    createMaterial: (payload) => {
+      const url = "/we/materials";
+      return client.post(url, payload);
     },
   },
 
@@ -116,9 +132,17 @@ const APIKit = {
         const url = `/we/products`;
         return client.get(url, { params });
       },
+      getProductDetails: (id) => {
+        const url = `/we/products/${id}`;
+        return client.get(url);
+      },
       createProduct: (payload) => {
         const url = `/we/products`;
         return client.post(url, payload, defaultFileUploadConfig);
+      },
+      updateProduct: (id, payload) => {
+        const url = `/we/product/${id}`;
+        return client.patch(url, payload, defaultFileUploadConfig);
       },
     },
   },

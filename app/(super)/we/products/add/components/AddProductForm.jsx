@@ -95,7 +95,7 @@ const AddProductForm = () => {
       const promise = APIKit.we.products
         .createProduct(formData)
         .then((data) => {
-          router.push("/we/products")
+          router.push("/we/products");
         })
         .catch((err) => {
           console.log(err);
@@ -109,6 +109,20 @@ const AddProductForm = () => {
       });
     },
   });
+
+  const createTag = (data, promise) => {
+    const apiFunc = promise({ name: data })
+      .then((data) => data)
+      .catch((error) => {
+        throw error;
+      });
+
+    return toast.promise(apiFunc, {
+      loading: "Creating...",
+      success: "Created Successfully",
+      error: "Something went wrong!",
+    });
+  };
   return (
     <form onSubmit={formik.handleSubmit} className="flex flex-col gap-3">
       <div>
@@ -134,7 +148,6 @@ const AddProductForm = () => {
           value={formik.values.first_name}
           autoComplete="price"
           placeholder="Enter Product Price"
-          //   errors={backendErrors}
         />
         <FormikErrorBox formik={formik} field="price" />
       </div>
@@ -148,7 +161,6 @@ const AddProductForm = () => {
           value={formik.values.discount}
           autoComplete="discount"
           placeholder="Enter Discount %"
-          //   errors={backendErrors}
         />
         <FormikErrorBox formik={formik} field="discount" />
       </div>
@@ -159,7 +171,7 @@ const AddProductForm = () => {
           loadOptions(inputValue, _, page, APIKit.tags.getCategoriesList)
         }
         additional={{ page: 1 }}
-        onCreateOption={(item) => console.log(item, "inside")}
+        onCreateOption={(item) => createTag(item, APIKit.tags.createCategory)}
         onChange={(items) => {
           formik.setFieldValue("categories", items);
         }}
@@ -173,7 +185,7 @@ const AddProductForm = () => {
         }
         additional={{ page: 1 }}
         isMulti={true}
-        onCreateOption={(item) => console.log(item, "inside")}
+        onCreateOption={(item) => createTag(item, APIKit.tags.createBrand)}
         onChange={(items) => {
           formik.setFieldValue("brand", items);
         }}
@@ -187,7 +199,7 @@ const AddProductForm = () => {
         }
         additional={{ page: 1 }}
         isMulti={true}
-        onCreateOption={(item) => console.log(item, "inside")}
+        onCreateOption={(item) => createTag(item, APIKit.tags.createColor)}
         onChange={(items) => {
           formik.setFieldValue("colors", items);
         }}
@@ -201,7 +213,7 @@ const AddProductForm = () => {
         }
         additional={{ page: 1 }}
         isMulti={true}
-        onCreateOption={(item) => console.log(item, "inside")}
+        onCreateOption={(item) => createTag(item, APIKit.tags.createMaterial)}
         onChange={(items) => {
           formik.setFieldValue("materials", items);
         }}
@@ -273,7 +285,7 @@ const AddProductForm = () => {
         <Button type="submit" variant="primary">
           Add Product
         </Button>
-        <Button type="submit" variant="light">
+        <Button onClick={() => router.push("/we/products")} variant="light">
           Cancel
         </Button>
       </div>

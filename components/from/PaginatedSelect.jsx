@@ -1,8 +1,17 @@
+import { useState } from "react";
 import { withAsyncPaginate, AsyncPaginate } from "react-select-async-paginate";
 import CreatableSelect from "react-select/creatable";
 
-function PaginatedSelect({ label, loadOptions, value, onChange, onCreateOption, ...props }) {
-  // Dynamically determine whether to use Creatable or AsyncPaginate
+function PaginatedSelect({
+  label,
+  loadOptions,
+  value,
+  onChange,
+  onCreateOption,
+  ...props
+}) {
+  const [cacheUniq, setCacheUniq] = useState(Date.now()); // Initial cache key
+
   const SelectComponent = onCreateOption
     ? withAsyncPaginate(CreatableSelect)
     : AsyncPaginate;
@@ -49,6 +58,13 @@ function PaginatedSelect({ label, loadOptions, value, onChange, onCreateOption, 
     }),
   };
 
+  const handleCreate = async (inputValue) => {
+    if (onCreateOption) {
+      await onCreateOption(inputValue);
+      setCacheUniq(Date.now());
+    }
+  };
+
   return (
     <div className="flex flex-col gap-1 w-full">
       <label
@@ -59,13 +75,14 @@ function PaginatedSelect({ label, loadOptions, value, onChange, onCreateOption, 
       </label>
       <SelectComponent
         cacheOptions
+        cacheUniq={cacheUniq}
         debounceTimeout={300}
         styles={customStyles}
         value={value}
         loadOptions={loadOptions}
         additional={{ page: 1 }}
         onChange={onChange}
-        {...(onCreateOption && { onCreateOption })} // Only add if provided
+        {...(onCreateOption && { onCreateOption: handleCreate })}
         {...props}
       />
     </div>
