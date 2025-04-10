@@ -86,7 +86,6 @@ const AdminProductEditForm = ({ data, refetch }) => {
           formData.append(key, payload[key]);
         }
       });
-      console.log(formData);
 
       const promise = APIKit.we.products
         .updateProduct(id, formData)
@@ -106,6 +105,14 @@ const AdminProductEditForm = ({ data, refetch }) => {
       });
     },
   });
+
+  const createTag = (data, promise) => {
+    const apiFunc = promise({ name: data })
+      .then((data) => data)
+      .catch((error) => {
+        throw error;
+      });
+  };
 
   return (
     <form onSubmit={formik.handleSubmit} className="flex flex-col gap-3">
@@ -155,7 +162,7 @@ const AdminProductEditForm = ({ data, refetch }) => {
           loadOptions(inputValue, _, page, APIKit.tags.getCategoriesList)
         }
         additional={{ page: 1 }}
-        onCreateOption={(item) => console.log(item, "inside")}
+        onCreateOption={(item) => createTag(item, APIKit.tags.createCategory)}
         onChange={(items) => {
           formik.setFieldValue("categories", items);
         }}
@@ -169,7 +176,7 @@ const AdminProductEditForm = ({ data, refetch }) => {
         }
         additional={{ page: 1 }}
         isMulti={true}
-        onCreateOption={(item) => console.log(item, "inside")}
+        onCreateOption={(item) => createTag(item, APIKit.tags.createBrand)}
         onChange={(items) => {
           formik.setFieldValue("brand", items);
         }}
@@ -183,7 +190,7 @@ const AdminProductEditForm = ({ data, refetch }) => {
         }
         additional={{ page: 1 }}
         isMulti={true}
-        onCreateOption={(item) => console.log(item, "inside")}
+        onCreateOption={(item) => createTag(item, APIKit.tags.createColor)}
         onChange={(items) => {
           formik.setFieldValue("colors", items);
         }}
@@ -197,7 +204,7 @@ const AdminProductEditForm = ({ data, refetch }) => {
         }
         additional={{ page: 1 }}
         isMulti={true}
-        onCreateOption={(item) => console.log(item, "inside")}
+        onCreateOption={(item) => createTag(item, APIKit.tags.createMaterial)}
         onChange={(items) => {
           formik.setFieldValue("materials", items);
         }}
