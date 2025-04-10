@@ -9,20 +9,20 @@ import { Plus } from "lucide-react";
 import React, { useState } from "react";
 import WeProductCard from "./components/WeProductCard";
 import { useRouter } from "next/navigation";
+import Pagination from "@/components/shared/Pagination";
 
 const WeProduct = () => {
   const router = useRouter();
-  const [searchKey, setSearchKey] = useState("");
+  const [params, setParams] = useState({
+    search: "",
+    page: 1,
+  });
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["/admin-products", searchKey],
+    queryKey: ["/admin-products", params],
     queryFn: () =>
-      APIKit.we.products
-        .getAllProduct({ search: searchKey })
-        .then(({ data }) => data),
+      APIKit.we.products.getAllProduct(params).then(({ data }) => data),
     keepPreviousData: true,
   });
-
-  console.log(searchKey);
 
   return (
     <div className="px-2 py-4 flex flex-col gap-4">
@@ -38,17 +38,37 @@ const WeProduct = () => {
       </div>
       <SearchByKey
         placeholders={["Search by Product Name"]}
-        value={searchKey}
+        value={params.search}
         onChange={(event) => {
-          setSearchKey(event.target.value);
+          setParams((prevParams) => ({
+            ...prevParams,
+            search: event.target.value,
+            page: 1,
+          }));
         }}
-        onReset={() => setSearchKey()}
+        onReset={() => {
+          setParams((prevParams) => ({
+            ...prevParams,
+            search: "",
+            page: 1,
+          }));
+        }}
       />
       {!isLoading && (
         <>
           {data?.results?.map((item, i) => (
             <WeProductCard key={i} item={item} />
           ))}
+          <Pagination
+            setPage={(pageNumber) => {
+              setParams((prevParams) => ({
+                ...prevParams,
+                page: pageNumber,
+              }));
+            }}
+            data={data}
+            page={+params.page}
+          />
         </>
       )}
     </div>
