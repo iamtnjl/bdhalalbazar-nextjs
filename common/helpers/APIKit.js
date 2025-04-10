@@ -144,6 +144,14 @@ const APIKit = {
         const url = `/we/product/${id}`;
         return client.patch(url, payload, defaultFileUploadConfig);
       },
+      updateProductVisibility: (id, payload) => {
+        const url = `/we/product/${id}/publish`;
+        return client.patch(url, payload);
+      },
+      deleteProduct: (id) => {
+        const url = `/we/product/${id}`;
+        return client.delete(url);
+      },
     },
   },
 };

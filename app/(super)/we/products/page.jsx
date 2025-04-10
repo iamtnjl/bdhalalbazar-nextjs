@@ -58,7 +58,7 @@ const WeProduct = () => {
       {!isLoading && (
         <>
           {data?.results?.map((item, i) => (
-            <WeProductCard key={i} item={item} />
+            <WeProductCard key={i} item={item} refetch={refetch} />
           ))}
           <Pagination
             setPage={(pageNumber) => {
