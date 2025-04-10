@@ -2,7 +2,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 
 import Button from "./Button";
 
-export default function Pagination({ setPage, data, page, divide = 40 }) {
+export default function Pagination({ setPage, data, page, divide = 20 }) {
   const handlePageChange = (pageNumber) => {
     setPage(pageNumber);
   };
