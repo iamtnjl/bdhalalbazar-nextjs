@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import OrderItemCard from "./components/OrderItemCard";
 import { useFilters } from "@/providers/FiltersProvider";
 import { sanitizeParams } from "@/common/helpers/UtilKit";
+import EmptyState from "@/components/shared/EmptyState";
 
 const Orders = () => {
   const { params, paramsInURL, updateParams, removeFilterItems } = useFilters();
@@ -55,11 +56,17 @@ const Orders = () => {
           />
         </div>
       </div>
-      <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-5 mb-14">
-        {data?.map((order) => (
-          <OrderItemCard key={order.order_id} order={order} />
-        ))}
-      </div>
+      {data?.count > 0 ? (
+        <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-5 mb-14">
+          {data?.map((order) => (
+            <OrderItemCard key={order.order_id} order={order} />
+          ))}
+        </div>
+      ) : (
+        <>
+          <EmptyState>No orders found</EmptyState>
+        </>
+      )}
     </div>
   );
 };

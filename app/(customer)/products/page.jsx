@@ -7,6 +7,7 @@ import SearchAndSelect from "@/components/from/SearchAndSelect";
 import FilterController from "@/components/products/FilterController";
 import ProductFilters from "@/components/products/ProductFilters";
 import Button from "@/components/shared/Button";
+import EmptyState from "@/components/shared/EmptyState";
 import Modal from "@/components/shared/Modal";
 import ProductCard from "@/components/shared/ProductCard";
 import SearchByKey from "@/components/shared/SearchByKey";
@@ -127,13 +128,19 @@ const ProductContainer = () => {
       </div>
 
       {/* Product Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {data?.pages.map((page) =>
-          page.results.map((product) => (
-            <ProductCard key={product._id} product={product} />
-          ))
-        )}
-      </div>
+      {data?.pages.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {data?.pages.map((page) =>
+            page.results.map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))
+          )}
+        </div>
+      ) : (
+        <>
+          <EmptyState>No products found</EmptyState>
+        </>
+      )}
 
       {/* Loading More Indicator */}
       <div ref={ref} className="text-center mt-4">

@@ -5,6 +5,7 @@ import SearchByKey from "@/components/shared/SearchByKey";
 import SectionTitle from "@/components/shared/SectionTitle";
 import { useQuery } from "@tanstack/react-query";
 import WeOrderCard from "./components/WeOrderCard";
+import EmptyState from "@/components/shared/EmptyState";
 
 const WeOrders = () => {
   const { data, isLoading, refetch } = useQuery({
@@ -28,9 +29,17 @@ const WeOrders = () => {
         // }}
         // onReset={() => removeFilterItems("search")}
       />
-      {data?.results.map((item, key) => (
-        <WeOrderCard data={item} key={key} refetch={refetch} />
-      ))}
+      {data.count > 0 ? (
+        <>
+          {data?.results.map((item, key) => (
+            <WeOrderCard data={item} key={key} refetch={refetch} />
+          ))}
+        </>
+      ) : (
+        <>
+          <EmptyState>No orders found.</EmptyState>
+        </>
+      )}
     </div>
   );
 };

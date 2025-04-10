@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import WeProductCard from "./components/WeProductCard";
 import { useRouter } from "next/navigation";
 import Pagination from "@/components/shared/Pagination";
+import EmptyState from "@/components/shared/EmptyState";
 
 const WeProduct = () => {
   const router = useRouter();
@@ -55,7 +56,7 @@ const WeProduct = () => {
           }));
         }}
       />
-      {!isLoading && (
+      {!isLoading && data?.count > 0 ? (
         <>
           {data?.results?.map((item, i) => (
             <WeProductCard key={i} item={item} refetch={refetch} />
@@ -70,6 +71,10 @@ const WeProduct = () => {
             data={data}
             page={+params.page}
           />
+        </>
+      ) : (
+        <>
+          <EmptyState>No products found</EmptyState>
         </>
       )}
     </div>
