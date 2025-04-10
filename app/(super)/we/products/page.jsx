@@ -16,7 +16,7 @@ const WeProduct = () => {
   const [params, setParams] = useState({
     search: "",
     page: 1,
-    createdAt: 1,
+    sort_by: "newest",
   });
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["/admin-products", params],
