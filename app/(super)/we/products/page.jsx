@@ -109,7 +109,7 @@ const WeProduct = () => {
           ))}
           <Pagination
             setPage={(pageNumber) => {
-              updateParams({ page: pageNumber });
+              updateParams("page", pageNumber);
               triggerURLUpdate();
             }}
             data={data}

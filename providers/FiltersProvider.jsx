@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 import { createUrlSearchParams, isEqual } from "../common/helpers/UtilKit.js";
 
@@ -11,6 +11,7 @@ export default function FiltersProvider({ children, initialParams = {} }) {
   const pathName = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
+  const didPushInitialParams = useRef(false);
 
   // Extracts query params from the URL.
   const getParamsFromURL = () => Object.fromEntries(searchParams.entries());
@@ -29,6 +30,34 @@ export default function FiltersProvider({ children, initialParams = {} }) {
       }, {}),
     };
   });
+
+  useEffect(() => {
+    if (didPushInitialParams.current) return;
+
+    const nonEmptyInitialParams = Object.keys(initialParams).reduce(
+      (acc, key) => {
+        const val = initialParams[key];
+        if (
+          (Array.isArray(val) && val.length > 0) ||
+          (!Array.isArray(val) &&
+            val !== "" &&
+            val !== null &&
+            val !== undefined)
+        ) {
+          acc[key] = val;
+        }
+        return acc;
+      },
+      {}
+    );
+
+    if (Object.keys(nonEmptyInitialParams).length > 0) {
+      router.replace(
+        `${pathName}?${createUrlSearchParams(nonEmptyInitialParams)}`
+      );
+      didPushInitialParams.current = true;
+    }
+  }, []);
 
   // Sync params with URL whenever searchParams changes
   useEffect(() => {
@@ -100,7 +129,12 @@ export default function FiltersProvider({ children, initialParams = {} }) {
             : items,
         };
 
-        if (fieldNameOrFields === "sort_by" || fieldNameOrFields === "status") {
+        if (
+          fieldNameOrFields === "sort_by" ||
+          fieldNameOrFields === "status" ||
+          fieldNameOrFields === "page"
+        ) {
+          console.log("execute");
           // Immediately update URL for sort_by
           triggerURLUpdate(newParams);
         } else if (
