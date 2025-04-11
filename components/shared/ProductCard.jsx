@@ -12,7 +12,6 @@ import QuantityButton from "./QuantityButton";
 const ProductCard = ({ product }) => {
   const { addToCart, updateQuantity, cart } = useCart();
   const cartItem = cart.find((item) => item.productId === product._id);
-  console.log(product);
 
   return (
     <div className="bg-white p-2 rounded-md shadow-sm">
