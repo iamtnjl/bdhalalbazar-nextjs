@@ -31,31 +31,39 @@ export default function FiltersProvider({ children, initialParams = {} }) {
     };
   });
 
+  // Push initialParams to the URL if they are not already there
   useEffect(() => {
-    if (didPushInitialParams.current) return;
+    const mergedParams = Object.keys(initialParams).reduce((acc, key) => {
+      const initialValue = initialParams[key];
 
-    const nonEmptyInitialParams = Object.keys(initialParams).reduce(
-      (acc, key) => {
-        const val = initialParams[key];
-        if (
-          (Array.isArray(val) && val.length > 0) ||
-          (!Array.isArray(val) &&
-            val !== "" &&
-            val !== null &&
-            val !== undefined)
-        ) {
-          acc[key] = val;
-        }
-        return acc;
-      },
-      {}
-    );
+      if (
+        (Array.isArray(initialValue) && initialValue.length > 0) ||
+        (!Array.isArray(initialValue) &&
+          initialValue !== undefined &&
+          initialValue !== null &&
+          initialValue !== "")
+      ) {
+        acc[key] = initialValue;
+      }
 
-    if (Object.keys(nonEmptyInitialParams).length > 0) {
-      router.replace(
-        `${pathName}?${createUrlSearchParams(nonEmptyInitialParams)}`
-      );
-      didPushInitialParams.current = true;
+      return acc;
+    }, {});
+
+    const shouldPush = Object.entries(mergedParams).some(([key, value]) => {
+      if (Array.isArray(value)) {
+        return (
+          !paramsInURL[key] ||
+          paramsInURL[key].split(",").sort().join(",") !==
+            value.sort().join(",")
+        );
+      } else {
+        return paramsInURL[key] !== String(value);
+      }
+    });
+
+    if (shouldPush) {
+      const finalURL = `${pathName}?${createUrlSearchParams(mergedParams)}`;
+      router.replace(finalURL); // replace to avoid history pollution
     }
   }, []);
 
