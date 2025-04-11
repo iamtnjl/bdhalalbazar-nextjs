@@ -32,7 +32,7 @@ const ProductCard = ({ product }) => {
         <div className="flex flex-col items-start pt-3 w-full">
           <div className="flex items-center gap-3 w-full">
             <div className="flex items-start justify-between w-full">
-              <div className="flex flex-col pointer-events-none">
+              <div className="flex flex-col pointer-events-none whitespace-nowrap">
                 <h3 className="font-medium text-gray-900 text-wrap">
                   {product?.name}
                 </h3>

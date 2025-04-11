@@ -10,7 +10,7 @@ const AdminEditProduct = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["/admin-product-details"],
+    queryKey: ["/admin-product-details", id],
     queryFn: () =>
       APIKit.we.products.getProductDetails(id).then(({ data }) => data),
     keepPreviousData: true,
