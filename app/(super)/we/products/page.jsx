@@ -107,12 +107,7 @@ const WeProduct = () => {
             <WeProductCard key={i} item={item} refetch={refetch} />
           ))}
           <Pagination
-            setPage={(pageNumber) => {
-              setParams((prevParams) => ({
-                ...prevParams,
-                page: pageNumber,
-              }));
-            }}
+            setPage={(pageNumber) => updateParams({ page: pageNumber })}
             data={data}
             page={+params.page}
           />
