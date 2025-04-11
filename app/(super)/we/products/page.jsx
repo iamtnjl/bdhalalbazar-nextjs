@@ -115,7 +115,7 @@ const WeProduct = () => {
               triggerURLUpdate();
             }}
             data={data}
-            page={+params.page}
+            page={+paramsInURL.page}
           />
         </>
       ) : (
