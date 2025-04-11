@@ -5,25 +5,58 @@ import Button from "@/components/shared/Button";
 import SearchByKey from "@/components/shared/SearchByKey";
 import SectionTitle from "@/components/shared/SectionTitle";
 import { useQuery } from "@tanstack/react-query";
-import { Plus } from "lucide-react";
+import { Plus, SlidersHorizontal } from "lucide-react";
 import React, { useState } from "react";
 import WeProductCard from "./components/WeProductCard";
 import { useRouter } from "next/navigation";
 import Pagination from "@/components/shared/Pagination";
 import EmptyState from "@/components/shared/EmptyState";
+import { useFilters } from "@/providers/FiltersProvider";
+import { useSelectedData } from "@/common/hooks/useSelectedData";
+import Modal from "@/components/shared/Modal";
+import AdminProductFilter from "./components/AdminProductFilter";
+import AdminProductFilterController from "./components/AdminProductFilterController";
 
 const WeProduct = () => {
-  const router = useRouter();
-  const [params, setParams] = useState({
-    search: "",
-    page: 1,
-    sort_by: "newest",
-  });
+  const {
+    params,
+    filterModal,
+    setFilterModal,
+    isFilterApplied,
+    paramsInURL,
+    updateParams,
+    removeFilterItems,
+  } = useFilters();
+
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["/admin-products", params],
+    queryKey: ["/admin-products", paramsInURL],
     queryFn: () =>
-      APIKit.we.products.getAllProduct(params).then(({ data }) => data),
+      APIKit.we.products.getAllProduct(paramsInURL).then(({ data }) => data),
     keepPreviousData: true,
+  });
+
+  const { data: selectedCategories } = useSelectedData({
+    queryKey: ["slugs"],
+    queryFn: APIKit.tags.getCategoriesList,
+    queryValue: params.categories,
+  });
+
+  const { data: selectedBrands } = useSelectedData({
+    queryKey: ["slugs"],
+    queryFn: APIKit.tags.getBrandsList,
+    queryValue: params.brands,
+  });
+
+  const { data: selectedColors } = useSelectedData({
+    queryKey: ["slugs"],
+    queryFn: APIKit.tags.getColorList,
+    queryValue: params.colors,
+  });
+
+  const { data: selectedMaterials } = useSelectedData({
+    queryKey: ["slugs"],
+    queryFn: APIKit.tags.getMaterialList,
+    queryValue: params.materials,
   });
 
   return (
@@ -38,24 +71,36 @@ const WeProduct = () => {
           <Plus width={20} height={20} className="text-white" /> Add Product
         </Button>
       </div>
-      <SearchByKey
-        placeholders={["Search by Product Name"]}
-        value={params.search}
-        onChange={(event) => {
-          setParams((prevParams) => ({
-            ...prevParams,
-            search: event.target.value,
-            page: 1,
-          }));
-        }}
-        onReset={() => {
-          setParams((prevParams) => ({
-            ...prevParams,
-            search: "",
-            page: 1,
-          }));
-        }}
-      />
+      <div className="flex items-center gap-2">
+        <SearchByKey
+          placeholders={["Search by Product Name"]}
+          value={params.search}
+          onChange={(event) => {
+            updateParams("search", event.target.value);
+          }}
+          onReset={() => removeFilterItems("search")}
+        />
+        <Button
+          onClick={() => setFilterModal(true)}
+          variant="white"
+          extraClassName="py-[10px] flex items-center mt-1"
+        >
+          <SlidersHorizontal
+            height={15}
+            width={15}
+            className="text-gray-700 mr-2"
+          />
+          Filters
+        </Button>
+      </div>
+      {isFilterApplied ? (
+        <AdminProductFilterController
+          selectedCategories={selectedCategories}
+          selectedBrands={selectedBrands}
+          selectedColors={selectedColors}
+          selectedMaterials={selectedMaterials}
+        />
+      ) : null}
       {!isLoading && data?.count > 0 ? (
         <>
           {data?.results?.map((item, i) => (
@@ -77,6 +122,15 @@ const WeProduct = () => {
           <EmptyState>No products found</EmptyState>
         </>
       )}
+      <Modal open={filterModal} setOpen={setFilterModal}>
+        <AdminProductFilter
+          setFilterModal={setFilterModal}
+          selectedCategories={selectedCategories}
+          selectedBrands={selectedBrands}
+          selectedColors={selectedColors}
+          selectedMaterials={selectedMaterials}
+        />
+      </Modal>
     </div>
   );
 };

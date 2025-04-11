@@ -66,7 +66,12 @@ export default function FiltersProvider({ children, initialParams = {} }) {
   const isFilterApplied = () => {
     return Object.entries(paramsInURL).some(([fieldName, value]) => {
       // Skip checking the 'key' field
-      if (fieldName === "search" || fieldName === "sort_by") return false;
+      if (
+        fieldName === "search" ||
+        fieldName === "sort_by" ||
+        fieldName === "page"
+      )
+        return false;
 
       if (Array.isArray(value)) {
         return value.length > 0;
