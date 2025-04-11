@@ -6,7 +6,6 @@ import SearchByKey from "@/components/shared/SearchByKey";
 import SectionTitle from "@/components/shared/SectionTitle";
 import { useQuery } from "@tanstack/react-query";
 import { Plus, SlidersHorizontal } from "lucide-react";
-import React, { useState } from "react";
 import WeProductCard from "./components/WeProductCard";
 import { useRouter } from "next/navigation";
 import Pagination from "@/components/shared/Pagination";
@@ -26,10 +25,8 @@ const WeProduct = () => {
     paramsInURL,
     updateParams,
     removeFilterItems,
-    triggerURLUpdate,
   } = useFilters();
-
-  console.log({ params, paramsInURL });
+  const router = useRouter();
 
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["/admin-products", paramsInURL],
