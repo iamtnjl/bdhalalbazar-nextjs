@@ -29,6 +29,8 @@ const WeProduct = () => {
     triggerURLUpdate,
   } = useFilters();
 
+  console.log({ params, paramsInURL });
+
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["/admin-products", paramsInURL],
     queryFn: () =>

@@ -134,7 +134,6 @@ export default function FiltersProvider({ children, initialParams = {} }) {
           fieldNameOrFields === "status" ||
           fieldNameOrFields === "page"
         ) {
-          console.log("execute");
           // Immediately update URL for sort_by
           triggerURLUpdate(newParams);
         } else if (
