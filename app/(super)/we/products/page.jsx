@@ -26,6 +26,7 @@ const WeProduct = () => {
     paramsInURL,
     updateParams,
     removeFilterItems,
+    triggerURLUpdate,
   } = useFilters();
 
   const { data, isLoading, refetch } = useQuery({
@@ -107,7 +108,10 @@ const WeProduct = () => {
             <WeProductCard key={i} item={item} refetch={refetch} />
           ))}
           <Pagination
-            setPage={(pageNumber) => updateParams({ page: pageNumber })}
+            setPage={(pageNumber) => {
+              updateParams({ page: pageNumber });
+              triggerURLUpdate();
+            }}
             data={data}
             page={+params.page}
           />
