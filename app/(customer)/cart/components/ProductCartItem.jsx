@@ -22,8 +22,25 @@ function ProductCartItem({ cartItem }) {
               </span>
             </p>
           </div>
+          {cartItem?.product?.colors.length > 0 ? (
+            <p className="text-xs md:text-sm text-gray-400">
+              {cartItem?.product?.colors.map((item) => item?.name).join(", ")}
+            </p>
+          ) : null}
+          {cartItem?.product?.brand.length > 0 ? (
+            <p className="text-xs md:text-sm text-gray-400">
+              {cartItem?.product?.brand.map((item) => item?.name).join(", ")}
+            </p>
+          ) : null}
+          {cartItem?.product?.categories.length > 0 ? (
+            <p className="text-xs md:text-sm text-gray-400">
+              {cartItem?.product?.categories
+                .map((item) => item?.name)
+                .join(", ")}
+            </p>
+          ) : null}
           <p className="text-xs md:text-sm text-gray-400">
-            {cartItem?.product?.colors.map((item) => item?.name).join(", ")}
+            {`Weight: ${cartItem?.product?.weight} ${cartItem?.product?.unit}`}
           </p>
           <div className="text-sm font-bold text-gray-600 w-full flex justify-between items-center">
             <div>

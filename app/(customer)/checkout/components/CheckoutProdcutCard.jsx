@@ -71,6 +71,11 @@ const CheckoutProductCard = ({ product, expand, animate }) => {
                       .join(", ")}
                   </p>
                 )}
+                {expand && (
+                  <p className="text-xs md:text-xs text-gray-400">
+                    {`Weight: ${product?.product?.weight} ${product?.product?.unit}`}
+                  </p>
+                )}
               </div>
             </div>
             {expand && (

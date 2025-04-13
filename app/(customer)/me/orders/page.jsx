@@ -56,7 +56,7 @@ const Orders = () => {
           />
         </div>
       </div>
-      {data?.count > 0 ? (
+      {data?.length > 0 ? (
         <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-5 mb-14">
           {data?.map((order) => (
             <OrderItemCard key={order.order_id} order={order} />

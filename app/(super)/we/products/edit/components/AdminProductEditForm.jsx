@@ -272,7 +272,7 @@ const AdminProductEditForm = ({ data, refetch }) => {
       </div>
       <div className="flex items-center gap-4">
         <Button type="submit" variant="primary">
-          Add Product
+          Edit Product
         </Button>
         <Button onClick={() => router.push("/we/products")} variant="light">
           Cancel

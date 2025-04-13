@@ -155,9 +155,27 @@ const ViewOrderDetails = ({ data, refetch }) => {
                 </h2>
               </div>
             </div>
+            <div className="font-medium flex justify-between items-center text-sm">
+              <p className="text-gray-700">Delivery Charge:</p>
+              <h2 className="font-semibold text-grey-700">
+                <span className="text-grey-700 font-semibold mr-1 text-sm">
+                  &#2547;
+                </span>
+                {formatCurrency(data?.delivery_charge, ",")}
+              </h2>
+            </div>
+            <div className="font-medium flex justify-between items-center text-sm">
+              <p className="text-gray-700">Platform Fee:</p>
+              <h2 className="font-semibold text-grey-700">
+                <span className="text-grey-700 font-semibold mr-1 text-sm">
+                  &#2547;
+                </span>
+                {formatCurrency(data?.platform_fee, ",")}
+              </h2>
+            </div>
 
-            <div className="font-semibold flex justify-between items-center text-sm">
-              <p className="font-normal text-gray-600">Total Order Price:</p>
+            <div className="font-bold flex justify-between items-center text-sm">
+              <p className="font-bold text-gray-600">Total Order Price:</p>
               <h2 className="font-bold text-grey-700">
                 <span className="text-grey-700 font-semibold mr-1 text-sm">
                   &#2547;
@@ -168,7 +186,6 @@ const ViewOrderDetails = ({ data, refetch }) => {
           </div>
         </div>
       </div>
-
       <div className="hidden">
         <CashReceipt ref={cashReceiptRef} order={data} />
       </div>

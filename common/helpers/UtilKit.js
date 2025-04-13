@@ -69,10 +69,16 @@ export function formatFilterOptions(data) {
   }));
 }
 
-export function formatCurrency(amount, separator = " ") {
-  return parseInt(amount)
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, separator);
+export function formatCurrency(amount, separator = " ", decimalPlaces = 2) {
+  if (isNaN(amount)) return "0";
+
+  const [intPart, decimalPart] = Number(amount)
+    .toFixed(decimalPlaces)
+    .split(".");
+
+  const formattedInt = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, separator);
+
+  return `${formattedInt}${decimalPlaces > 0 ? "." + decimalPart : ""}`;
 }
 
 export function isEqual(obj1, obj2) {

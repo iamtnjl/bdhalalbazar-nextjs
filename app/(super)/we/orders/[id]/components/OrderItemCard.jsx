@@ -38,6 +38,10 @@ const OrderItemCard = ({ item }) => {
             Categories:{" "}
             {item?.product?.categories.map((item) => item.name).join(", ")}
           </p>
+          <p className="text-xs md:text-sm text-gray-500">
+            Categories:{" "}
+            {`Weight: ${item?.product?.weight} ${item?.product?.unit}`}
+          </p>
           <div className="text-sm font-medium flex items-center gap-1"></div>
         </div>
       </div>

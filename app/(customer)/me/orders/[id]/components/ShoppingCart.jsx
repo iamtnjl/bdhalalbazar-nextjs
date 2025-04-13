@@ -63,6 +63,28 @@ const ShoppingCart = ({ data }) => {
                 </h2>
               </div>
             </div>
+            <div className="font-medium flex justify-between items-center">
+              <h2 className="text-base">Delivery Charge:</h2>
+              <p className="font-medium">
+                <span className="text-gray-900 font-medium mr-1 text-sm">
+                  &#2547;
+                </span>
+                <span className="text-gray-600">
+                  {formatCurrency(data?.delivery_charge, ",")}
+                </span>
+              </p>
+            </div>
+            <div className="font-medium flex justify-between items-center">
+              <h2 className="text-base">Platform fee:</h2>
+              <p className="font-medium">
+                <span className="text-gray-900 font-medium mr-1 text-sm">
+                  &#2547;
+                </span>
+                <span className="text-gray-600">
+                  {formatCurrency(data?.platform_fee, ",")}
+                </span>
+              </p>
+            </div>
             <div className="flex justify-between items-center">
               <h2 className="text-base font-medium text-gray-900">
                 Total Order Price:

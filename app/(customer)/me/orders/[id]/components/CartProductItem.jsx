@@ -36,6 +36,9 @@ const CartProductItem = ({ product }) => {
           <p className="text-xs text-gray-500">
             {product.product.categories.map((item) => item.name).join(", ")}
           </p>
+          <p className="text-xs text-gray-500">
+            {`Weight: ${product.product.weight} ${product.product.unit}`}
+          </p>
         </div>
       </div>
       <div className="flex items-center justify-between">

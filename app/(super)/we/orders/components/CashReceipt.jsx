@@ -11,13 +11,13 @@ const CashReceipt = forwardRef(({ order }, ref) => {
         <div className="flex flex-col gap-1">
           <h2 className="text-2xl font-bold capitalize">HalalBazar</h2>
           <a href={`https://halalbazar.net`}>
-            <span className="text-sm">{`https://halalbazar.net`}</span>
+            <span className="text-sm">{`https://bdhalalbazar.com`}</span>
           </a>
         </div>
         <div>
           <div className="flex gap-2">
             <p className="text-sm font-bold">Address: </p>
-            <p className="text-sm">ul.Słoneczna 6B 05-500 Stara Iwiczna</p>
+            <p className="text-sm">Pabna Sadar, Pabna-6600, Bangladesh</p>
           </div>
         </div>
       </header>
@@ -51,6 +51,7 @@ const CashReceipt = forwardRef(({ order }, ref) => {
             <tr className="pt-2">
               <th className="text-left text-sm">Product</th>
               <th className="text-sm">Qty</th>
+              <th className="text-sm">Weight</th>
               <th className="text-sm">Pri.</th>
               <th className="text-sm">Disc.</th>
               <th className="text-sm">Subt.</th>
@@ -62,6 +63,7 @@ const CashReceipt = forwardRef(({ order }, ref) => {
               <tr key={i} className="font-normal text-sm">
                 <td className="text-left">{item?.product?.name}</td>
                 <td>{item?.quantity}</td>
+                <td>{`${item?.weight} ${item?.unit}`}</td>
                 <td>{formatCurrency(item?.price * item?.quantity, ",")}</td>
                 <td>
                   {formatCurrency(
@@ -98,6 +100,18 @@ const CashReceipt = forwardRef(({ order }, ref) => {
               {formatCurrency(order?.discount, ",")}
             </h2>
           </div>
+          <div className="font-normal flex justify-between items-center">
+            Delivery Charge:
+            <h2 className="font-normal">
+              {formatCurrency(order?.delivery_charge, ",")}
+            </h2>
+          </div>
+          <div className="font-normal flex justify-between items-center">
+            Platform Fee:
+            <h2 className="font-normal">
+              {formatCurrency(order?.platform_fee, ",")}
+            </h2>
+          </div>
           <div className="font-semibold flex justify-between items-center">
             Total Order Price:
             <h2 className="font-semibold">
@@ -115,9 +129,8 @@ const CashReceipt = forwardRef(({ order }, ref) => {
           Thank You For Shopping With HalalBazar
         </h2>
         <h2 className="text-xs text-center py-2">
-          Please Contact {"+48 796 420 987"}
+          Please Contact {"+8801612255672"}
         </h2>
-        <h2 className="text-xs text-center capitalize">HalalBazar</h2>
       </div>
       <div>
         <h2 className="text-xs text-center">

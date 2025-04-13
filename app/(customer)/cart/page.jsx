@@ -91,6 +91,18 @@ const Cart = () => {
                 ৳ {formatCurrency(data?.discount, ",")}
               </p>
             </div>
+            <div className="flex justify-between items-center text-sm font-medium text-grey-700">
+              <p>Delivery Charge</p>
+              <p className="flex items-center gap-1">
+                ৳ {formatCurrency(data?.delivery_charge, ",")}
+              </p>
+            </div>
+            <div className="flex justify-between items-center text-sm font-medium text-grey-700">
+              <p>Platform Fee</p>
+              <p className="flex items-center gap-1">
+                ৳ {formatCurrency(data?.platform_fee, ",")}
+              </p>
+            </div>
             <div className="flex justify-between items-center text-sm font-bold text-grey-700">
               <p>Total Cost</p>
               <p>৳ {formatCurrency(data?.grand_total, ",")}</p>

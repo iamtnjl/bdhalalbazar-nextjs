@@ -29,9 +29,14 @@ const PaymentBreakdown = ({ data }) => {
           </p>
         </div>
 
+        <div className="flex justify-between items-center text-base font-medium text-grey-700">
+          <p>Delivery Charge</p>৳ {formatCurrency(data?.delivery_charge, ", ")}
+        </div>
+        <div className="flex justify-between items-center text-base font-medium text-grey-700">
+          <p>Platform Fee</p>৳ {formatCurrency(data?.platform_fee, ", ")}
+        </div>
         <div className="flex justify-between items-center text-base font-bold text-grey-700">
           <p>Total Order Price</p>৳ {formatCurrency(data?.grand_total, ", ")}
-          {/* <p>৳{formatCurrency(+cart?.total_price + +deliveryCharge?.charge)}</p> */}
         </div>
       </div>
     </div>
