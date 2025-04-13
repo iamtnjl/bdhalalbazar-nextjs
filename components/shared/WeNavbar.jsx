@@ -13,6 +13,7 @@ import {
 import Button from "./Button";
 import LeftSideDrawer from "./LeftSideDrawer";
 import Image from "next/image";
+import { Settings } from "lucide-react";
 
 const navigation = [
   { name: "Dashboard", icon: HomeIcon, href: "/we" },
@@ -25,6 +26,11 @@ const navigation = [
     name: "All Products",
     icon: CubeIcon,
     href: "/we/products",
+  },
+  {
+    name: "Settings",
+    icon: Settings,
+    href: "/we/settings",
   },
 ];
 

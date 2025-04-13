@@ -153,6 +153,16 @@ const APIKit = {
         return client.delete(url);
       },
     },
+    settings: {
+      getSettings: () => {
+        const url = `/we/settings`;
+        return client.get(url);
+      },
+      updateSettings: (payload) => {
+        const url = `/we/settings`;
+        return client.put(url, payload);
+      },
+    },
   },
 };
 
