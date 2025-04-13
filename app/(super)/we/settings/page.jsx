@@ -22,6 +22,7 @@ const Settings = () => {
       delivery_charge: data?.platform_fee || "",
       platform_fee: data?.delivery_charge || "",
     },
+    enableReinitialize: true,
     onSubmit: (values) => {
       const promise = APIKit.we.settings
         .updateSettings(values)
@@ -44,6 +45,7 @@ const Settings = () => {
   if (isLoading) {
     return "Loading...";
   }
+
   return (
     <form
       onSubmit={formik.handleSubmit}
