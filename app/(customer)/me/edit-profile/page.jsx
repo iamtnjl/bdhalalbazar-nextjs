@@ -102,16 +102,18 @@ function EditProfile({ ...props }) {
           <FormikErrorBox formik={formik} field="email" />
         </div>
         <div className="mb-4">
-          <PhoneInputField
+          <TextInputField
             placeholder="Enter your phone"
             label="Phone"
             id="phone"
             name="phone"
+            disabled={true}
             type="phone"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.phone}
           />
+          <p className="text-xs text-gray-500 font-semibold mt-2">Phone number can not be edited.</p>
           <FormikErrorBox formik={formik} field="phone" />
         </div>
         <div className="mb-4">

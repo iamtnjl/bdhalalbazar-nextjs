@@ -114,9 +114,9 @@ const APIKit = {
   //Admin API's
   we: {
     orders: {
-      getOrders: () => {
+      getOrders: (params) => {
         const url = `/we/orders/`;
-        return client.get(url);
+        return client.get(url, { params });
       },
       getOrderDetails: (id) => {
         const url = `/we/orders/${id}`;

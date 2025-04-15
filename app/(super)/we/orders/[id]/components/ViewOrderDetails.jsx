@@ -17,8 +17,6 @@ const ViewOrderDetails = ({ data, refetch }) => {
     documentTitle: `cash_receipt#${data?.order_id}`,
   });
 
-  const ongoingStatus = data?.status?.find((item) => item.stage === "current");
-
   const handleOrderStatusChange = (event) => {
     let values = {
       newStatus: event.target.value,
@@ -49,6 +47,21 @@ const ViewOrderDetails = ({ data, refetch }) => {
       },
     });
   };
+
+  console.log(data.status);
+  const orderStatusList = [
+    { name: "Pending", slug: "pending" },
+    { name: "Accepted", slug: "accepted" },
+    { name: "Ready to Deliver", slug: "ready-to-deliver" },
+    { name: "On the Way", slug: "on-the-way" },
+    { name: "Delivered", slug: "delivered" },
+    { name: "Rejected", slug: "rejected" },
+    { name: "Canceled", slug: "canceled" },
+    { name: "Return", slug: "return" },
+    { name: "Failed to Deliver", slug: "failed-to-deliver" },
+  ];
+
+  const ongoingStatus = data?.status?.find((item) => item.stage === "current");
 
   return (
     <div>

@@ -28,7 +28,6 @@ const yupAddressAddSchema = object({
   street: string(),
   city: string(),
   zip: string(),
-  
 });
 
 const CheckOut = () => {
@@ -139,10 +138,17 @@ const CheckOut = () => {
     },
   });
 
+  let phoneNumber = "";
+  if (formik.values.phone.charAt(0) === "0") {
+    phoneNumber = "+880" + formik.values.phone.substring(1);
+  } else {
+    phoneNumber = "+880" + formik.values.phone;
+  }
+
   const placeOrder = () => {
     const payload = {
       name: formik.values.name,
-      phone: formik.values.phone,
+      phone: phoneNumber,
       email: formik.values.email,
       address: {
         street: formik.values.street,

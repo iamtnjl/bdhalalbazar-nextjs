@@ -37,7 +37,6 @@ const Register = () => {
     password: "",
     retype_password: "",
   });
-  
 
   const formik = useFormik({
     initialValues,
@@ -55,8 +54,22 @@ const Register = () => {
         throw error;
       };
 
+      let phoneNumber = "";
+      if (values.phone.charAt(0) === "0") {
+        phoneNumber = "+880" + values.phone.substring(1);
+      } else {
+        phoneNumber = "+880" + values.phone;
+      }
+      // Delete phone from values
+      delete values.phone;
+
+      const payload = {
+        phone: phoneNumber,
+        ...values,
+      };
+
       const promise = APIKit.auth
-        .register(values)
+        .register(payload)
         .then(handleSuccess)
         .catch(handleFailure)
         .finally(() => setSubmitting(false));

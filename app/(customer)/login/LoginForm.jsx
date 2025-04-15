@@ -31,6 +31,7 @@ const LoginForm = () => {
   const searchParams = useSearchParams();
   const previousURL = searchParams.get("next");
   const router = useRouter();
+
   const formik = useFormik({
     initialValues,
     validationSchema: yupSchema,
@@ -53,8 +54,15 @@ const LoginForm = () => {
         throw error;
       };
 
+      let phoneNumber = "";
+      if (values.phone.charAt(0) === "0") {
+        phoneNumber = "+880" + values.phone.substring(1);
+      } else {
+        phoneNumber = "+880" + values.phone;
+      }
+
       const payload = {
-        user_id: values.phone,
+        user_id: phoneNumber,
         password: values.password,
       };
 
@@ -112,11 +120,11 @@ const LoginForm = () => {
             ) : null}
           </div>
 
-          <div className="flex justify-end items-start pb-6">
+          {/* <div className="flex justify-end items-start pb-6">
             <Link href="#" className="text-primary font-bold">
               Forgot password?
             </Link>
-          </div>
+          </div> */}
 
           <Button type="submit" variant="primary" extraClassName="w-full">
             Sign in

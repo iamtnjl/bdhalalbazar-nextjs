@@ -9,6 +9,15 @@ import OrderItemCard from "./components/OrderItemCard";
 import { useFilters } from "@/providers/FiltersProvider";
 import { sanitizeParams } from "@/common/helpers/UtilKit";
 import EmptyState from "@/components/shared/EmptyState";
+import Pagination from "@/components/shared/Pagination";
+
+const successStatusOptions = [
+  { label: "Pending", value: "pending" },
+  { label: "Accepted", value: "accepted" },
+  { label: "Ready to Deliver", value: "ready-to-deliver" },
+  { label: "On the Way", value: "on-the-way" },
+  { label: "Delivered", value: "delivered" },
+];
 
 const Orders = () => {
   const { params, paramsInURL, updateParams, removeFilterItems } = useFilters();
@@ -20,10 +29,6 @@ const Orders = () => {
     keepPreviousData: true,
     retry: false,
   });
-
-  if (isLoading) {
-    return "Loading...";
-  }
 
   return (
     <div className="px-2 py-4">
@@ -44,10 +49,10 @@ const Orders = () => {
             className="pt-4"
             label="Filter by Status"
             name="status-filter"
-            options={[
-              { label: "Pending", value: "pending" },
-              { label: "Accepted", value: "accepted" },
-            ]}
+            value={successStatusOptions.find(
+              (item) => item.value === params.status
+            )}
+            options={successStatusOptions}
             onChange={(items) => {
               updateParams("status", items?.value);
             }}
@@ -56,12 +61,21 @@ const Orders = () => {
           />
         </div>
       </div>
-      {data?.length > 0 ? (
-        <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-5 mb-14">
-          {data?.map((order) => (
-            <OrderItemCard key={order.order_id} order={order} />
-          ))}
-        </div>
+      {data?.count > 0 && !isLoading ? (
+        <>
+          <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-5 mb-14">
+            {data?.results.map((order) => (
+              <OrderItemCard key={order.order_id} order={order} />
+            ))}
+          </div>
+          <Pagination
+            setPage={(pageNumber) => {
+              updateParams("page", pageNumber);
+            }}
+            data={data}
+            page={+paramsInURL.page}
+          />
+        </>
       ) : (
         <>
           <EmptyState>No orders found</EmptyState>

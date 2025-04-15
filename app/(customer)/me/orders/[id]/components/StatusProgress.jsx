@@ -11,7 +11,8 @@ const StatusProgress = ({ item }) => {
       <div className="flex justify-between items-center gap-1">
         <div className="flex items-center gap-2">
           <div>
-            {item?.stage === "completed" ? (
+            {item?.stage === "completed" ||
+            (item?.stage === "current" && item?.slug === "delivered") ? (
               <>
                 <CheckCircleIcon className="w-5 text-green-500" />
               </>
@@ -45,7 +46,8 @@ const StatusProgress = ({ item }) => {
         </div>
         <div>
           <h2 className="text-sm font-normal text-gray-500 text-right">
-            {item?.stage === "completed" ? (
+            {item?.stage === "completed" ||
+            (item?.stage === "current" && item?.slug === "delivered") ? (
               formatDateTime(item?.updatedAt, true)
             ) : (
               <p className="capitalize">{item?.stage}</p>
