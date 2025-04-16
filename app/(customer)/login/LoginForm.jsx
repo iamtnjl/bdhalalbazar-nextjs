@@ -61,13 +61,11 @@ const LoginForm = () => {
         phoneNumber = "+880" + values.phone;
       }
 
-      const payload = {
-        user_id: phoneNumber,
-        password: values.password,
-      };
-
       const promise = APIKit.auth
-        .login(payload)
+        .login({
+          user_id: phoneNumber,
+          password: values.password,
+        })
         .then(handleSuccess)
         .catch(handleFailure)
         .finally(() => setSubmitting(false));
