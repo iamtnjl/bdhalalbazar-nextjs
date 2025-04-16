@@ -109,6 +109,10 @@ const APIKit = {
       const url = `/me/orders/${id}`;
       return client.get(url);
     },
+    postFcmToken: (payload) => {
+      const url = `/me/save-fcm-token`;
+      return client.post(url, payload);
+    },
   },
 
   //Admin API's

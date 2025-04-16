@@ -6,8 +6,8 @@ import TanstackQueryProvider from "@/TanstackQuery/TanstackQueryhProvider";
 import { configure } from "mobx";
 import { Provider } from "mobx-react";
 import rootStore from "../stores/root";
-import Head from "next/head";
 import TopLoader from "@/components/shared/TopLoader";
+import FcmNotificationProvider from "@/providers/FcmNotificationProvider";
 
 const figtree = Figtree({ subsets: ["latin"] });
 
@@ -40,6 +40,7 @@ export default function RootLayout({ children }) {
             />
             {children}
             <TopLoader />
+            <FcmNotificationProvider />
           </TanstackQueryProvider>
         </Provider>
       </body>
