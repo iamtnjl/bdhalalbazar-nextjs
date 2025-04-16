@@ -53,8 +53,15 @@ const WeLoginForm = () => {
         throw error;
       };
 
+      let phoneNumber = "";
+      if (values.phone.charAt(0) === "0") {
+        phoneNumber = "+880" + values.phone.substring(1);
+      } else {
+        phoneNumber = "+880" + values.phone;
+      }
+
       const payload = {
-        user_id: values.phone,
+        user_id: phoneNumber,
         password: values.password,
       };
 
