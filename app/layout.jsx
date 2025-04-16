@@ -7,7 +7,12 @@ import { configure } from "mobx";
 import { Provider } from "mobx-react";
 import rootStore from "../stores/root";
 import TopLoader from "@/components/shared/TopLoader";
-import FcmNotificationProvider from "@/providers/FcmNotificationProvider";
+import dynamic from "next/dynamic";
+
+const FcmNotificationProvider = dynamic(
+  () => import("@/providers/FcmNotificationProvider"),
+  { ssr: false }
+);
 
 const figtree = Figtree({ subsets: ["latin"] });
 

@@ -1,11 +1,6 @@
-"use client"
-import { requestFcmToken } from "@/firebase/requestFcmToken";
-import  { useEffect } from "react";
+"use client";
 
 const Dashboard = () => {
-  useEffect(() => {
-    requestFcmToken();
-  }, []);
   return <div>This is dashboard</div>;
 };
 
