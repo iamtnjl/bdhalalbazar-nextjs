@@ -7,6 +7,7 @@ import { configure } from "mobx";
 import { Provider } from "mobx-react";
 import rootStore from "../stores/root";
 import Head from "next/head";
+import TopLoader from "@/components/shared/TopLoader";
 
 const figtree = Figtree({ subsets: ["latin"] });
 
@@ -38,6 +39,7 @@ export default function RootLayout({ children }) {
               }}
             />
             {children}
+            <TopLoader />
           </TanstackQueryProvider>
         </Provider>
       </body>
