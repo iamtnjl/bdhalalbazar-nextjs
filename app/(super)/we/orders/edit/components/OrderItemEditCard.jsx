@@ -116,25 +116,29 @@ const OrderItemEditCard = ({ item, refetch }) => {
         </div>
 
         <div className="flex items-center gap-2">
-          <TextInputField
-            label="Price"
-            name="total_price"
-            type="number"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.total_price}
-            autoComplete="total_price"
-          />
-          <TextInputField
-            label="Purchase Price"
-            name="purchase_price"
-            type="number"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.purchase_price}
-            autoComplete="purchase-price"
-            placeholder="Enter Product Purchase Price"
-          />
+          <div className="w-full">
+            <TextInputField
+              label="Price"
+              name="total_price"
+              type="number"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.total_price}
+              autoComplete="total_price"
+            />
+          </div>
+          <div className="w-full">
+            <TextInputField
+              label="Purchase Price"
+              name="purchase_price"
+              type="number"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.purchase_price}
+              autoComplete="purchase-price"
+              placeholder="Enter Product Purchase Price"
+            />
+          </div>
         </div>
 
         {isEdited && (
