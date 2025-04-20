@@ -4,6 +4,12 @@ import Image from "next/image";
 const CartProductItem = ({ product }) => {
   const calculateDiscount = (price, discount) =>
     price - (price * discount) / 100;
+
+  const isPriceEdited =
+    calculateDiscount(product.product.price, product.product.discount) *
+      product.quantity !==
+    product.total_price;
+
   return (
     <div className="border rounded-lg w-full gap-3 border-gray-300 justify-between flex-col flex p-3 bg-white">
       <div className="flex items-start gap-3">
@@ -27,50 +33,48 @@ const CartProductItem = ({ product }) => {
               </span>
             </p>
           </div>
-          <p className="text-xs text-gray-500">
-            {product.product.colors.map((item) => item.name).join(", ")}
-          </p>
-          <p className="text-xs text-gray-500">
-            {product.product.materials.map((item) => item.name).join(", ")}
-          </p>
+
           <p className="text-xs text-gray-500">
             {product.product.categories.map((item) => item.name).join(", ")}
           </p>
           <p className="text-xs text-gray-500">
-            {`Weight: ${product.product.weight} ${product.product.unit}`}
+            {product.product.brand.map((item) => item.name).join(", ")}
+          </p>
+          <p className="text-xs text-gray-500">
+            {`Weight: ${product.weight} ${product.unit}`}
           </p>
         </div>
       </div>
       <div className="flex items-center justify-between">
-        <div>
-          {product.discount === 0 ? (
-            <p className="text-sm font-bold text-gray-600 flex gap-1">
-              <span>
-                ৳ bg-white text-base font-bold
-                {formatCurrency(product.product.price, ",")}
-              </span>
-              <span className="text-gray-600">X {product.quantity}</span>
-            </p>
-          ) : (
-            <p className="text-sm font-bold text-gray-600 flex gap-3">
-              <span className="line-through">
-                ৳ {formatCurrency(product.product.price, ",")}
-              </span>{" "}
-              <span className="text-primary font-bold text-sm">
-                ৳
-                {formatCurrency(
-                  calculateDiscount(
-                    product.product.price,
-                    product.product.discount
-                  ),
-                  ","
-                )}
-                <span className="text-grey-500"></span>{" "}
+        {!isPriceEdited ? (
+          <div>
+            {product.discount === 0 ? (
+              <p className="text-sm font-bold text-gray-600 flex gap-1">
+                <span>৳{formatCurrency(product.product.price, ",")}</span>
                 <span className="text-gray-600">X {product.quantity}</span>
-              </span>
-            </p>
-          )}
-        </div>
+              </p>
+            ) : (
+              <p className="text-sm font-bold text-gray-600 flex gap-3">
+                <span className="line-through">
+                  ৳ {formatCurrency(product.product.price, ",")}
+                </span>{" "}
+                <span className="text-primary font-bold text-sm">
+                  ৳
+                  {formatCurrency(
+                    calculateDiscount(
+                      product.product.price,
+                      product.product.discount
+                    ),
+                    ","
+                  )}
+                  <span className="text-grey-500"></span>{" "}
+                  <span className="text-gray-600">X {product.quantity}</span>
+                </span>
+              </p>
+            )}
+          </div> 
+        ) : <></>}
+
         <div className="text-primary font-semibold ">
           ৳ {formatCurrency(product.total_price, ",")}
         </div>

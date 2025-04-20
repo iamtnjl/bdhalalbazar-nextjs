@@ -40,13 +40,13 @@ const Cart = () => {
     <div className="px-2 py-4">
       {data?.cart_products?.length > 0 ? (
         <div>
-          {data?.products?.length === 1 ? (
+          {+data?.cart_products?.length === 1 ? (
             <h2 className="text-sm font-bold text-gray-700 mb-2">
-              {data?.products?.length} Product added
+              {data?.cart_products?.length} Product added
             </h2>
           ) : (
             <h2 className="text-sm font-bold text-gray-700 mb-2">
-              {data?.products?.length} Products added
+              {data?.cart_products?.length} Products added
             </h2>
           )}
           <div>

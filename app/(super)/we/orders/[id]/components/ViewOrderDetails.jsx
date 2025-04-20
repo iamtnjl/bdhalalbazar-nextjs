@@ -48,19 +48,6 @@ const ViewOrderDetails = ({ data, refetch }) => {
     });
   };
 
-  console.log(data.status);
-  const orderStatusList = [
-    { name: "Pending", slug: "pending" },
-    { name: "Accepted", slug: "accepted" },
-    { name: "Ready to Deliver", slug: "ready-to-deliver" },
-    { name: "On the Way", slug: "on-the-way" },
-    { name: "Delivered", slug: "delivered" },
-    { name: "Rejected", slug: "rejected" },
-    { name: "Canceled", slug: "canceled" },
-    { name: "Return", slug: "return" },
-    { name: "Failed to Deliver", slug: "failed-to-deliver" },
-  ];
-
   const ongoingStatus = data?.status?.find((item) => item.stage === "current");
 
   return (
@@ -131,72 +118,114 @@ const ViewOrderDetails = ({ data, refetch }) => {
           <h2 className="mb-1 font-medium text-base text-gray-800">
             Payment Breakdown
           </h2>
-          <div className="flex flex-col gap-[1px]">
-            <div className="font-semibold flex justify-between items-center text-sm">
-              <p className="text-gray-700">Sub Total:</p>
-              <h2 className="font-semibold text-grey-700">
-                <span className="text-grey-700 font-semibold mr-1 text-sm">
-                  &#2547;
-                </span>
-                {formatCurrency(data?.sub_total, ",")}
-              </h2>
-            </div>
-            <div className="flex justify-between items-center text-sm">
-              <p className="font-normal text-gray-600">Discount:</p>
-              <div className="flex items-center gap-1">
-                <span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-6 h-6 text-grey-700"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M18 12H6"
-                    />
-                  </svg>
-                </span>
+          {!data?.isPriceEdited ? (
+            <div className="flex flex-col gap-[1px]">
+              <div className="font-semibold flex justify-between items-center text-sm">
+                <p className="text-gray-700">Sub Total:</p>
                 <h2 className="font-semibold text-grey-700">
-                  <span className="font-semibold mr-1 text-sm text-grey-700">
+                  <span className="text-grey-700 font-semibold mr-1 text-sm">
                     &#2547;
                   </span>
-                  {formatCurrency(data?.discount, ",")}
+                  {formatCurrency(data?.sub_total, ",")}
+                </h2>
+              </div>
+              <div className="flex justify-between items-center text-sm">
+                <p className="font-normal text-gray-600">Discount:</p>
+                <div className="flex items-center gap-1">
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6 text-grey-700"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M18 12H6"
+                      />
+                    </svg>
+                  </span>
+                  <h2 className="font-semibold text-grey-700">
+                    <span className="font-semibold mr-1 text-sm text-grey-700">
+                      &#2547;
+                    </span>
+                    {formatCurrency(data?.discount, ",")}
+                  </h2>
+                </div>
+              </div>
+              <div className="font-medium flex justify-between items-center text-sm">
+                <p className="text-gray-700">Delivery Charge:</p>
+                <h2 className="font-semibold text-grey-700">
+                  <span className="text-grey-700 font-semibold mr-1 text-sm">
+                    &#2547;
+                  </span>
+                  {formatCurrency(data?.delivery_charge, ",")}
+                </h2>
+              </div>
+              <div className="font-medium flex justify-between items-center text-sm">
+                <p className="text-gray-700">Platform Fee:</p>
+                <h2 className="font-semibold text-grey-700">
+                  <span className="text-grey-700 font-semibold mr-1 text-sm">
+                    &#2547;
+                  </span>
+                  {formatCurrency(data?.platform_fee, ",")}
+                </h2>
+              </div>
+
+              <div className="font-bold flex justify-between items-center text-sm">
+                <p className="font-bold text-gray-600">Total Order Price:</p>
+                <h2 className="font-bold text-grey-700">
+                  <span className="text-grey-700 font-semibold mr-1 text-sm">
+                    &#2547;
+                  </span>
+                  {formatCurrency(data?.grand_total, ",")}
                 </h2>
               </div>
             </div>
-            <div className="font-medium flex justify-between items-center text-sm">
-              <p className="text-gray-700">Delivery Charge:</p>
-              <h2 className="font-semibold text-grey-700">
-                <span className="text-grey-700 font-semibold mr-1 text-sm">
-                  &#2547;
-                </span>
-                {formatCurrency(data?.delivery_charge, ",")}
-              </h2>
-            </div>
-            <div className="font-medium flex justify-between items-center text-sm">
-              <p className="text-gray-700">Platform Fee:</p>
-              <h2 className="font-semibold text-grey-700">
-                <span className="text-grey-700 font-semibold mr-1 text-sm">
-                  &#2547;
-                </span>
-                {formatCurrency(data?.platform_fee, ",")}
-              </h2>
-            </div>
+          ) : (
+            <div className="flex flex-col gap-[1px]">
+              <div className="font-semibold flex justify-between items-center text-sm">
+                <p className="text-gray-700">Sub Total:</p>
+                <h2 className="font-semibold text-grey-700">
+                  <span className="text-grey-700 font-semibold mr-1 text-sm">
+                    &#2547;
+                  </span>
+                  {formatCurrency(data?.calculated_total_price, ",")}
+                </h2>
+              </div>
+              <div className="font-medium flex justify-between items-center text-sm">
+                <p className="text-gray-700">Delivery Charge:</p>
+                <h2 className="font-semibold text-grey-700">
+                  <span className="text-grey-700 font-semibold mr-1 text-sm">
+                    &#2547;
+                  </span>
+                  {formatCurrency(data?.delivery_charge, ",")}
+                </h2>
+              </div>
+              <div className="font-medium flex justify-between items-center text-sm">
+                <p className="text-gray-700">Platform Fee:</p>
+                <h2 className="font-semibold text-grey-700">
+                  <span className="text-grey-700 font-semibold mr-1 text-sm">
+                    &#2547;
+                  </span>
+                  {formatCurrency(data?.platform_fee, ",")}
+                </h2>
+              </div>
 
-            <div className="font-bold flex justify-between items-center text-sm">
-              <p className="font-bold text-gray-600">Total Order Price:</p>
-              <h2 className="font-bold text-grey-700">
-                <span className="text-grey-700 font-semibold mr-1 text-sm">
-                  &#2547;
-                </span>
-                {formatCurrency(data?.grand_total, ",")}
-              </h2>
+              <div className="font-bold flex justify-between items-center text-sm">
+                <p className="font-bold text-gray-600">Total Order Price:</p>
+                <h2 className="font-bold text-grey-700">
+                  <span className="text-grey-700 font-semibold mr-1 text-sm">
+                    &#2547;
+                  </span>
+                  {formatCurrency(data?.grand_total, ",")}
+                </h2>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
       <div className="hidden">

@@ -90,6 +90,14 @@ const WeOrderCard = ({ data, refetch }) => {
             >
               View Order
             </button>
+            <button
+              className="w-full rounded-md border-2 border-gray-200 py-2 px-3 text-sm font-semibold  text-gray-800 shadow-sm hover:bg-gray-50"
+              onClick={() => {
+                router.push(`/we/orders/edit?id=${data?._id}`);
+              }}
+            >
+              Edit Order
+            </button>
           </div>
           <div className="w-full flex flex-col gap-1 mt-1 cursor-pointer">
             <select

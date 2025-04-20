@@ -1,10 +1,7 @@
-// import { calculateDiscountedPrice } from "../../../../common/helpers/UtilKit";
-
 import { formatCurrency } from "@/common/helpers/UtilKit";
 import Image from "next/image";
 
 const OrderItemCard = ({ item }) => {
-  //   const productPrice = item.selling_price / (1 - item.discount_price / 100);
   const selling_price =
     item?.price - (item?.product.price * item?.product?.discount) / 100;
 
@@ -28,21 +25,12 @@ const OrderItemCard = ({ item }) => {
             </p>
           </div>
           <p className="text-xs md:text-sm text-gray-500">
-            Colors: {item?.product?.colors.map((item) => item.name).join(", ")}
-          </p>
-          <p className="text-xs md:text-sm text-gray-500">
-            Materials:{" "}
-            {item?.product?.materials.map((item) => item.name).join(", ")}
-          </p>
-          <p className="text-xs md:text-sm text-gray-500">
             Categories:{" "}
             {item?.product?.categories.map((item) => item.name).join(", ")}
           </p>
           <p className="text-xs md:text-sm text-gray-500">
-            Categories:{" "}
-            {`Weight: ${item?.product?.weight} ${item?.product?.unit}`}
+            {`Weight: ${item?.weight} ${item?.unit}`}
           </p>
-          <div className="text-sm font-medium flex items-center gap-1"></div>
         </div>
       </div>
       <div className="text-sm font-bold text-gray-600 w-full flex justify-between items-center">

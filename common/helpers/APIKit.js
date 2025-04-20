@@ -130,6 +130,10 @@ const APIKit = {
         const url = `/we/orders/${id}`;
         return client.patch(url, payload);
       },
+      editOrder: (id, payload) => {
+        const url = `/we/orders/${id}/edit`;
+        return client.put(url, payload);
+      },
     },
     products: {
       getAllProduct: (params) => {

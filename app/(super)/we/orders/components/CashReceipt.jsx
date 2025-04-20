@@ -1,7 +1,6 @@
 "use client";
 
 import React, { forwardRef } from "react";
-import Image from "next/image";
 import { formatCurrency, formatDateTime } from "@/common/helpers/UtilKit";
 
 const CashReceipt = forwardRef(({ order }, ref) => {
@@ -53,8 +52,12 @@ const CashReceipt = forwardRef(({ order }, ref) => {
               <th className="text-sm">Qty</th>
               <th className="text-sm">Weight</th>
               <th className="text-sm">Pri.</th>
-              <th className="text-sm">Disc.</th>
-              <th className="text-sm">Subt.</th>
+              {!order?.isPriceEdited ? (
+                <>
+                  <th className="text-sm">Disc.</th>
+                  <th className="text-sm">Subt.</th>
+                </>
+              ) : null}
             </tr>
           </thead>
 
@@ -64,15 +67,21 @@ const CashReceipt = forwardRef(({ order }, ref) => {
                 <td className="text-left">{item?.product?.name}</td>
                 <td>{item?.quantity}</td>
                 <td>{`${item?.weight} ${item?.unit}`}</td>
-                <td>{formatCurrency(item?.price * item?.quantity, ",")}</td>
-                <td>
-                  {formatCurrency(
-                    item?.price * item?.quantity -
-                      item?.discount_price * item?.quantity,
-                    ","
-                  )}
-                </td>
-                <td>{formatCurrency(item?.total_price, ",")}</td>
+                {!order?.isPriceEdited ? (
+                  <>
+                    <td>{formatCurrency(item?.price * item?.quantity, ",")}</td>
+                    <td>
+                      {formatCurrency(
+                        item?.price * item?.quantity -
+                          item?.discount_price * item?.quantity,
+                        ","
+                      )}
+                    </td>
+                    <td>{formatCurrency(item?.total_price, ",")}</td>
+                  </>
+                ) : (
+                  <td>{formatCurrency(item?.total_price, ",")}</td> 
+                )}
               </tr>
             ))}
           </tbody>
@@ -81,47 +90,82 @@ const CashReceipt = forwardRef(({ order }, ref) => {
 
       <div className="text-sm text-grey-700 font-normal border-b-2 border-dashed border-grey-300 py-2">
         <h2 className="font-semibold">Payment Breakdown</h2>
-        <div>
-          <div className="font-normal flex justify-between items-center">
-            Sub Total:
-            <h2 className="font-normal">
-              <span className="text-grey-700 font-normal mr-1 text-sm">
-                &#2547;
-              </span>
-              {formatCurrency(order?.sub_total, ",")}
-            </h2>
+        {!order?.isPriceEdited ? (
+          <div>
+            <div className="font-normal flex justify-between items-center">
+              Sub Total:
+              <h2 className="font-normal">
+                <span className="text-grey-700 font-normal mr-1 text-sm">
+                  &#2547;
+                </span>
+                {formatCurrency(order?.sub_total, ",")}
+              </h2>
+            </div>
+            <div className="font-normal flex justify-between items-center">
+              Discount:
+              <h2 className="font-normal">
+                <span className="text-grey-700 font-normal mr-1 text-sm">
+                  − &#2547;
+                </span>
+                {formatCurrency(order?.discount, ",")}
+              </h2>
+            </div>
+            <div className="font-normal flex justify-between items-center">
+              Delivery Charge:
+              <h2 className="font-normal">
+                {formatCurrency(order?.delivery_charge, ",")}
+              </h2>
+            </div>
+            <div className="font-normal flex justify-between items-center">
+              Platform Fee:
+              <h2 className="font-normal">
+                {formatCurrency(order?.platform_fee, ",")}
+              </h2>
+            </div>
+            <div className="font-semibold flex justify-between items-center">
+              Total Order Price:
+              <h2 className="font-semibold">
+                <span className="text-grey-700 font-semibold mr-1 text-sm">
+                  &#2547;
+                </span>
+                {formatCurrency(order?.grand_total, ",")}
+              </h2>
+            </div>
           </div>
-          <div className="font-normal flex justify-between items-center">
-            Discount:
-            <h2 className="font-normal">
-              <span className="text-grey-700 font-normal mr-1 text-sm">
-                − &#2547;
-              </span>
-              {formatCurrency(order?.discount, ",")}
-            </h2>
+        ) : (
+          <div>
+            <div className="font-normal flex justify-between items-center">
+              Sub Total:
+              <h2 className="font-normal">
+                <span className="text-grey-700 font-normal mr-1 text-sm">
+                  &#2547;
+                </span>
+                {formatCurrency(order?.calculated_total_price, ",")}
+              </h2>
+            </div>
+            <div className="font-normal flex justify-between items-center">
+              Delivery Charge:
+              <h2 className="font-normal">
+                {formatCurrency(order?.delivery_charge, ",")}
+              </h2>
+            </div>
+            <div className="font-normal flex justify-between items-center">
+              Platform Fee:
+              <h2 className="font-normal">
+                {formatCurrency(order?.platform_fee, ",")}
+              </h2>
+            </div>
+            <div className="font-semibold flex justify-between items-center">
+              Total Order Price:
+              <h2 className="font-semibold">
+                <span className="text-grey-700 font-semibold mr-1 text-sm">
+                  &#2547;
+                </span>
+                {formatCurrency(order?.grand_total, ",")}
+              </h2>
+            </div>
           </div>
-          <div className="font-normal flex justify-between items-center">
-            Delivery Charge:
-            <h2 className="font-normal">
-              {formatCurrency(order?.delivery_charge, ",")}
-            </h2>
-          </div>
-          <div className="font-normal flex justify-between items-center">
-            Platform Fee:
-            <h2 className="font-normal">
-              {formatCurrency(order?.platform_fee, ",")}
-            </h2>
-          </div>
-          <div className="font-semibold flex justify-between items-center">
-            Total Order Price:
-            <h2 className="font-semibold">
-              <span className="text-grey-700 font-semibold mr-1 text-sm">
-                &#2547;
-              </span>
-              {formatCurrency(order?.grand_total, ",")}
-            </h2>
-          </div>
-        </div>
+        )}
       </div>
 
       <div className="py-2">

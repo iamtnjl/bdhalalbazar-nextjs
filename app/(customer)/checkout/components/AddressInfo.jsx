@@ -1,5 +1,4 @@
 function AddressInfo({ addresses, setShowAddress }) {
-  console.log(addresses);
   return (
     <>
       {addresses?.length > 0 && (
