@@ -79,6 +79,10 @@ const OrderItemEditCard = ({ item, refetch }) => {
               Categories:{" "}
               {item?.product?.categories.map((cat) => cat.name).join(", ")}
             </p>
+            <p className="text-xs md:text-sm text-gray-500">
+              Categories:{" "}
+              {item?.product?.brand.map((cat) => cat.name).join(", ")}
+            </p>
           </div>
         </div>
 
