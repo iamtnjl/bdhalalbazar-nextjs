@@ -1,86 +1,34 @@
-"use client";
-import { Disclosure } from "@headlessui/react";
-import { MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
-function Accordion({ params, data, title }) {
+import { useState, useRef } from "react";
+import { ChevronDown } from "lucide-react";
+
+export default function Accordion({ title, children }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const contentRef = useRef(null);
+
   return (
-    <div>
-      <div className="mx-auto">
-        <div className="mx-auto max-w-4xl divide-y divide-gray-900/10">
-          <dl className="space-y-4 divide-y divide-gray-900/10">
-            <Disclosure as="div">
-              {({ open }) => (
-                <>
-                  <dt>
-                    <Disclosure.Button className="flex w-full items-start justify-between text-left text-gray-900">
-                      <span className="text-sm font-semibold leading-7">
-                        {title}
-                      </span>
-                      <span className="flex h-7 items-center">
-                        {open ? (
-                          <MinusSmallIcon
-                            className="h-5 w-5"
-                            aria-hidden="true"
-                          />
-                        ) : (
-                          <PlusSmallIcon
-                            className="h-5 w-5"
-                            aria-hidden="true"
-                          />
-                        )}
-                      </span>
-                    </Disclosure.Button>
-                  </dt>
-                  {data?.map((item) => (
-                    <Disclosure.Panel
-                      as="dd"
-                      className="mt-2 pr-12"
-                      key={item.slug}
-                    >
-                      <div className="flex items-center gap-2">
-                        <input
-                          type="checkbox"
-                          id={item.slug}
-                          name={item.slug}
-                          className="rounded-md"
-                          // onChange={(event) => {
-                          //   setParams((prevParams) => {
-                          //     const colors = event.target.name;
-                          //     const newColors = prevParams.colors.includes(
-                          //       colors
-                          //     )
-                          //       ? prevParams.colors.filter((b) => b !== colors)
-                          //       : [...prevParams.colors, colors];
+    <div className="border rounded-xl shadow-sm bg-white">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center justify-between w-full p-4 text-left focus:outline-none"
+      >
+        <span className="font-semibold text-gray-800 text-base">{title}</span>
+        <ChevronDown
+          size={20}
+          className={`transform transition-transform duration-300 ${
+            isOpen ? "rotate-180" : "rotate-0"
+          }`}
+        />
+      </button>
 
-                          //     return {
-                          //       ...prevParams,
-                          //       colors: newColors,
-                          //       page: 1,
-                          //     };
-                          //   });
-                          // }}
-                          onChange={(e) => onChange(e)}
-                          // checked={params?.includes(item.slug)}
-                          // value={params?.includes(item.slug)}
-                        />
-
-                        <label
-                          htmlFor={item.slug}
-                          className="text-sm font-medium leading-7 text-gray-600"
-                        >
-                          {item.name}
-                        </label>
-                      </div>
-                    </Disclosure.Panel>
-                  ))}
-                </>
-              )}
-            </Disclosure>
-            <hr />
-          </dl>
-        </div>
+      <div
+        ref={contentRef}
+        className={`overflow-hidden transition-all duration-500 ease-in-out ${
+          isOpen ? "max-h-[450px]" : "max-h-0"
+        }`}
+        style={{ transitionProperty: "max-height" }}
+      >
+        <div className="p-4 border-t">{children}</div>
       </div>
     </div>
   );
 }
-
-export default Accordion;

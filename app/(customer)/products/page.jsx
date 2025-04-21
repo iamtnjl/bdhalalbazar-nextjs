@@ -37,6 +37,8 @@ const ProductContainer = () => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useProducts(paramsInURL);
 
+  const allProducts = data?.pages.flatMap((page) => page.results) || [];
+
   // Intersection Observer to trigger fetching the next page
   const { ref } = useInView({
     threshold: 1,
@@ -128,7 +130,7 @@ const ProductContainer = () => {
       </div>
 
       {/* Product Grid */}
-      {data?.pages.length > 0 ? (
+      {allProducts.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {data?.pages.map((page) =>
             page.results.map((product) => (
