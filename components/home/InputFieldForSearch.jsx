@@ -18,7 +18,7 @@ const InputFieldForSearch = () => {
         <input
           type="text"
           placeholder="Search any products"
-          className="w-full pl-11 pr-12 py-[9px] rounded-full border-2 border-primary text-base text-gray-700 font-semibold focus:outline-none"
+          className="w-full pl-11 pr-12 py-[9px] rounded-full border-[3px] border-primary text-base text-gray-700 font-semibold focus:outline-none"
           onChange={(e) => setValue(e.target.value)}
         />
         <button
