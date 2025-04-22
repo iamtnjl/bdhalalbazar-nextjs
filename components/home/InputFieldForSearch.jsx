@@ -25,7 +25,7 @@ const InputFieldForSearch = () => {
           onClick={() => {
             router.push(`/products?search=${value}`);
           }}
-          className="absolute top-1/2 -translate-y-1/2 right-2 p-2 bg-primary rounded-full"
+          className="absolute top-1/2 -translate-y-1/2 right-0 px-3 py-3 bg-primary rounded-r-full"
         >
           <Search className="text-white" size={20} />
         </button>

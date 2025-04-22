@@ -104,7 +104,7 @@ const ProductContainer = () => {
         <Button
           onClick={() => setFilterModal(true)}
           variant="white"
-          extraClassName="py-[10px] flex items-center"
+          extraClassName="py-[12px] flex items-center"
         >
           <SlidersHorizontal
             height={15}
