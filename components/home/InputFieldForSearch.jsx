@@ -17,14 +17,14 @@ const InputFieldForSearch = () => {
         <input
           type="text"
           placeholder="Search any products"
-          className="w-full pl-11 pr-5 py-2 rounded-full border-2 border-primary text-base text-gray-700 font-semibold focus:outline-none "
+          className="w-full pl-11 pr-5 py-[9px] rounded-full border-2 border-primary text-base text-gray-700 font-semibold focus:outline-none "
           onChange={(e) => setValue(e.target.value)}
         />
         <div
           onClick={() => {
             router.push(`/products?search=${value}`);
           }}
-          className="p-[11px] rounded-full bg-primary w-fit right-[1px] absolute top-[1px]"
+          className="p-[11px] rounded-full bg-primary w-fit right-[2px] absolute top-[2px]"
         >
           <Search className="text-white" size={20} />
         </div>

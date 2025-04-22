@@ -50,11 +50,9 @@ const CategorySlider = () => {
   return (
     <div className="relative px-2">
       <Swiper
-        modules={[Pagination]}
         spaceBetween={12}
         slidesPerView={3.2}
         allowTouchMove={true}
-        pagination={{ clickable: true }}
         className="!pb-6"
       >
         {categories.map((category, index) => (
@@ -81,28 +79,6 @@ const CategorySlider = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-
-      {/* Custom Pagination Styling */}
-      <style jsx global>{`
-        .swiper-pagination {
-          display: flex;
-          justify-content: center;
-          gap: 6px;
-          margin-top: 10px;
-        }
-        .swiper-pagination-bullet {
-          background-color: #d1d5db; /* Tailwind's gray-300 */
-          width: 8px;
-          height: 8px;
-          border-radius: 9999px;
-          transition: all 0.3s ease;
-        }
-        .swiper-pagination-bullet-active {
-          background-color: #0f766e; /* Tailwind's emerald-700 */
-          width: 24px;
-          border-radius: 9999px;
-        }
-      `}</style>
     </div>
   );
 };

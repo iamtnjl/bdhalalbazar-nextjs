@@ -40,7 +40,7 @@ export default function Carousel() {
   };
 
   return (
-    <div className="relative w-full max-w-3xl mx-auto rounded-lg overflow-hidden">
+    <div className="relative w-full max-w-3xl mx-auto overflow-hidden">
       {/* Swipe Container with Fixed Height */}
       <div className="w-full h-[30vh] md:h-[40vh] overflow-hidden relative">
         <Swipe
@@ -67,7 +67,7 @@ export default function Carousel() {
                   alt={`Slide ${index}`}
                   src={image.src}
                   fill
-                  className="w-full aspect-1 object-center rounded-xl"
+                  className="w-full aspect-1 object-center"
                 />
               </div>
             ))}
