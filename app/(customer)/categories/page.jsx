@@ -1,13 +1,13 @@
 "use client";
-import { Tab } from "@headlessui/react";
-import classNames from "classnames";
-import React, { useState } from "react";
-import Accordion from "./Accordion";
-import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
+
 import APIKit from "@/common/helpers/APIKit";
+import Accordion from "@/components/shared/Accordion";
+import { Tab } from "@headlessui/react";
+import { useQuery } from "@tanstack/react-query";
+import classNames from "classnames";
+import { ChevronRightIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 const dailyEssentials = [
   { label: "Rice", value: "rice" },
@@ -61,7 +61,8 @@ const tabsData = [
     value: "categories",
   },
 ];
-const MenuContent = ({ setOpen }) => {
+
+const Categories = () => {
   const [tab, setTab] = useState("all-items");
   const router = useRouter();
 
@@ -85,7 +86,7 @@ const MenuContent = ({ setOpen }) => {
               className={({ selected }) =>
                 classNames(
                   "w-full py-3 px-4 text-sm font-medium leading-5 text-grey-400",
-                  "ring-white leading-5 font-semibold ring-opacity-60 ring-offset-2 ring-offset-primary",
+                  "ring-white leading-5 font-semibold focus:outline-none",
                   selected
                     ? ` text-primary transition ease-in-out duration-700 border-b-2 border-primary`
                     : "border-b-2 transition ease-in-out duration-700 border-grey-300"
@@ -98,14 +99,13 @@ const MenuContent = ({ setOpen }) => {
         </Tab.List>
       </Tab.Group>
       {tab === "all-items" ? (
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 px-2">
           <Accordion title="Daily Essentials">
             <div className="flex flex-col gap-3">
               {dailyEssentials.map((item, i) => (
                 <div
                   onClick={() => {
                     router.push(`/products?categories=${item.value}`);
-                    setOpen(false);
                   }}
                   key={i}
                   className="flex items-center justify-between w-full pb-3 border-b border-gray-200 last:border-b-0 last:pb-0"
@@ -196,7 +196,7 @@ const MenuContent = ({ setOpen }) => {
           </Accordion>
         </div>
       ) : (
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 px-2 pb-32">
           {data?.results.map((item, i) => (
             <div
               onClick={() => {
@@ -216,4 +216,4 @@ const MenuContent = ({ setOpen }) => {
   );
 };
 
-export default MenuContent;
+export default Categories;

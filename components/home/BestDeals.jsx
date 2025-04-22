@@ -6,7 +6,7 @@ import { BadgePercent } from "lucide-react";
 
 const BestDeals = () => {
   return (
-    <div>
+    <div className="px-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <BadgePercent height={30} widths={30} className="text-primary" />

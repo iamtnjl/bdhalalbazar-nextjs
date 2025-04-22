@@ -22,7 +22,7 @@ const PopularProducts = () => {
     },
   });
   return (
-    <div className="flex flex-col gap-6 mt-4">
+    <div className="flex flex-col gap-6 px-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <ChartNoAxesCombined
@@ -35,7 +35,7 @@ const PopularProducts = () => {
         <Button variant="border-less"> See All </Button>
       </div>
       {/* Product Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {data?.pages.map((page) =>
           page.results.map((product) => (
             <ProductCard key={product._id} product={product} />

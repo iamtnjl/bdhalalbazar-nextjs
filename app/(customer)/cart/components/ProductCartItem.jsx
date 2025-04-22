@@ -112,7 +112,7 @@ function ProductCartItem({ cartItem }) {
           </button>
         </div>
         <div className="flex items-center gap-8">
-          <div>
+          <div className="whitespace-nowrap ml-2">
             <p className="text-primary font-semibold">
               ৳ {formatCurrency(cartItem?.final_price, ",")}
             </p>

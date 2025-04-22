@@ -1,13 +1,34 @@
 "use client";
 import Image from "next/image";
-import { Bell, MessageSquareText } from "lucide-react";
-import { Bars3Icon } from "@heroicons/react/24/outline";
-import { useState } from "react";
-import RightSideDrawer from "./RightSideDrawer";
-import MenuContent from "./MenuContent";
+import { ShoppingCart } from "lucide-react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
+import APIKit from "@/common/helpers/APIKit";
 
 const TopNavbar = () => {
-  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const [deviceId, setDeviceId] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      let storedDeviceId = localStorage.getItem("deviceId");
+
+      setDeviceId(storedDeviceId);
+    }
+  }, []);
+  const { data, isLoading } = useQuery({
+    queryKey: ["/cart"],
+    queryFn: () => APIKit.public.getCart({ deviceId }).then(({ data }) => data),
+    keepPreviousData: true,
+    enabled: !!deviceId,
+    retry: false,
+  });
+
+  if (isLoading) {
+    return "Loading...";
+  }
   return (
     <nav className="px-4 py-3 bg-white  shadow-sm flex items-center justify-between sticky top-0 z-50 rounded-bl-md rounded-br-md">
       <div className="flex items-center justify-between w-full">
@@ -17,10 +38,22 @@ const TopNavbar = () => {
             BDHalalBazar
           </p>
         </div>
-        <Bars3Icon
-          onClick={() => setOpen(true)}
-          className="text-gray-800 size-8 cursor-pointer"
-        />
+        <div className="bg-primary-bg p-2 rounded-full hover:bg-gray-100 cursor-pointer">
+          <Link href={"/cart"} className={`relative `}>
+            <div className="relative">
+              <ShoppingCart
+                className={`${
+                  pathname === "/cart" ? "text-primary" : "text-gray-700"
+                }`}
+              />
+              {data?.cart_products?.length > 0 ? (
+                <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full">
+                  {data?.cart_products?.length}
+                </span>
+              ) : null}
+            </div>
+          </Link>
+        </div>
       </div>
       {/* <div className="flex items-start gap-4">
         <div className="bg-primary-bg p-2 rounded-full hover:bg-gray-100 cursor-pointer">
@@ -30,9 +63,6 @@ const TopNavbar = () => {
           <MessageSquareText className="text-gray-700" height={22} width={22} />
         </div>
       </div> */}
-      <RightSideDrawer open={open} setOpen={setOpen}>
-        <MenuContent setOpen={setOpen} />
-      </RightSideDrawer>
     </nav>
   );
 };

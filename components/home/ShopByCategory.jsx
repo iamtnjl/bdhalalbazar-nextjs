@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const ShopByCategory = () => {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 px-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Layers height={25} width={25} className="text-primary" />

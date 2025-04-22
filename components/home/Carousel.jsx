@@ -40,7 +40,7 @@ export default function Carousel() {
   };
 
   return (
-    <div className="relative w-full max-w-3xl mx-auto rounded-lg overflow-hidden mt-6">
+    <div className="relative w-full max-w-3xl mx-auto rounded-lg overflow-hidden">
       {/* Swipe Container with Fixed Height */}
       <div className="w-full h-[30vh] md:h-[40vh] overflow-hidden relative">
         <Swipe
