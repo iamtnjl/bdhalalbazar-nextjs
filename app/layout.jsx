@@ -92,7 +92,6 @@ export default function RootLayout({ children }) {
             />
             {children}
             <TopLoader />
-            <FcmNotificationProvider />
           </TanstackQueryProvider>
         </Provider>
       </body>
