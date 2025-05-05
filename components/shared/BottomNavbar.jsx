@@ -12,7 +12,7 @@ const BottomNavbar = () => {
       <Link
         href="/home"
         className={`flex flex-col items-center  text-sm font-normal w-full py-2 rounded-md   ${
-          pathname === "/" ? "bg-primary-100" : ""
+          pathname === "/home" ? "bg-primary-100" : ""
         }`}
       >
         <HomeIcon
