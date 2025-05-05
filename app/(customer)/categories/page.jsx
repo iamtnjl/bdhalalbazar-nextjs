@@ -124,7 +124,6 @@ const Categories = () => {
                 <div
                   onClick={() => {
                     router.push(`/products?categories=${item.value}`);
-                    setOpen(false);
                   }}
                   key={i}
                   className="flex items-center justify-between w-full pb-3 border-b border-gray-200 last:border-b-0 last:pb-0"
@@ -143,7 +142,6 @@ const Categories = () => {
                 <div
                   onClick={() => {
                     router.push(`/products?categories=${item.value}`);
-                    setOpen(false);
                   }}
                   key={i}
                   className="flex items-center justify-between w-full pb-3 border-b border-gray-200 last:border-b-0 last:pb-0"
@@ -162,7 +160,6 @@ const Categories = () => {
                 <div
                   onClick={() => {
                     router.push(`/products?categories=${item.value}`);
-                    setOpen(false);
                   }}
                   key={i}
                   className="flex items-center justify-between w-full pb-3 border-b border-gray-200 last:border-b-0 last:pb-0"
@@ -181,7 +178,6 @@ const Categories = () => {
                 <div
                   onClick={() => {
                     router.push(`/products?categories=${item.value}`);
-                    setOpen(false);
                   }}
                   key={i}
                   className="flex items-center justify-between w-full pb-3 border-b border-gray-200 last:border-b-0 last:pb-0"
@@ -201,7 +197,6 @@ const Categories = () => {
             <div
               onClick={() => {
                 router.push(`/products?categories=${item.slug}`);
-                setOpen(false);
               }}
               key={i}
               className="flex items-center justify-between w-full pb-3 border-b border-gray-200 last:border-b-0 last:pb-0"
