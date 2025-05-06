@@ -2,15 +2,7 @@
 module.exports = {
   siteUrl: "https://bdhalalbazar.com",
   generateRobotsTxt: true,
-  exclude: [
-    "/we/*",
-    "/me/*",
-    "/cart",
-    "/checkout",
-    "/login",
-    "/register",
-  ],
-  robotsTxtOptions: {
-    additionalSitemaps: ["https://bdhalalbazar.com/sitemap.xml"],
-  },
+  sitemapSize: 5000,
+  generateIndexSitemap: false,
+  exclude: ["/admin/*", "/cart", "/checkout", "/account/*"],
 };
