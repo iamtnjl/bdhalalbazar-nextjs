@@ -10,11 +10,6 @@ import TopLoader from "@/components/shared/TopLoader";
 import dynamic from "next/dynamic";
 import Script from "next/script";
 
-const FcmNotificationProvider = dynamic(
-  () => import("@/providers/FcmNotificationProvider"),
-  { ssr: false }
-);
-
 const figtree = Figtree({ subsets: ["latin"] });
 
 configure({
@@ -25,12 +20,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <title>BDHalalBazar.com</title>
-        <meta
-          name="description"
-          content="HalalBazar.net is your go-to online marketplace for halal products, offering a wide range of certified items for all your needs."
-        />
-
         {/* Google Analytics (GA4) */}
         <Script
           strategy="afterInteractive"
