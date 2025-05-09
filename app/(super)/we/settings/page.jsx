@@ -19,8 +19,8 @@ const Settings = () => {
   });
   const formik = useFormik({
     initialValues: {
-      delivery_charge: data?.platform_fee || "",
-      platform_fee: data?.delivery_charge || "",
+      delivery_charge: data?.delivery_charge || "",
+      platform_fee: data?.platform_fee || "",
     },
     enableReinitialize: true,
     onSubmit: (values) => {
