@@ -3,20 +3,30 @@ import { onMessage } from "firebase/messaging";
 import { messaging } from "@/firebase/config";
 
 const useFcmNotifications = () => {
+  const isFcmSupported = () => {
+    if (typeof window === "undefined" || typeof navigator === "undefined")
+      return false;
+
+    const ua = navigator.userAgent || navigator.vendor || "";
+
+    // Skip for known in-app browsers
+    const isInApp = /FBAN|FBAV|Instagram|Messenger|Line|Snapchat|TikTok/.test(
+      ua
+    );
+
+    // Skip if key APIs are missing
+    const hasRequiredApis =
+      "Notification" in window &&
+      "serviceWorker" in navigator &&
+      "PushManager" in window;
+
+    return !isInApp && hasRequiredApis;
+  };
   useEffect(() => {
-    // ✅ Guard against unsupported environments (in-app browsers etc.)
-    if (
-      typeof window === "undefined" ||
-      typeof navigator === "undefined" ||
-      !("Notification" in window) ||
-      !("serviceWorker" in navigator) ||
-      !("PushManager" in window) ||
-      isInAppBrowser()
-    ) {
-      console.warn("❌ Browser does not support FCM or is in-app browser.");
+    if (!isFcmSupported()) {
+      console.warn("🔕 FCM not supported in this browser.");
       return;
     }
-
     // ✅ Request notification permission
     if (Notification.permission !== "granted") {
       Notification.requestPermission().then((permission) => {
