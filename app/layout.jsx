@@ -7,7 +7,6 @@ import { configure } from "mobx";
 import { Provider } from "mobx-react";
 import rootStore from "../stores/root";
 import TopLoader from "@/components/shared/TopLoader";
-import dynamic from "next/dynamic";
 import Script from "next/script";
 
 const figtree = Figtree({ subsets: ["latin"] });
@@ -20,6 +19,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <title>BDHalalBazar.com</title>
+        <meta
+          name="description"
+          content="BDHalalBazar.com is a trusted grocery e-commerce platform in Pabna offering fresh, halal, and quality daily essentials at your doorstep."
+        />
         {/* Google Analytics (GA4) */}
         <Script
           strategy="afterInteractive"

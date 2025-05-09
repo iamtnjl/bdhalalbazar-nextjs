@@ -7,14 +7,21 @@ import SearchAndSelect from "@/components/from/SearchAndSelect";
 import TextInputField from "@/components/from/TextInputField";
 import Image from "next/image";
 import Button from "@/components/shared/Button";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import APIKit from "@/common/helpers/APIKit";
 import toast from "react-hot-toast";
+
+const unitOptions = [
+  { label: "KG", value: "kg" },
+  { label: "Gram", value: "gram" },
+  { label: "Litre", value: "litre" },
+  { label: "Piece", value: "piece" },
+];
 
 const OrderItemEditCard = ({ item, refetch }) => {
   const [isEdited, setIsEdited] = useState(false);
   const params = useSearchParams();
-  console.log(item);
+  const router = useRouter();
 
   const initialValues = {
     product_id: item.product._id || "",
@@ -31,7 +38,7 @@ const OrderItemEditCard = ({ item, refetch }) => {
       const promise = APIKit.we.orders
         .editOrder(params.get("id"), values)
         .then(({}) => {
-          refetch();
+          router.push(`/we/orders/${params.get("id")}`);
         })
         .catch((error) => {
           throw error;
@@ -51,6 +58,19 @@ const OrderItemEditCard = ({ item, refetch }) => {
       });
     },
   });
+
+  useEffect(() => {
+    const weight = parseFloat(formik.values.weight);
+    const price = parseFloat(item?.product?.price || "0");
+    const actualPrice = price - (price * item?.product?.discount) / 100;
+
+    if (!isNaN(weight) && !isNaN(price)) {
+      const newTotal = weight * actualPrice;
+      formik.setFieldValue("total_price", newTotal.toFixed(2));
+    } else {
+      formik.setFieldValue("total_price", "");
+    }
+  }, [formik.values.weight, item?.product?.price]);
 
   useEffect(() => {
     const isFormChanged = Object.keys(initialValues).some(
@@ -87,7 +107,7 @@ const OrderItemEditCard = ({ item, refetch }) => {
         </div>
 
         <div className="flex items-center justify-between gap-2 w-full">
-          <div className="w-full">
+          <div className="w-1/2">
             <TextInputField
               label="Weight"
               name="weight"
@@ -99,22 +119,13 @@ const OrderItemEditCard = ({ item, refetch }) => {
               placeholder="Enter Product Weight"
             />
           </div>
-          <div className="w-fit">
-            <SearchAndSelect
-              label="Select Unit"
-              options={[
-                { label: "KG", value: "kg" },
-                { label: "Gram", value: "gram" },
-                { label: "Litre", value: "litre" },
-                { label: "Piece", value: "piece" },
-              ]}
-              onChange={(selected) =>
-                formik.setFieldValue("unit", selected.value)
+          <div className="w-1/2">
+            <TextInputField
+              label="Unit"
+              disabled
+              value={
+                unitOptions.find((data) => data.value === item.unit)?.label
               }
-              value={{
-                label: formik.values.unit?.toUpperCase(),
-                value: formik.values.unit,
-              }}
             />
           </div>
         </div>
@@ -122,6 +133,7 @@ const OrderItemEditCard = ({ item, refetch }) => {
         <div className="flex items-center gap-2">
           <div className="w-full">
             <TextInputField
+              disabled={true}
               label="Price"
               name="total_price"
               type="number"

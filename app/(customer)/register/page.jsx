@@ -20,10 +20,10 @@ const yupSchema = object({
   email: string().email("Please enter a valid Email"),
   password: string()
     .required("Password is required")
-    .min(8, "At least 8 characters"),
+    .min(6, "At least 6 characters"),
   retype_password: string()
     .required("Password is required.")
-    .min(8, "At least 8 characters")
+    .min(6, "At least 6 characters")
     .oneOf([ref("password")], "Passwords doesn't match"),
 });
 

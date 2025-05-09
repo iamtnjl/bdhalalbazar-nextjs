@@ -46,34 +46,40 @@ const CartProductItem = ({ product }) => {
         </div>
       </div>
       <div className="flex items-center justify-between">
-        {!isPriceEdited ? (
-          <div>
-            {product.discount === 0 ? (
-              <p className="text-sm font-bold text-gray-600 flex gap-1">
-                <span>৳{formatCurrency(product.product.price, ",")}</span>
-                <span className="text-gray-600">X {product.quantity}</span>
-              </p>
-            ) : (
-              <p className="text-sm font-bold text-gray-600 flex gap-3">
-                <span className="line-through">
-                  ৳ {formatCurrency(product.product.price, ",")}
-                </span>{" "}
-                <span className="text-primary font-bold text-sm">
-                  ৳
-                  {formatCurrency(
-                    calculateDiscount(
-                      product.product.price,
-                      product.product.discount
-                    ),
-                    ","
-                  )}
-                  <span className="text-grey-500"></span>{" "}
-                  <span className="text-gray-600">X {product.quantity}</span>
-                </span>
-              </p>
-            )}
-          </div> 
-        ) : <></>}
+        <div>
+          {product.discount === 0 ? (
+            <p className="text-sm font-bold text-gray-600 flex gap-1">
+              <span>৳{formatCurrency(product.product.price, ",")}</span>
+              <span className="text-gray-600">X {product.quantity}</span>
+            </p>
+          ) : (
+            <p className="text-sm font-bold text-gray-600 flex gap-3">
+              <span className="line-through">
+                ৳ {formatCurrency(product.product.price, ",")}
+              </span>{" "}
+              <span className="text-primary font-bold text-sm">
+                ৳
+                {formatCurrency(
+                  calculateDiscount(
+                    product.product.price,
+                    product.product.discount
+                  ),
+                  ","
+                )}
+                <span className="text-grey-500"></span>{" "}
+                {isPriceEdited ? (
+                  <span className="text-sm font-bold text-gray-600">
+                    / {`${product?.product?.weight} ${product?.product?.unit}`}
+                  </span>
+                ) : (
+                  <span className="text-sm font-bold text-gray-600">
+                    x{product?.quantity}
+                  </span>
+                )}
+              </span>
+            </p>
+          )}
+        </div>
 
         <div className="text-primary font-semibold ">
           ৳ {formatCurrency(product.total_price, ",")}

@@ -5,6 +5,8 @@ const OrderItemCard = ({ item }) => {
   const selling_price =
     item?.price - (item?.product.price * item?.product?.discount) / 100;
 
+  const isPriceEdited = selling_price * item?.quantity !== item?.total_price;
+
   return (
     <div className="bg-white border border-gray-300 p-2 rounded-lg flex flex-col gap-3 mb-2">
       <div className="flex flex-row-reverse items-start gap-2">
@@ -47,9 +49,15 @@ const OrderItemCard = ({ item }) => {
               <span className="text-primary font-bold text-sm">
                 ৳ {formatCurrency(selling_price, ",")}
               </span>
-              <span className="text-sm font-bold text-gray-600">
-                x{item?.quantity}
-              </span>
+              {isPriceEdited ? (
+                <span className="text-sm font-bold text-gray-600 -ml-2">
+                  / {`${item?.product?.weight} ${item?.product?.unit}`}
+                </span>
+              ) : (
+                <span className="text-sm font-bold text-gray-600">
+                  x{item?.quantity}
+                </span>
+              )}
             </p>
           )}
         </div>

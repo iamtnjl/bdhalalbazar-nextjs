@@ -28,7 +28,7 @@ const APIKit = {
       return client.post(url, payload);
     },
     deleteCart: (deviceId, productId) => {
-      const url = `public/cart/${deviceId}/product/${productId}`;
+      const url = `/public/cart/${deviceId}/product/${productId}`;
       return client.delete(url);
     },
     placeOrder: (payload) => {
@@ -74,11 +74,15 @@ const APIKit = {
   //Auth API's
   auth: {
     login: (payload) => {
-      const url = "auth/token";
+      const url = "/auth/token";
       return client.post(url, payload);
     },
     register: (payload) => {
-      const url = "auth/register";
+      const url = "/auth/register";
+      return client.post(url, payload);
+    },
+    SetupPassword: (payload) => {
+      const url = "/auth/setup-password";
       return client.post(url, payload);
     },
   },
