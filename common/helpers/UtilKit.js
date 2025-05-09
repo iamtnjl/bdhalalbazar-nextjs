@@ -136,13 +136,13 @@ export function arrayToParams(arr) {
   return arr;
 }
 
-export const transformOptionsData = (data) => {
+export const transformOptionsData = (data, valueFiled) => {
   const transformedData = {
     options: [
       ...data?.results.map((item) => {
         return {
           label: item.name,
-          value: item.slug,
+          value: item[valueFiled],
         };
       }),
     ],
@@ -152,12 +152,18 @@ export const transformOptionsData = (data) => {
   return transformedData;
 };
 
-export const loadOptions = async (inputValue, _, { page }, promise) => {
+export const loadOptions = async (
+  inputValue,
+  _,
+  { page },
+  promise,
+  valueFiled = "slug"
+) => {
   try {
     const response = await promise(
       sanitizeParams({ search: inputValue, page })
     );
-    const transformed = transformOptionsData(response.data);
+    const transformed = transformOptionsData(response.data, valueFiled);
     return {
       options: transformed.options,
       hasMore: transformed.hasMore,

@@ -9,6 +9,7 @@ import {
   ClipboardDocumentListIcon,
   CubeIcon,
   HomeIcon,
+  UserGroupIcon,
 } from "@heroicons/react/24/solid";
 import Button from "./Button";
 import LeftSideDrawer from "./LeftSideDrawer";
@@ -17,6 +18,11 @@ import { Settings } from "lucide-react";
 
 const navigation = [
   { name: "Dashboard", icon: HomeIcon, href: "/we" },
+  {
+    name: "Customers",
+    icon: UserGroupIcon,
+    href: "/we/customers",
+  },
   {
     name: "Orders",
     icon: ClipboardDocumentListIcon,

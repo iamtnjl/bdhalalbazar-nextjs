@@ -36,12 +36,12 @@ const WeOrders = () => {
       <div className="flex items-end w-full flex-col md:flex-row gap-4">
         <div className="w-full md:w-3/4 pt-2 lg:pt-0">
           <SearchByKey
-            placeholders={["Search by ID"]}
-            value={params.order_id}
+            placeholders={["Search by phone number or order id"]}
+            value={params.search}
             onChange={(event) => {
-              updateParams("order_id", event.target.value);
+              updateParams("search", event.target.value);
             }}
-            onReset={() => removeFilterItems("order_id")}
+            onReset={() => removeFilterItems("search")}
           />
         </div>
         <div className="w-full flex items-end gap-4 md:w-1/4">

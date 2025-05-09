@@ -175,6 +175,16 @@ const APIKit = {
         return client.put(url, payload);
       },
     },
+    customers: {
+      getAllCustomers: (params) => {
+        const url = `/we/customers-orders`;
+        return client.get(url, { params });
+      },
+      getCustomerDetails: (id) => {
+        const url = `/we/users/${id}`;
+        return client.get(url);
+      },
+    },
   },
 };
 

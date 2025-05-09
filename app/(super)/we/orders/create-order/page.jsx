@@ -100,10 +100,11 @@ const CreateOrder = () => {
           Order Products
         </h3>
         <PaginatedSelect
-          label="Select Categories"
+          label="Select Products"
+          isClearable={true}
           placeholder="Select categories"
           loadOptions={(inputValue, _, page) =>
-            loadOptions(inputValue, _, page, APIKit.we.products.getAllProduct)
+            loadOptions(inputValue, _, page, APIKit.we.products.getAllProduct, "_id")
           }
           additional={{ page: 1 }}
           onChange={(items) => {
