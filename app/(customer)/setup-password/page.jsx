@@ -1,10 +1,11 @@
+import { Suspense } from "react";
 import SetupPasswordForm from "./components/SetupPasswordForm";
 
 const SetupPassword = () => {
   return (
-    <div>
+    <Suspense fallback={<div>Loading...</div>}>
       <SetupPasswordForm />
-    </div>
+    </Suspense>
   );
 };
 
