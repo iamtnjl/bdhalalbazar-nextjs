@@ -166,7 +166,11 @@ const CheckOut = () => {
     const promise = APIKit.public
       .placeOrder(payload)
       .then(({ data }) => {
-        router.push(`/me/orders/${data.order._id}`);
+        if (Object.keys(user).length > 0) {
+          router.push(`/me/orders/${data.order._id}`);
+        } else {
+          router.push(`/setup-password?phone=${phoneNumber}`);
+        }
         clearCart();
       })
       .catch((err) => {

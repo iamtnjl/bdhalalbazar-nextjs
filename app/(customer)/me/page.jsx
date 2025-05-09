@@ -17,7 +17,7 @@ const UserPanel = ({ meStore: { me } }) => {
         <div className="h-[150px] w-[150px] overflow-hidden rounded-full border border-primary">
           <Image
             alt="profile-picture"
-            src={me.images.original || "/placeholders/user-placeholder.jpg"}
+            src={me?.images?.original || "/placeholders/user-placeholder.jpg"}
             height={150}
             width={150}
             className="w-full h-full object-cover object-center"
