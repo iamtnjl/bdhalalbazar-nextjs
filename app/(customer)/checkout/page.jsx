@@ -146,7 +146,7 @@ const CheckOut = () => {
       phoneNumber = "+880" + formik.values.phone;
     }
   } else {
-    phoneNumber = formik.values.phone;
+    phoneNumber = "+880" + formik.values.phone;
   }
 
   const placeOrder = () => {
