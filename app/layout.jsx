@@ -19,10 +19,18 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <title>BDHalalBazar.com</title>
+        <title>
+          BDHalalBazar | Online Grocery Shop in Pabna | Fresh & Halal Essentials
+        </title>
+
         <meta
           name="description"
-          content="BDHalalBazar.com is a trusted grocery e-commerce platform in Pabna offering fresh, halal, and quality daily essentials at your doorstep."
+          content="Shop fresh, halal, and affordable groceries online from BDHalalBazar – Pabna's most trusted online grocery store. Enjoy same-day delivery of meat, fish, fruits, vegetables, and daily essentials at your doorstep."
+        />
+
+        <meta
+          name="keywords"
+          content="pabna grocery delivery, online grocery store pabna, BDHalalBazar, halal groceries pabna, fresh meat pabna, fruits and vegetables delivery, pabna food delivery, online halal shop Bangladesh, daily essentials pabna, halal food pabna, online grocery shop in pabna, grocery shop near me, halal online shopping, same-day delivery groceries, online grocery shop pabna, online bazar pabna, online bazar delivery pabna"
         />
         {/* Google Analytics (GA4) */}
         <Script
