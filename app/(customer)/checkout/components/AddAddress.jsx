@@ -5,9 +5,7 @@ import Button from "@/components/shared/Button";
 import SearchAndSelect from "@/components/from/SearchAndSelect";
 import TextAreaField from "@/components/from/TextAreaField";
 
-function AddAddress({ formik, setShowForm, Cancel, refetch, setShowAddress }) {
-  const [backendErrors, setBackendErrors] = useState({});
-
+function AddAddress({ formik, setShowForm, Cancel, setShowAddress }) {
   return (
     <form className="flex flex-col gap-3" onSubmit={formik.handleSubmit}>
       <div>

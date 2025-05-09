@@ -12,7 +12,7 @@ const OrderLayout = ({ children }) => {
     <div>
       <FiltersProvider
         initialParams={{
-          order_id: "",
+          search: "",
           status: "",
           page: 1,
         }}

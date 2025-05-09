@@ -9,6 +9,8 @@ import EmptyState from "@/components/shared/EmptyState";
 import SearchAndSelect from "@/components/from/SearchAndSelect";
 import { useFilters } from "@/providers/FiltersProvider";
 import Pagination from "@/components/shared/Pagination";
+import Button from "@/components/shared/Button";
+import { useRouter } from "next/navigation";
 
 const successStatusOptions = [
   { label: "Pending", value: "pending" },
@@ -19,6 +21,7 @@ const successStatusOptions = [
 ];
 
 const WeOrders = () => {
+  const router = useRouter();
   const { params, paramsInURL, updateParams, removeFilterItems } = useFilters();
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["/admin-orders", paramsInURL],
@@ -33,15 +36,15 @@ const WeOrders = () => {
       <div className="flex items-end w-full flex-col md:flex-row gap-4">
         <div className="w-full md:w-3/4 pt-2 lg:pt-0">
           <SearchByKey
-            placeholders={["Search by ID"]}
-            value={params.order_id}
+            placeholders={["Search by phone number or order id"]}
+            value={params.search}
             onChange={(event) => {
-              updateParams("order_id", event.target.value);
+              updateParams("search", event.target.value);
             }}
-            onReset={() => removeFilterItems("order_id")}
+            onReset={() => removeFilterItems("search")}
           />
         </div>
-        <div className="w-full md:w-1/4">
+        <div className="w-full flex items-end gap-4 md:w-1/4">
           <SearchAndSelect
             className="pt-4"
             label="Filter by Status"
@@ -56,6 +59,13 @@ const WeOrders = () => {
             isClearable={params.status}
             placeholder="All Orders"
           />
+          <Button
+            onClick={() => router.push("/we/orders/create-order")}
+            extraClassName="whitespace-nowrap"
+            variant="primary"
+          >
+            Create Order
+          </Button>
         </div>
       </div>
       {data?.count > 0 && !isLoading ? (
