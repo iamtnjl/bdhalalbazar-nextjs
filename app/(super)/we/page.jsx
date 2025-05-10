@@ -9,7 +9,9 @@ const Dashboard = () => {
     queryKey: ["/admin-orders"],
     queryFn: () => APIKit.we.orders.getDashboard().then(({ data }) => data),
   });
-  console.log(data);
+  if (isLoading) {
+    return "Loading....";
+  }
   return (
     <div className="px-2 py-4 flex flex-col gap-4">
       <SectionTitle title="Dashboard" />
