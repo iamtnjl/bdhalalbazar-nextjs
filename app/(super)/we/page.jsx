@@ -39,13 +39,13 @@ const Dashboard = () => {
         <div className="p-4 rounded-md border border-gray-200 bg-white">
           <p className="text-base font-medium text-gray-500">Order Amount</p>
           <p className="text-2xl font-bold text-gray-700">
-            {data?.totalOrderAmount}
+            {Number(data?.totalOrderAmount).toFixed(2)}
           </p>
         </div>
         <div className="p-4 rounded-md border border-gray-200 bg-white">
           <p className="text-base font-medium text-gray-500">Purchase Amount</p>
           <p className="text-2xl font-bold text-gray-700">
-            {data?.totalPurchaseAmount}
+            {Number(data?.totalPurchaseAmount).toFixed(2)}
           </p>
         </div>
         <div className="p-4 rounded-md border border-gray-200 bg-white">
