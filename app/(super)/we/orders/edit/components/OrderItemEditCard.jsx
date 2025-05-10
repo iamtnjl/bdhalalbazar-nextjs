@@ -60,17 +60,27 @@ const OrderItemEditCard = ({ item, refetch }) => {
   });
 
   useEffect(() => {
-    const weight = parseFloat(formik.values.weight);
+    const productWeight = parseFloat(item?.product?.weight || "1");
+    const selectedWeight = parseFloat(formik.values.weight);
+    const quantity = parseInt(formik.values.quantity || "1", 10);
     const price = parseFloat(item?.product?.price || "0");
-    const actualPrice = price - (price * item?.product?.discount) / 100;
+    const discount = parseFloat(item?.product?.discount || "0");
+    const sellingPrice = parseFloat(price - (price * discount) / 100);
 
-    if (!isNaN(weight) && !isNaN(price)) {
-      const newTotal = weight * actualPrice;
-      formik.setFieldValue("total_price", newTotal.toFixed(2));
+    if (!isNaN(selectedWeight) && !isNaN(price) && !isNaN(quantity)) {
+      let actualUnitPrice;
+
+      if (productWeight > 1) {
+        const pricePerUnit = sellingPrice / productWeight;
+        actualUnitPrice = pricePerUnit * selectedWeight * quantity;
+      } else {
+        actualUnitPrice = sellingPrice * quantity;
+      }
+      formik.setFieldValue("total_price", actualUnitPrice.toFixed(2));
     } else {
       formik.setFieldValue("total_price", "");
     }
-  }, [formik.values.weight, item?.product?.price]);
+  }, [formik.values.weight, formik.values.quantity, item?.product?.price]);
 
   useEffect(() => {
     const isFormChanged = Object.keys(formik.initialValues)
