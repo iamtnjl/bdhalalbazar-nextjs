@@ -57,7 +57,6 @@ const EditOrder = () => {
 
   const ongoingStatus = data?.status?.find((item) => item.stage === "current");
 
-  console.log(data);
   return (
     <div className="px-2 py-4 flex flex-col gap-6">
       <SectionTitle title={"Edit Order"} />

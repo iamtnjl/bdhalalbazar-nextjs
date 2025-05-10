@@ -9,8 +9,24 @@ import TextAreaField from "@/components/from/TextAreaField";
 import TextInputField from "@/components/from/TextInputField";
 import SectionTitle from "@/components/shared/SectionTitle";
 import React from "react";
+import toast from "react-hot-toast";
 
 const CreateOrder = () => {
+  const handleProductAdd = (payload) => {
+    const promise = APIKit.we.orders
+      .createAdminOrder(payload)
+      .then(({data}) => console.log(data))
+      .catch((error) => {
+        console.log(error);
+        throw error;
+      });
+
+    return toast.promise(promise, {
+      loading: "Adding Product...",
+      success: "Product added successfully.",
+      error: "Something went wrong!",
+    });
+  };
   return (
     <div className="py-4 px-2 flex flex-col gap-4">
       <SectionTitle title={"Create Order"} />
@@ -102,14 +118,23 @@ const CreateOrder = () => {
         <PaginatedSelect
           label="Select Products"
           isClearable={true}
-          placeholder="Select categories"
+          placeholder="Select products"
           loadOptions={(inputValue, _, page) =>
-            loadOptions(inputValue, _, page, APIKit.we.products.getAllProduct, "_id")
+            loadOptions(
+              inputValue,
+              _,
+              page,
+              APIKit.we.products.getAllProduct,
+              "_id"
+            )
           }
           additional={{ page: 1 }}
-          onChange={(items) => {
-            console.log(items);
-          }}
+          onChange={(items) =>
+            handleProductAdd({
+              productId: items?.value,
+              quantity: 1,
+            })
+          }
           //   value={selectedCategories?.filter((option) =>
           //     params?.categories?.includes(option.value)
           //   )}

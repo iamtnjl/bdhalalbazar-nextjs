@@ -8,6 +8,7 @@ import {
   Bars4Icon,
   ClipboardDocumentListIcon,
   CubeIcon,
+  DocumentChartBarIcon,
   HomeIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/solid";
@@ -27,6 +28,11 @@ const navigation = [
     name: "Orders",
     icon: ClipboardDocumentListIcon,
     href: "/we/orders",
+  },
+  {
+    name: "Orders Summary",
+    icon: DocumentChartBarIcon,
+    href: "/we/orders-summary",
   },
   {
     name: "All Products",

@@ -38,7 +38,7 @@ const OrderItemEditCard = ({ item, refetch }) => {
       const promise = APIKit.we.orders
         .editOrder(params.get("id"), values)
         .then(({}) => {
-          router.push(`/we/orders/${params.get("id")}`);
+          refetch();
         })
         .catch((error) => {
           throw error;
@@ -73,11 +73,11 @@ const OrderItemEditCard = ({ item, refetch }) => {
   }, [formik.values.weight, item?.product?.price]);
 
   useEffect(() => {
-    const isFormChanged = Object.keys(initialValues).some(
-      (key) => formik.values[key] !== initialValues[key]
-    );
+    const isFormChanged = Object.keys(formik.initialValues)
+      .filter((key) => key !== "total_price")
+      .some((key) => formik.values[key] !== formik.initialValues[key]);
     setIsEdited(isFormChanged);
-  }, [formik.values]);
+  }, [formik.values, formik.initialValues]);
 
   return (
     <form onSubmit={formik.handleSubmit}>

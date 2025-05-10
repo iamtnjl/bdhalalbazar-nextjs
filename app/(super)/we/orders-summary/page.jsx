@@ -1,16 +1,14 @@
 "use client";
 
 import APIKit from "@/common/helpers/APIKit";
+import SearchAndSelect from "@/components/from/SearchAndSelect";
 import SearchByKey from "@/components/shared/SearchByKey";
 import SectionTitle from "@/components/shared/SectionTitle";
-import { useQuery } from "@tanstack/react-query";
-import WeOrderCard from "./components/WeOrderCard";
-import EmptyState from "@/components/shared/EmptyState";
-import SearchAndSelect from "@/components/from/SearchAndSelect";
 import { useFilters } from "@/providers/FiltersProvider";
+import { useQuery } from "@tanstack/react-query";
+import React from "react";
+import OrderSummaryTable from "./components/OrderSummaryTable";
 import Pagination from "@/components/shared/Pagination";
-import Button from "@/components/shared/Button";
-import { useRouter } from "next/navigation";
 
 const successStatusOptions = [
   { label: "Pending", value: "pending" },
@@ -20,19 +18,21 @@ const successStatusOptions = [
   { label: "Delivered", value: "delivered" },
 ];
 
-const WeOrders = () => {
-  const router = useRouter();
+const OrderSummary = () => {
   const { params, paramsInURL, updateParams, removeFilterItems } = useFilters();
-  const { data, isLoading, refetch } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["/admin-orders", paramsInURL],
     queryFn: () =>
       APIKit.we.orders.getOrders(paramsInURL).then(({ data }) => data),
     keepPreviousData: true,
   });
 
+  if (isLoading) {
+    return "Loading...";
+  }
   return (
     <div className="px-2 py-4 flex flex-col gap-4">
-      <SectionTitle title={"Orders"} />
+      <SectionTitle title={"Orders Summary"} />
       <div className="flex items-end w-full flex-col md:flex-row gap-4">
         <div className="w-full md:w-3/4 pt-2 lg:pt-0">
           <SearchByKey
@@ -59,35 +59,18 @@ const WeOrders = () => {
             isClearable={params.status}
             placeholder="All Orders"
           />
-          {/* <Button
-            onClick={() => router.push("/we/orders/create-order")}
-            extraClassName="whitespace-nowrap"
-            variant="primary"
-          >
-            Create Order
-          </Button> */}
         </div>
       </div>
-      {data?.count > 0 && !isLoading ? (
-        <>
-          {data?.results.map((item, key) => (
-            <WeOrderCard data={item} key={key} refetch={refetch} />
-          ))}
-          <Pagination
-            setPage={(pageNumber) => {
-              updateParams("page", pageNumber);
-            }}
-            data={data}
-            page={+paramsInURL.page}
-          />
-        </>
-      ) : (
-        <>
-          <EmptyState>No orders found.</EmptyState>
-        </>
-      )}
+      <OrderSummaryTable data={data?.results} />
+      <Pagination
+        setPage={(pageNumber) => {
+          updateParams("page", pageNumber);
+        }}
+        data={data}
+        page={+paramsInURL.page}
+      />
     </div>
   );
 };
 
-export default WeOrders;
+export default OrderSummary;

@@ -122,6 +122,10 @@ const APIKit = {
   //Admin API's
   we: {
     orders: {
+      getDashboard: () => {
+        const url = `/we/dashboard/`;
+        return client.get(url);
+      },
       getOrders: (params) => {
         const url = `/we/orders/`;
         return client.get(url, { params });
@@ -137,6 +141,14 @@ const APIKit = {
       editOrder: (id, payload) => {
         const url = `/we/orders/${id}/edit`;
         return client.put(url, payload);
+      },
+      getAdminOrder: (params) => {
+        const url = `/we/cart`;
+        return client.get(url, { params });
+      },
+      createAdminOrder: (payload) => {
+        const url = `/we/cart`;
+        return client.post(url, payload);
       },
     },
     products: {
