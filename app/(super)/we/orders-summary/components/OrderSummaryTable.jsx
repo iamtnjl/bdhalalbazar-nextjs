@@ -31,8 +31,11 @@ const OrderSummaryTable = ({ data }) => {
                 </td>
                 <td className="px-4 py-2 text-sm font-medium text-gray-700 ">
                   <div>
-                    <p>Order: ৳ {item?.grand_total}</p>
-                    <p>Purchase: ৳ {item?.total_purchase_price}</p>
+                    <p>Order: ৳ {Number(item?.grand_total).toFixed(2)}</p>
+                    <p>
+                      Purchase: ৳{" "}
+                      {Number(item?.total_purchase_price).toFixed(2)}
+                    </p>
                   </div>
                 </td>
                 <td className="px-4 py-2 text-sm font-medium text-gray-700">
