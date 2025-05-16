@@ -3,9 +3,11 @@ import Image from "next/image";
 
 const OrderItemCard = ({ item }) => {
   const selling_price =
-    item?.price - (item?.product.price * item?.product?.discount) / 100;
+    item?.price - (item?.product?.price * item?.product?.discount) / 100;
 
   const isPriceEdited = selling_price * item?.quantity !== item?.total_price;
+
+  console.log(item);
 
   return (
     <div className="bg-white border border-gray-300 p-2 rounded-lg flex flex-col gap-3 mb-2">
@@ -16,7 +18,7 @@ const OrderItemCard = ({ item }) => {
           height={500}
           className="w-12 h-12 object-cover rounded-md border-2 border-gray-200"
           src={item?.product?.primary_image.original}
-          alt={item.product.name}
+          alt={item?.product?.name}
         />
 
         {/* Description */}
