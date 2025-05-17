@@ -86,6 +86,12 @@ const APIKit = {
       return client.post(url, payload);
     },
   },
+  facebook: {
+    track: (payload) => {
+      const url = "/facebook/track";
+      return client.post(url, payload);
+    },
+  },
 
   //Users API's
   me: {

@@ -109,7 +109,10 @@ const Cart = () => {
             </div>
           </div>
           <Button
-            onClick={() => router.push("/checkout")}
+            onClick={() => {
+              router.push("/checkout");
+              return APIKit.facebook.track({ eventName: "Checkout" });
+            }}
             variant="primary"
             extraClassName="w-full mt-10"
           >

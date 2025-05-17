@@ -6,6 +6,7 @@ import { formatCurrency } from "@/common/helpers/UtilKit";
 import { ShoppingCart, Truck } from "lucide-react";
 import { useCart } from "@/providers/CartProvider";
 import QuantityButton from "./QuantityButton";
+import APIKit from "@/common/helpers/APIKit";
 
 const ProductCard = ({ product }) => {
   const { addToCart, cart } = useCart();
@@ -54,6 +55,7 @@ const ProductCard = ({ product }) => {
               e.stopPropagation();
               e.preventDefault();
               addToCart(product._id, 1);
+              return APIKit.facebook.track({ eventName: "Add_to_cart" });
             }}
             variant="primary"
             extraClassName="w-full"

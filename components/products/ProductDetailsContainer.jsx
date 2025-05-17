@@ -136,7 +136,10 @@ export default function ProductDetailsContainer({ data }) {
             <div className="flex gap-2">
               {!isAddedToCart ? (
                 <Button
-                  onClick={() => addToCart(data?._id, 1)}
+                  onClick={() => {
+                    addToCart(data?._id, 1);
+                    return APIKit.facebook.track({ eventName: "Add_to_cart" });
+                  }}
                   variant="primary"
                 >
                   <ShoppingCart className="w-[18px] h-[18px] mr-2 mb-[3px]" />

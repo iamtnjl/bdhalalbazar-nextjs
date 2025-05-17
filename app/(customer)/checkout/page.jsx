@@ -169,6 +169,7 @@ const CheckOut = () => {
           router.push(`/setup-password?phone=${phoneNumber}`);
         }
         clearCart();
+        APIKit.facebook.track({ eventName: "Purchase" });
       })
       .catch((err) => {
         throw err;

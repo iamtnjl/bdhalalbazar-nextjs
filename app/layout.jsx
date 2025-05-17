@@ -8,6 +8,8 @@ import { Provider } from "mobx-react";
 import rootStore from "../stores/root";
 import TopLoader from "@/components/shared/TopLoader";
 import Script from "next/script";
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 const figtree = Figtree({ subsets: ["latin"] });
 
@@ -15,6 +17,17 @@ configure({
   enforceActions: "always",
 });
 
+function FacebookPageView() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (typeof window.fbq !== "undefined") {
+      window.fbq("track", "PageView");
+    }
+  }, [pathname]);
+
+  return null;
+}
 
 export default function RootLayout({ children }) {
   return (
@@ -24,22 +37,35 @@ export default function RootLayout({ children }) {
           name="facebook-domain-verification"
           content="pe7angcbyi0y7n7mn6mh0b2xc09ntr"
         />
-        
         <title>
           BDHalalBazar | Online Grocery Shop in Pabna | Fresh & Halal Essentials
         </title>
-
         <meta
           name="description"
           content="Shop fresh, halal, and affordable groceries online from BDHalalBazar – Pabna's most trusted online grocery store. Enjoy same-day delivery of meat, fish, fruits, vegetables, and daily essentials at your doorstep."
         />
-
         <meta
           name="keywords"
           content="pabna grocery delivery, online grocery store pabna, BDHalalBazar, halal groceries pabna, fresh meat pabna, fruits and vegetables delivery, pabna food delivery, online halal shop Bangladesh, daily essentials pabna, halal food pabna, online grocery shop in pabna, grocery shop near me, halal online shopping, same-day delivery groceries, online grocery shop pabna, online bazar pabna, online bazar delivery pabna"
         />
 
-        {/* Google Analytics (GA4) */}
+        {/* Meta Pixel */}
+        <Script id="facebook-pixel" strategy="afterInteractive">
+          {`
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '664588003120839');
+            fbq('track', 'PageView');
+          `}
+        </Script>
+
+        {/* Google Analytics */}
         <Script
           strategy="afterInteractive"
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
@@ -77,7 +103,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${figtree.className} max-w-3xl mx-auto bg-primary-bg pb-[80px] overflow-y-scroll`}
       >
-        {/* GTM NoScript Fallback */}
+        {/* GTM NoScript */}
         <noscript
           dangerouslySetInnerHTML={{
             __html: `
@@ -86,6 +112,20 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
+
+        {/* Meta Pixel NoScript */}
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=664588003120839&ev=PageView&noscript=1"
+          />
+        </noscript>
+
+        {/* FB PageView Tracker for route changes */}
+        <FacebookPageView />
+
         <Provider rootStore={rootStore} meStore={rootStore.meStore}>
           <TanstackQueryProvider>
             <Toaster
