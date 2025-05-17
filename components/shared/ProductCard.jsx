@@ -17,16 +17,12 @@ const ProductCard = ({ product }) => {
         href={`/products/${product._id}`}
         className="group flex flex-col gap-2 justify-between h-full"
       >
-        <Image
+        <img
           className="cursor-pointer group-hover:scale-[1.01] group-hover:opacity-75 rounded-md w-full  object-cover object-center"
-          width={600}
-          height={600}
           src={
             product?.primary_image.original ||
             "/placeholders/no-image-square.jpg"
           }
-          loading="lazy"
-          decoding="async"
           alt="popular-product"
         />
         <div className="flex flex-col pointer-events-none whitespace-nowrap">
