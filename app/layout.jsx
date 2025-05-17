@@ -15,10 +15,16 @@ configure({
   enforceActions: "always",
 });
 
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <meta
+          name="facebook-domain-verification"
+          content="pe7angcbyi0y7n7mn6mh0b2xc09ntr"
+        />
+        
         <title>
           BDHalalBazar | Online Grocery Shop in Pabna | Fresh & Halal Essentials
         </title>
@@ -33,10 +39,6 @@ export default function RootLayout({ children }) {
           content="pabna grocery delivery, online grocery store pabna, BDHalalBazar, halal groceries pabna, fresh meat pabna, fruits and vegetables delivery, pabna food delivery, online halal shop Bangladesh, daily essentials pabna, halal food pabna, online grocery shop in pabna, grocery shop near me, halal online shopping, same-day delivery groceries, online grocery shop pabna, online bazar pabna, online bazar delivery pabna"
         />
 
-        <meta
-          name="facebook-domain-verification"
-          content="pe7angcbyi0y7n7mn6mh0b2xc09ntr"
-        />
         {/* Google Analytics (GA4) */}
         <Script
           strategy="afterInteractive"
