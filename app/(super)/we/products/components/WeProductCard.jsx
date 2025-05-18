@@ -52,9 +52,7 @@ const WeProductCard = ({ item, refetch }) => {
           </div>
           <ProductStatusToggle product={item} refetch={refetch} />
         </div>
-        <Image
-          width={500}
-          height={500}
+        <img
           className="h-16 w-16 flex-shrink-0 rounded-md"
           src={item?.primary_image?.original}
           alt={item.name}

@@ -30,12 +30,10 @@ const CheckoutProductCard = ({ product, expand, animate }) => {
             <div className="flex items-start gap-3">
               {/* Image */}
               {expand && (
-                <Image
+                <img
                   alt="product-image"
                   className="w-16 h-16 object-cover rounded-md border-2 border-gray-200"
                   src={product?.product?.primary_image?.original || ""}
-                  width={500}
-                  height={500}
                 />
               )}
 

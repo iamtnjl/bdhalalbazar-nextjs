@@ -76,9 +76,7 @@ function ProductCartItem({ cartItem }) {
           </div>
         </div>
         {/* Image */}
-        <Image
-          height={500}
-          width={500}
+        <img
           className="w-16 h-16 object-cover rounded-md border-2 border-gray-200"
           src={
             cartItem?.product?.primary_image?.original ||

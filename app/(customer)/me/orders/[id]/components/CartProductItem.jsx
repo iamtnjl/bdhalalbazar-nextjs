@@ -14,15 +14,10 @@ const CartProductItem = ({ product }) => {
     <div className="border rounded-lg w-full gap-3 border-gray-300 justify-between flex-col flex p-3 bg-white">
       <div className="flex items-start gap-3">
         {/* Image */}
-        <Image
-          width={500}
-          height={500}
+        <img
           alt="product-image"
           className="w-16 h-16 object-cover rounded-md border-2 border-gray-200"
-          src={
-            product?.product?.primary_image.original ||
-            "https://cdn.discordapp.com/attachments/741231928392286249/1095224501647720459/med-placeholder.webp"
-          }
+          src={product?.product?.primary_image.original}
         />
         {/* Description */}
         <div className="w-full">

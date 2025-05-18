@@ -49,14 +49,10 @@ export default function ProductDetailsContainer({ data }) {
                     <>
                       <span className="sr-only">{image?.name}</span>
                       <div className="inset-0 overflow-hidden rounded-md">
-                        <Image
+                        <img
                           src={image?.original}
                           alt={image?.name}
                           className="block w-full h-auto object-cover object-center"
-                          width={512}
-                          loading="lazy"
-                          decoding="async"
-                          height={512}
                         />
                       </div>
                       <span
@@ -79,14 +75,10 @@ export default function ProductDetailsContainer({ data }) {
                 {" "}
                 {data?.images.map((image, idx) => (
                   <Tab.Panel key={idx}>
-                    <Image
+                    <img
                       src={image?.original}
                       alt={image?.name || "public_product_image"}
                       className="h-[350px] md:h-[400px]  w-full object-cover object-center sm:rounded-lg"
-                      width={512}
-                      loading="lazy"
-                      decoding="async"
-                      height={512}
                       onClick={() => {
                         setCurrentIndex(idx);
                         setOpen(true);
@@ -96,13 +88,9 @@ export default function ProductDetailsContainer({ data }) {
                 ))}
               </>
             ) : (
-              <Image
-                height={256}
-                width={256}
+              <img
                 src="/images/placeholders/no-image-square.jpg"
-                priority
                 aria-label="image-options"
-                layout="fixed"
                 alt="product__image"
                 className="w-full object-cover object-center rounded-lg"
               />
