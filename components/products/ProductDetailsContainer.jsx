@@ -14,6 +14,7 @@ import { formatCurrency } from "@/common/helpers/UtilKit";
 import { ShoppingCart } from "lucide-react";
 import { useCart } from "@/providers/CartProvider";
 import QuantityButton from "../shared/QuantityButton";
+import APIKit from "@/common/helpers/APIKit";
 
 export default function ProductDetailsContainer({ data }) {
   // Lightbox states
