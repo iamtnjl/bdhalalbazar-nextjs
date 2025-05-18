@@ -94,9 +94,7 @@ const OrderItemEditCard = ({ item, refetch }) => {
     <form onSubmit={formik.handleSubmit}>
       <div className="bg-white border border-gray-300 p-2 rounded-lg flex flex-col gap-3 mb-2">
         <div className="flex flex-row-reverse items-start gap-2">
-          <Image
-            width={500}
-            height={500}
+          <img
             className="w-12 h-12 object-cover rounded-md border-2 border-gray-200"
             src={item?.product?.primary_image.original}
             alt={item.product.name}
