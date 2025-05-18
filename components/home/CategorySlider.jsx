@@ -21,7 +21,7 @@ const CategorySlider = () => {
       name: "Meat",
       desc: "Meat Items",
       icon: "/icons/meat.png",
-      href: "meat",
+      href: "beef%2Cchicken%2Cmutton%2Cmeat",
       color: "bg-rose-50",
     },
     {
