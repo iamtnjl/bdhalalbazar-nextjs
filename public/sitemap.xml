@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://bdhalalbazar.com/categories</loc><lastmod>2025-05-17T09:50:25.251Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bdhalalbazar.com/login</loc><lastmod>2025-05-17T09:50:25.253Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bdhalalbazar.com/home</loc><lastmod>2025-05-17T09:50:25.253Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bdhalalbazar.com/me/edit-profile</loc><lastmod>2025-05-17T09:50:25.253Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bdhalalbazar.com/me/orders</loc><lastmod>2025-05-17T09:50:25.253Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bdhalalbazar.com/me</loc><lastmod>2025-05-17T09:50:25.253Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bdhalalbazar.com/me/addresses</loc><lastmod>2025-05-17T09:50:25.253Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bdhalalbazar.com/register</loc><lastmod>2025-05-17T09:50:25.253Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bdhalalbazar.com/setup-password</loc><lastmod>2025-05-17T09:50:25.253Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bdhalalbazar.com/super-login</loc><lastmod>2025-05-17T09:50:25.253Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bdhalalbazar.com/products</loc><lastmod>2025-05-17T09:50:25.253Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bdhalalbazar.com/we/customers</loc><lastmod>2025-05-17T09:50:25.254Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bdhalalbazar.com/we/orders-summary</loc><lastmod>2025-05-17T09:50:25.254Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bdhalalbazar.com/we/orders/create-order</loc><lastmod>2025-05-17T09:50:25.254Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bdhalalbazar.com/we/orders</loc><lastmod>2025-05-17T09:50:25.254Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bdhalalbazar.com/we</loc><lastmod>2025-05-17T09:50:25.254Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bdhalalbazar.com/we/orders/edit</loc><lastmod>2025-05-17T09:50:25.254Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bdhalalbazar.com/we/products/add</loc><lastmod>2025-05-17T09:50:25.254Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bdhalalbazar.com/we/products/edit</loc><lastmod>2025-05-17T09:50:25.254Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bdhalalbazar.com/we/settings</loc><lastmod>2025-05-17T09:50:25.254Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bdhalalbazar.com</loc><lastmod>2025-05-17T09:50:25.254Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bdhalalbazar.com/we/products</loc><lastmod>2025-05-17T09:50:25.254Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<urlset 
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+  xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" 
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" 
+  xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+>
+
+  <url><loc>https://bdhalalbazar.com/categories</loc><lastmod>2025-05-17T09:50:25.251Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bdhalalbazar.com/login</loc><lastmod>2025-05-17T09:50:25.253Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bdhalalbazar.com/home</loc><lastmod>2025-05-17T09:50:25.253Z</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://bdhalalbazar.com/me/edit-profile</loc><lastmod>2025-05-17T09:50:25.253Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bdhalalbazar.com/me/orders</loc><lastmod>2025-05-17T09:50:25.253Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bdhalalbazar.com/me</loc><lastmod>2025-05-17T09:50:25.253Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bdhalalbazar.com/me/addresses</loc><lastmod>2025-05-17T09:50:25.253Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bdhalalbazar.com/register</loc><lastmod>2025-05-17T09:50:25.253Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bdhalalbazar.com/setup-password</loc><lastmod>2025-05-17T09:50:25.253Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bdhalalbazar.com/super-login</loc><lastmod>2025-05-17T09:50:25.253Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bdhalalbazar.com/products</loc><lastmod>2025-05-17T09:50:25.253Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bdhalalbazar.com/we/customers</loc><lastmod>2025-05-17T09:50:25.254Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bdhalalbazar.com/we/orders-summary</loc><lastmod>2025-05-17T09:50:25.254Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bdhalalbazar.com/we/orders/create-order</loc><lastmod>2025-05-17T09:50:25.254Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bdhalalbazar.com/we/orders</loc><lastmod>2025-05-17T09:50:25.254Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bdhalalbazar.com/we</loc><lastmod>2025-05-17T09:50:25.254Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bdhalalbazar.com/we/orders/edit</loc><lastmod>2025-05-17T09:50:25.254Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bdhalalbazar.com/we/products/add</loc><lastmod>2025-05-17T09:50:25.254Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bdhalalbazar.com/we/products/edit</loc><lastmod>2025-05-17T09:50:25.254Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bdhalalbazar.com/we/settings</loc><lastmod>2025-05-17T09:50:25.254Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bdhalalbazar.com/we/products</loc><lastmod>2025-05-17T09:50:25.254Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>
