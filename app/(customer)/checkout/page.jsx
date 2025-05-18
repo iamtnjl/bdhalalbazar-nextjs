@@ -140,10 +140,14 @@ const CheckOut = () => {
 
   let phoneNumber = "";
 
-  if (formik.values.phone.charAt(0) === "0") {
-    phoneNumber = "+880" + formik.values.phone.substring(1);
+  if (!user?.user?.phone) {
+    if (formik.values.phone.charAt(0) === "0") {
+      phoneNumber = "+880" + formik.values.phone.substring(1);
+    } else {
+      phoneNumber = "+880" + formik.values.phone;
+    }
   } else {
-    phoneNumber = "+880" + formik.values.phone;
+    phoneNumber = user?.user?.phone;
   }
 
   const placeOrder = () => {
