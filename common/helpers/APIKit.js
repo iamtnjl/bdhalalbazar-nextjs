@@ -89,7 +89,7 @@ const APIKit = {
   facebook: {
     track: (payload) => {
       const url = "/facebook/track";
-      return client.post(url, payload);
+      return client.post(url, payload, { withCredentials: true });
     },
   },
 
