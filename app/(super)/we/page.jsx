@@ -84,7 +84,7 @@ const Dashboard = () => {
           <div className="p-4 rounded-md border border-gray-200 bg-white">
             <p className="text-base font-medium text-gray-500">Order Amount</p>
             <p className="text-2xl font-bold text-gray-700">
-              {Number(data?.orders?.totalAmount).toFixed(2)}
+              {Number(data?.orders?.completedAmount).toFixed(2)}
             </p>
           </div>
           <div className="p-4 rounded-md border border-gray-200 bg-white">
