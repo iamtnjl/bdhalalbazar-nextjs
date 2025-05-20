@@ -12,6 +12,7 @@ import Modal from "@/components/shared/Modal";
 import ProductCard from "@/components/shared/ProductCard";
 import SearchByKey from "@/components/shared/SearchByKey";
 import SectionTitle from "@/components/shared/SectionTitle";
+import HomePageSkeleton from "@/components/skeleton/HomePageSkeleton";
 import { useFilters } from "@/providers/FiltersProvider";
 import { ShoppingBasket, SlidersHorizontal } from "lucide-react";
 import { useInView } from "react-intersection-observer";
@@ -34,7 +35,7 @@ const ProductContainer = () => {
     removeFilterItems,
   } = useFilters();
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useProducts(paramsInURL);
 
   const allProducts = data?.pages.flatMap((page) => page.results) || [];
@@ -130,17 +131,23 @@ const ProductContainer = () => {
       </div>
 
       {/* Product Grid */}
-      {allProducts.length > 0 ? (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {data?.pages.map((page) =>
-            page.results.map((product) => (
-              <ProductCard key={product._id} product={product} />
-            ))
-          )}
-        </div>
+      {isLoading ? (
+        <HomePageSkeleton />
       ) : (
         <>
-          <EmptyState>No products found</EmptyState>
+          {allProducts.length > 0 ? (
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {data?.pages.map((page) =>
+                page.results.map((product) => (
+                  <ProductCard key={product._id} product={product} />
+                ))
+              )}
+            </div>
+          ) : (
+            <>
+              <EmptyState>No products found</EmptyState>
+            </>
+          )}
         </>
       )}
 

@@ -7,7 +7,7 @@ import TextInputField from "../from/TextInputField";
 const QuantityButton = ({ cartItem, product, fromCartPage, refetch }) => {
   const { updateQuantity } = useCart();
   return (
-    <div className="flex items-center gap-2 w-full justify-between">
+    <div  className="flex items-center gap-2 w-full justify-between">
       <button
         className="p-1 border rounded-md bg-gray-100"
         onClick={(e) => {

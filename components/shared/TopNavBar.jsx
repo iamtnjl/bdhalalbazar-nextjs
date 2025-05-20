@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import { ShoppingCart } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -6,31 +7,36 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import APIKit from "@/common/helpers/APIKit";
+import LogoCartSkeleton from "../skeleton/LogoCartSkeleton";
 
 const TopNavbar = () => {
   const pathname = usePathname();
-  const [deviceId, setDeviceId] = useState(null);
+  const [deviceId, setDeviceId] = useState(false);
+  const [isDeviceIdReady, setIsDeviceIdReady] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      let storedDeviceId = localStorage.getItem("deviceId");
-
+      const storedDeviceId = localStorage.getItem("deviceId");
       setDeviceId(storedDeviceId);
+      setIsDeviceIdReady(true); // mark that deviceId fetching is complete
     }
   }, []);
+
   const { data, isLoading } = useQuery({
     queryKey: ["/cart"],
     queryFn: () => APIKit.public.getCart({ deviceId }).then(({ data }) => data),
-    keepPreviousData: true,
     enabled: !!deviceId,
     retry: false,
+    keepPreviousData: true,
   });
 
-  if (isLoading) {
-    return "Loading...";
+  // Prevent flickering: show skeleton if deviceId isn't ready or data is loading
+  if (!isDeviceIdReady || isLoading) {
+    return <LogoCartSkeleton />;
   }
+
   return (
-    <nav className="px-4 py-3 bg-white  shadow-sm flex items-center justify-between sticky top-0 z-50 rounded-bl-md rounded-br-md">
+    <nav className="px-4 py-3 bg-white shadow-sm flex items-center justify-between sticky top-0 z-50 rounded-bl-md rounded-br-md">
       <div className="flex items-center justify-between w-full">
         <div className="flex gap-1 items-center">
           <Image alt="logo" src={"/logo/logo.png"} width={50} height={50} />
@@ -39,30 +45,22 @@ const TopNavbar = () => {
           </p>
         </div>
         <div className="bg-primary-bg p-2 rounded-full hover:bg-gray-100 cursor-pointer">
-          <Link href={"/cart"} className={`relative `}>
+          <Link href={"/cart"}>
             <div className="relative">
               <ShoppingCart
-                className={`${
+                className={
                   pathname === "/cart" ? "text-primary" : "text-gray-700"
-                }`}
+                }
               />
-              {data?.cart_products?.length > 0 ? (
+              {data?.cart_products?.length > 0 && (
                 <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs font-bold w-4 h-4 flex items-center justify-center rounded-full">
-                  {data?.cart_products?.length}
+                  {data.cart_products.length}
                 </span>
-              ) : null}
+              )}
             </div>
           </Link>
         </div>
       </div>
-      {/* <div className="flex items-start gap-4">
-        <div className="bg-primary-bg p-2 rounded-full hover:bg-gray-100 cursor-pointer">
-          <Bell className="text-gray-700" height={22} width={22} />
-        </div>
-        <div className="bg-primary-bg p-2 rounded-full hover:bg-gray-100 cursor-pointer">
-          <MessageSquareText className="text-gray-700" height={22} width={22} />
-        </div>
-      </div> */}
     </nav>
   );
 };

@@ -9,6 +9,7 @@ import "swiper/css/navigation";
 import { useQuery } from "@tanstack/react-query";
 import APIKit from "@/common/helpers/APIKit";
 import ProductCard from "./ProductCard";
+import HomePageSkeleton from "../skeleton/HomePageSkeleton";
 
 const ProductSlider = () => {
   const [cardHeight, setCardHeight] = useState(0);
@@ -38,7 +39,7 @@ const ProductSlider = () => {
     };
   }, []);
 
-  const { data: productsData } = useQuery({
+  const { data: productsData, isLoading } = useQuery({
     queryKey: ["/products"],
     queryFn: () => APIKit.public.getProducts().then(({ data }) => data),
   });
@@ -48,6 +49,10 @@ const ProductSlider = () => {
       swiperRef.current.autoplay.stop();
     }
   };
+
+  if (isLoading) {
+    return <HomePageSkeleton />;
+  }
 
   return (
     <div ref={containerRef} onClick={handleClick}>
@@ -86,7 +91,7 @@ const ProductSlider = () => {
         Virtual
       >
         {productsData?.results.map((item, i) => (
-          <SwiperSlide  key={i}>
+          <SwiperSlide key={i}>
             <ProductCard product={item} />
           </SwiperSlide>
         ))}

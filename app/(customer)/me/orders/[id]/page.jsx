@@ -8,6 +8,7 @@ import { formatDateTime } from "@/common/helpers/UtilKit";
 import OrderStatusCard from "./components/OrderStatusCard";
 import CustomerDetailsFormCard from "./components/CustomerDetailsFormCard";
 import ShoppingCart from "./components/ShoppingCart";
+import OrderDetailsSkeleton from "@/components/skeleton/OrderDetailsSkeleton";
 
 const OrderDetails = () => {
   const { id } = useParams();
@@ -18,7 +19,7 @@ const OrderDetails = () => {
   });
 
   if (isLoading) {
-    return "Loading...";
+    return <OrderDetailsSkeleton />;
   }
 
   return (

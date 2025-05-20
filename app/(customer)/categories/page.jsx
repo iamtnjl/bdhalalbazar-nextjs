@@ -2,6 +2,7 @@
 
 import APIKit from "@/common/helpers/APIKit";
 import Accordion from "@/components/shared/Accordion";
+import CategoryAccordionSkeleton from "@/components/skeleton/CategoryAccordionSkeleton";
 import { Tab } from "@headlessui/react";
 import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
@@ -72,7 +73,7 @@ const Categories = () => {
   });
 
   if (isLoading) {
-    return "Loading...";
+    return <CategoryAccordionSkeleton />;
   }
 
   return (

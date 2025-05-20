@@ -1,14 +1,17 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/image";
 import Link from "next/link";
+import CategorySliderSkeleton from "../skeleton/CategorySliderSkeleton";
 
 const CategorySlider = () => {
+  const [loading, setLoading] = useState(true);
+
   const categories = [
     {
       name: "Fish",
@@ -46,6 +49,14 @@ const CategorySlider = () => {
       color: "bg-amber-50",
     },
   ];
+
+  // Simulate loading (or use real data fetch if needed)
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) return <CategorySliderSkeleton />;
 
   return (
     <div className="relative px-2">

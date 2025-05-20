@@ -10,6 +10,7 @@ import { useFilters } from "@/providers/FiltersProvider";
 import { sanitizeParams } from "@/common/helpers/UtilKit";
 import EmptyState from "@/components/shared/EmptyState";
 import Pagination from "@/components/shared/Pagination";
+import OrdersSkeletonList from "@/components/skeleton/OrdersSkeletonList";
 
 const successStatusOptions = [
   { label: "Pending", value: "pending" },
@@ -61,24 +62,30 @@ const Orders = () => {
           />
         </div>
       </div>
-      {data?.count > 0 && !isLoading ? (
-        <>
-          <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-5 mb-14">
-            {data?.results.map((order) => (
-              <OrderItemCard key={order.order_id} order={order} />
-            ))}
-          </div>
-          <Pagination
-            setPage={(pageNumber) => {
-              updateParams("page", pageNumber);
-            }}
-            data={data}
-            page={+paramsInURL.page}
-          />
-        </>
+      {isLoading ? (
+        <OrdersSkeletonList />
       ) : (
         <>
-          <EmptyState>No orders found</EmptyState>
+          {data?.count > 0 && !isLoading ? (
+            <>
+              <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-5 mb-14">
+                {data?.results.map((order) => (
+                  <OrderItemCard key={order.order_id} order={order} />
+                ))}
+              </div>
+              <Pagination
+                setPage={(pageNumber) => {
+                  updateParams("page", pageNumber);
+                }}
+                data={data}
+                page={+paramsInURL.page}
+              />
+            </>
+          ) : (
+            <>
+              <EmptyState>No orders found</EmptyState>
+            </>
+          )}
         </>
       )}
     </div>

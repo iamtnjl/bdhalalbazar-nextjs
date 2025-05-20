@@ -7,9 +7,10 @@ import ProductCard from "../shared/ProductCard";
 import { ChartNoAxesCombined } from "lucide-react";
 import { useProducts } from "@/common/hooks/useProducts";
 import { useInView } from "react-intersection-observer";
+import HomePageSkeleton from "../skeleton/HomePageSkeleton";
 
 const PopularProducts = () => {
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useProducts();
 
   // Intersection Observer to trigger fetching the next page
@@ -21,6 +22,10 @@ const PopularProducts = () => {
       }
     },
   });
+
+  if (isLoading) {
+    return <HomePageSkeleton />;
+  }
   return (
     <div className="flex flex-col gap-6 px-2">
       <div className="flex items-center justify-between">
