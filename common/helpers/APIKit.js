@@ -203,6 +203,12 @@ const APIKit = {
         return client.get(url);
       },
     },
+    carts: {
+      getAllCart: (params) => {
+        const url = `/we/carts`;
+        return client.get(url, { params });
+      },
+    },
   },
 };
 

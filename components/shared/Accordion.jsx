@@ -11,7 +11,7 @@ export default function Accordion({ title, children }) {
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center justify-between w-full p-4 text-left focus:outline-none"
       >
-        <span className="font-semibold text-gray-800 text-base">{title}</span>
+        <span className="font-semibold text-gray-800 text-base truncate">{title}</span>
         <ChevronDown
           size={20}
           className={`transform transition-transform duration-300 ${
