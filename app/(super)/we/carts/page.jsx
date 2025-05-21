@@ -8,6 +8,7 @@ import { useState } from "react";
 import Pagination from "@/components/shared/Pagination";
 import SearchByKey from "@/components/shared/SearchByKey";
 import CartProduct from "./components/CartProduct";
+import { formatCurrency, formatDateTime } from "@/common/helpers/UtilKit";
 
 const CustomerCart = () => {
   const [params, setParams] = useState({
@@ -41,16 +42,26 @@ const CustomerCart = () => {
       />
       {!isLoading &&
         data?.results.map((item) => {
-          console.log(item);
           const hasUser = item?.user;
           const title = hasUser
             ? `${item?.user.name} - ${item?.user.phone}`
             : `${item?.deviceId}`;
           return (
             <Accordion key={item?.id} title={title}>
-              {item?.cart_products.map((item) => (
-                <CartProduct key={item._id} item={item} />
-              ))}
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-semibold text-gray-600">
+                    {formatDateTime(item?.createdAt, true)}
+                  </p>
+                  <p className="text-sm font-semibold text-gray-600">
+                    {" "}
+                    ৳{formatCurrency(item?.grand_total)}
+                  </p>
+                </div>
+                {item?.cart_products.map((item) => (
+                  <CartProduct key={item._id} item={item} />
+                ))}
+              </div>
             </Accordion>
           );
         })}
