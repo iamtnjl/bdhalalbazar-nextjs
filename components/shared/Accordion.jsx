@@ -22,7 +22,7 @@ export default function Accordion({ title, children }) {
 
       <div
         ref={contentRef}
-        className={`overflow-hidden transition-all duration-500 ease-in-out ${
+        className={`overflow-y-auto transition-all duration-500 ease-in-out ${
           isOpen ? "max-h-[450px]" : "max-h-0"
         }`}
         style={{ transitionProperty: "max-height" }}
