@@ -50,7 +50,7 @@ const PopularProducts = () => {
 
       {/* Loading More Indicator */}
       <div ref={ref} className="text-center mt-4">
-        {isFetchingNextPage && <p>Loading more products...</p>}
+        {isFetchingNextPage && <HomePageSkeleton />}
       </div>
     </div>
   );
