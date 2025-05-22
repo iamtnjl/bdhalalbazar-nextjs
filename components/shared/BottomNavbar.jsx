@@ -73,7 +73,7 @@ const BottomNavbar = () => {
         <p
           className={`${pathname === "/me" ? "text-primary" : "text-gray-700"}`}
         >
-          My Account
+          Account
         </p>
       </Link>
     </div>
