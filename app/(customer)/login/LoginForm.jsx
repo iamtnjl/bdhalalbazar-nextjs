@@ -40,11 +40,22 @@ const LoginForm = () => {
       const handleSuccess = ({ data }) => {
         setJWTokenAndRedirect(data.access, () => {
           setBackendErrors({});
-          if (previousURL) {
-            router.push(previousURL);
-          } else {
-            router.push("/me");
-          }
+          return APIKit.me
+            .getProfile()
+            .then(({ data }) => {
+              if (data.user.role === "user") {
+                if (previousURL) {
+                  router.push(previousURL);
+                } else {
+                  router.push("/me");
+                }
+              } else {
+                router.push("/we");
+              }
+            })
+            .catch((error) => {
+              throw error;
+            });
         });
       };
 
@@ -65,7 +76,6 @@ const LoginForm = () => {
         user_id: phoneNumber,
         password: values.password,
       };
-
 
       const promise = APIKit.auth
         .login(payload)

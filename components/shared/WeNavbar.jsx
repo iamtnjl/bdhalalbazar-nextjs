@@ -103,7 +103,7 @@ function WeNavbar() {
                       </Button>
                     </div>
 
-                    <div className="flex items-center gap-2 justify-between w-full">
+                    <Link href={"/home"} className="flex items-center gap-2 justify-between w-full">
                       <div className="flex gap-1 items-center">
                         <Image
                           alt="logo"
@@ -115,7 +115,7 @@ function WeNavbar() {
                           HalalBazar
                         </p>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 </div>
               </div>
