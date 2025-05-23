@@ -21,6 +21,7 @@ const Settings = () => {
     initialValues: {
       delivery_charge: data?.delivery_charge || "",
       platform_fee: data?.platform_fee || "",
+      profit_margin: data?.profit_margin || "",
     },
     enableReinitialize: true,
     onSubmit: (values) => {
@@ -77,6 +78,15 @@ const Settings = () => {
           name="platform_fee"
           id="platform_fee"
           value={formik.values.platform_fee}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          disabled={!editMode}
+        />
+        <TextInputField
+          label="Profit Margin (%)"
+          name="profit_margin"
+          id="profit_margin"
+          value={formik.values.profit_margin}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           disabled={!editMode}

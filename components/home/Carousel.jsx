@@ -4,11 +4,7 @@ import { useState, useEffect } from "react";
 import Swipe from "react-easy-swipe";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-const images = [
-  { src: "/banners/2.png" },
-  { src: "/banners/1.png" },
-  { src: "/banners/3.png" },
-];
+const images = [{ src: "/banners/1.jpg" }, { src: "/banners/2banner.png" }];
 
 export default function Carousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
