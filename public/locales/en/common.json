@@ -1,0 +1,30 @@
+{
+  "sectionTitle": {
+    "homeSearch": "Search Products",
+    "categories": "Categories",
+    "goodDiscount": "Good Discount",
+    "fish": "Fish",
+    "meat": "Meat",
+    "vegetables": "Vegetables",
+    "rice": "Rice",
+    "spice": "Spices",
+    "trendingProducts": "Trending Products"
+  },
+  "subTitle": {
+    "seeAll": "See All",
+    "fish": "Fresh fish",
+    "meat": "Halal meat",
+    "vegetables": "Fresh vegetables",
+    "rice": "Quality Rice",
+    "spices": "Pure Spices"
+  },
+  "ctaButton": {
+    "addToCart": "Add to Cart"
+  },
+  "navigation": {
+    "home": "Home",
+    "cart": "Cart",
+    "categories": "Categories",
+    "products": "Products"
+  }
+}

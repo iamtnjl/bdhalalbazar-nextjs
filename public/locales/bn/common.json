@@ -1,0 +1,30 @@
+{
+  "sectionTitle": {
+    "homeSearch": "পণ্যের নাম সার্চ করুন",
+    "categories": "ক্যাটেগরি",
+    "goodDiscount": "স্পেশাল অফার",
+    "fish": "মাছ",
+    "meat": "মাংস",
+    "vegetables": "শাক সবজি",
+    "rice": "চাউল",
+    "spice": "মশলা",
+    "trendingProducts": "জনপ্রিয় পণ্য"
+  },
+  "subTitle": {
+    "seeAll": "সব দেখুন",
+    "fish": "টাটকা মাছ",
+    "meat": "হালাল মাংস",
+    "vegetables": "টাটকা সবজি",
+    "rice": "আতপ ও সিদ্ধ চাল",
+    "spices": "খাঁটি মসলা"
+  },
+  "ctaButton": {
+    "addToCart": "ব্যাগে যোগ করুন"
+  },
+  "navigation": {
+    "home": "হোম",
+    "cart": "ব্যাগ",
+    "categories": "ক্যাটেগরি",
+    "products": "সব পণ্য"
+  }
+}

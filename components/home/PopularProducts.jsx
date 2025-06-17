@@ -8,8 +8,10 @@ import { ChartNoAxesCombined } from "lucide-react";
 import { useProducts } from "@/common/hooks/useProducts";
 import { useInView } from "react-intersection-observer";
 import HomePageSkeleton from "../skeleton/HomePageSkeleton";
+import { useTranslation } from "react-i18next";
 
 const PopularProducts = () => {
+  const {t} = useTranslation()
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useProducts();
 
@@ -35,9 +37,9 @@ const PopularProducts = () => {
             width={25}
             className="text-primary"
           />
-          <SectionTitle title="Trending Products" />
+          <SectionTitle title={t("sectionTitle.trendingProducts")} />
         </div>
-        <Button variant="border-less"> See All </Button>
+        <Button variant="border-less"> {t("subTitle.seeAll")} </Button>
       </div>
       {/* Product Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">

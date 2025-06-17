@@ -10,6 +10,7 @@ import TopLoader from "@/components/shared/TopLoader";
 import Script from "next/script";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import '@/i18n'; 
 
 const figtree = Figtree({ subsets: ["latin"] });
 

@@ -2,48 +2,49 @@
 
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/image";
 import Link from "next/link";
 import CategorySliderSkeleton from "../skeleton/CategorySliderSkeleton";
+import { useTranslation } from "react-i18next";
 
 const CategorySlider = () => {
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
   const categories = [
     {
-      name: "Fish",
-      desc: "Fish Items",
+      name: t("sectionTitle.fish"),
+      desc: t("subTitle.fish"),
       icon: "/icons/fish.png",
       href: "fish",
       color: "bg-orange-50",
     },
     {
-      name: "Meat",
-      desc: "Meat Items",
+      name: t("sectionTitle.meat"),
+      desc: t("subTitle.meat"),
       icon: "/icons/meat.png",
       href: "beef%2Cchicken%2Cmutton%2Cmeat",
       color: "bg-rose-50",
     },
     {
-      name: "Vegetable",
-      desc: "Fresh Vegetable",
+      name: t("sectionTitle.vegetables"),
+      desc: t("subTitle.vegetables"),
       icon: "/icons/vegetable.png",
       href: "vegetable",
       color: "bg-emerald-50",
     },
     {
-      name: "Rice",
-      desc: "Premium Rice",
+      name: t("sectionTitle.rice"),
+      desc: t("subTitle.rice"),
       icon: "/icons/rice.png",
       href: "rice",
       color: "bg-yellow-50",
     },
     {
-      name: "Moshla",
-      desc: "Pure Moshla",
+      name: t("sectionTitle.spice"),
+      desc: t("subTitle.spices"),
       icon: "/icons/moshla.png",
       href: "moshla",
       color: "bg-amber-50",
