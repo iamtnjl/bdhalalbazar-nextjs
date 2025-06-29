@@ -174,7 +174,7 @@ const SearchAndCategories = () => {
     {
       label: t("sectionTitle.grocery"),
       key: "grocery",
-      icon: "/icons/grocery.jpg",
+      icon: "/icons/veg.jpg",
       tabs: getCategoriesData(),
       bg: "bg-lime-50",
     },
