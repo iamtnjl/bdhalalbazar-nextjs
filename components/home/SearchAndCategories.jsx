@@ -194,7 +194,7 @@ const SearchAndCategories = () => {
     },
     {
       label: t("sectionTitle.gas"),
-      key: "gas",
+      key: "gas-cylinder",
       icon: "/icons/gas.jpg",
       tabs: [],
       bg: "bg-rose-50",
@@ -244,7 +244,7 @@ const SearchAndCategories = () => {
       setSelectedCategory(item);
       router.push(`${pathName}?category=${item.key}`);
     } else {
-      router.push(`/products?category=${item.key}`);
+      router.push(`/products?categories=${item.key}`);
     }
   };
 

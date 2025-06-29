@@ -7,7 +7,6 @@ import "swiper/css/pagination";
 import Image from "next/image";
 import Link from "next/link";
 import CategorySliderSkeleton from "../skeleton/CategorySliderSkeleton";
-import { useTranslation } from "react-i18next";
 
 const CategorySlider = ({ categories }) => {
   const [loading, setLoading] = useState(true);
