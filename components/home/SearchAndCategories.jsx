@@ -30,14 +30,14 @@ const SearchAndCategories = () => {
       name: t("sectionTitle.meat"),
       desc: t("subTitle.meat"),
       icon: "/icons/meat.jpg",
-      href: "beef%2Cchicken%2Cmutton%2Cmeat",
+      href: "meat",
       color: "bg-rose-700", // rich, heavy tone for meat
     },
     {
       name: t("sectionTitle.vegetables"),
       desc: t("subTitle.vegetables"),
       icon: "/icons/veg.jpg",
-      href: "vegetable",
+      href: "vegetables",
       color: "bg-lime-700", // green tone for fresh veggies
     },
     {
@@ -58,7 +58,7 @@ const SearchAndCategories = () => {
       name: t("sectionTitle.spice"),
       desc: t("subTitle.spices"),
       icon: "/icons/spice.png",
-      href: "moshla",
+      href: "spices",
       color: "bg-red-700", // bold spicy tone, distinct from amber
     },
   ];
@@ -68,14 +68,14 @@ const SearchAndCategories = () => {
       name: t("sectionTitle.babyFood"),
       desc: t("subTitle.fish"),
       icon: "/icons/baby-food.webp",
-      href: "fish",
+      href: "baby-food",
       color: "bg-amber-700",
     },
     {
       name: t("sectionTitle.babyCare"),
       desc: t("subTitle.meat"),
       icon: "/icons/baby-carex.jpg",
-      href: "beef%2Cchicken%2Cmutton%2Cmeat",
+      href: "baby-care",
       color: "bg-lime-700",
     },
   ];
@@ -85,70 +85,70 @@ const SearchAndCategories = () => {
       name: t("sectionTitle.bread"),
       desc: t("subTitle.bread"),
       icon: "/icons/bread.png",
-      href: "bread-buns",
+      href: "bread-and-buns",
       color: "bg-yellow-700",
     },
     {
       name: t("sectionTitle.biscuits"),
       desc: t("subTitle.biscuits"),
       icon: "/icons/cookies.jpg",
-      href: "biscuits-cookies",
+      href: "biscuit-and-cookies",
       color: "bg-orange-700",
     },
     {
       name: t("sectionTitle.snacks"),
       desc: t("subTitle.snacks"),
       icon: "/icons/snacks.jpg",
-      href: "snacks-chips",
+      href: "snacks-and-chips",
       color: "bg-red-700",
     },
     {
       name: t("sectionTitle.drinks"),
       desc: t("subTitle.drinks"),
       icon: "/icons/drinks.jpg",
-      href: "soft-drinks-juices",
+      href: "soft-drinks",
       color: "bg-cyan-700",
     },
     {
       name: t("sectionTitle.tea"),
       desc: t("subTitle.tea"),
       icon: "/icons/tea.jpg",
-      href: "tea-coffee",
+      href: "tea-and-coffee",
       color: "bg-green-700",
     },
     {
       name: t("sectionTitle.dairy"),
       desc: t("subTitle.dairy"),
       icon: "/icons/milk.jpg",
-      href: "milk-dairy",
+      href: "milk-and-dairy",
       color: "bg-indigo-700",
     },
     {
       name: t("sectionTitle.instant"),
       desc: t("subTitle.instant"),
       icon: "/icons/instant.jpg",
-      href: "instant-food",
+      href: "instant-foods",
       color: "bg-pink-700",
     },
     {
       name: t("sectionTitle.butter"),
       desc: t("subTitle.butter"),
       icon: "/icons/ghee.png",
-      href: "ghee-butter",
+      href: "ghee-and-butter",
       color: "bg-fuchsia-700",
     },
     {
       name: t("sectionTitle.sauces"),
       desc: t("subTitle.sauces"),
       icon: "/icons/sauce.webp",
-      href: "sauces-ketchup",
+      href: "sauce-and-ketchup",
       color: "bg-rose-700",
     },
     {
       name: t("sectionTitle.condensed"),
       desc: t("subTitle.condensed"),
       icon: "/icons/milk.png",
-      href: "condensed-milk",
+      href: "condensed-and-powder-milk",
       color: "bg-sky-700",
     },
   ];
@@ -158,14 +158,14 @@ const SearchAndCategories = () => {
       name: t("sectionTitle.paradise"),
       desc: t("subTitle.fish"),
       icon: "/icons/paradise.jpg",
-      href: "fish",
+      href: "paradise-sweets",
       color: "bg-amber-700",
     },
     {
       name: t("sectionTitle.lakshmi"),
       desc: t("subTitle.meat"),
       icon: "/icons/lakshmi.jpg",
-      href: "beef%2Cchicken%2Cmutton%2Cmeat",
+      href: "paradise-sweets",
       color: "bg-red-700",
     },
   ];
@@ -198,6 +198,20 @@ const SearchAndCategories = () => {
       icon: "/icons/gas.jpg",
       tabs: [],
       bg: "bg-rose-50",
+    },
+    {
+      label: t("sectionTitle.fruits"),
+      key: "fruits",
+      icon: "/icons/fruits.jpg",
+      tabs: [],
+      bg: "bg-lime-50",
+    },
+    {
+      label: t("sectionTitle.cosmetics"),
+      key: "fruits",
+      icon: "/icons/cosmetics.jpg",
+      tabs: [],
+      bg: "bg-amber-50",
     },
     {
       label: t("sectionTitle.sweet"),
@@ -252,7 +266,7 @@ const SearchAndCategories = () => {
                 <SwiperSlide key={item.key} className="h-full">
                   <div
                     onClick={() => changeCategory(item)}
-                    className={`h-full flex flex-col gap-2 px-4 py-2 items-center justify-center border rounded-md ${
+                    className={`h-full flex flex-col gap-2 px-4 py-2 items-center justify-center border rounded-md cursor-pointer ${
                       item.bg
                     } ${
                       selectedCategory.key === item.key

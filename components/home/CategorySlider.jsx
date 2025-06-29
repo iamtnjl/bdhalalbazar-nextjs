@@ -33,7 +33,7 @@ const CategorySlider = ({ categories }) => {
             {" "}
             {/* Make slide take content width */}
             <Link
-              href={`/products?categories=${category.href}`}
+              href={`/products?subCategory=${category.href}`}
               className={`${category.color} py-2 px-2 rounded-full flex items-center gap-2 h-full w-full whitespace-nowrap`} // prevent wrapping
             >
               <Image
