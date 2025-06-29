@@ -11,6 +11,7 @@ import { sanitizeParams } from "@/common/helpers/UtilKit";
 import EmptyState from "@/components/shared/EmptyState";
 import Pagination from "@/components/shared/Pagination";
 import OrdersSkeletonList from "@/components/skeleton/OrdersSkeletonList";
+import { useTranslation } from "react-i18next";
 
 const successStatusOptions = [
   { label: "Pending", value: "pending" },
@@ -22,6 +23,7 @@ const successStatusOptions = [
 
 const Orders = () => {
   const { params, paramsInURL, updateParams, removeFilterItems } = useFilters();
+  const { t } = useTranslation();
 
   const { data, isLoading } = useQuery({
     queryKey: ["/orders", paramsInURL],
@@ -33,11 +35,11 @@ const Orders = () => {
 
   return (
     <div className="px-2 py-4">
-      <SectionTitle title={"My Orders"} />
+      <SectionTitle title={t("orders.title")} />
       <div className="flex items-end w-full flex-col md:flex-row bg-primary-bg sticky pt-4 pb-5 top-10 sm:top-14 lg:top-[60px] gap-4">
         <div className="w-full md:w-3/4 pt-2 lg:pt-0">
           <SearchByKey
-            placeholders={["Search by ID"]}
+            placeholders={[t("orders.search")]}
             value={params.order_id}
             onChange={(event) => {
               updateParams("order_id", event.target.value);
@@ -48,7 +50,7 @@ const Orders = () => {
         <div className="w-full md:w-1/4">
           <SearchAndSelect
             className="pt-4"
-            label="Filter by Status"
+            label={t("orders.filter")}
             name="status-filter"
             value={successStatusOptions.find(
               (item) => item.value === params.status
@@ -58,7 +60,7 @@ const Orders = () => {
               updateParams("status", items?.value);
             }}
             isClearable={params.status}
-            placeholder="All Orders"
+            placeholder={t("orders.filterPlaceholder")}
           />
         </div>
       </div>

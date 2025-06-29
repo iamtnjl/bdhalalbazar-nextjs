@@ -7,6 +7,7 @@ const FilterController = ({
   selectedBrands,
   selectedColors,
   selectedMaterials,
+  selectedSubcategories,
 }) => {
   const { removeFilterItems, resetFilters } = useFilters();
   return (
@@ -16,6 +17,13 @@ const FilterController = ({
           key={i}
           name={item.label}
           onReset={() => removeFilterItems("categories", item.value)}
+        />
+      ))}
+      {selectedSubcategories?.map((item, i) => (
+        <FilterBadge
+          key={i}
+          name={item.label}
+          onReset={() => removeFilterItems("subCategory", item.value)}
         />
       ))}
       {selectedBrands?.map((item, i) => (

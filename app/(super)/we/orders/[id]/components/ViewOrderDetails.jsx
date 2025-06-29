@@ -184,6 +184,15 @@ const ViewOrderDetails = ({ data, refetch }) => {
                   {formatCurrency(data?.grand_total, ",")}
                 </h2>
               </div>
+              <div className="font-bold flex justify-between items-center text-sm">
+                <p className="font-bold text-gray-600">Profit:</p>
+                <h2 className="font-bold text-grey-700">
+                  <span className="text-grey-700 font-semibold mr-1 text-sm">
+                    &#2547;
+                  </span>
+                  {formatCurrency(data?.profit, ",")}
+                </h2>
+              </div>
             </div>
           ) : (
             <div className="flex flex-col gap-[1px]">

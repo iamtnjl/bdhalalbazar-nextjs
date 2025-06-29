@@ -77,6 +77,11 @@ const WeOrderCard = ({ data, refetch }) => {
             {`${data?.address.street}, ${data?.address.city}, ${data?.address.zip}`}
           </address>
         </div>
+        <div className="text-grey-700">
+          <address className="text-sm whitespace-pre-wrap">
+            Profit: <span className="text-primary">&#2547; {data?.profit}</span>
+          </address>
+        </div>
       </div>
       {/* Actions */}
       <div className="space-y-2">

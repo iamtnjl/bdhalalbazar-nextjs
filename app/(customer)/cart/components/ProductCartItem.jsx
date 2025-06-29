@@ -1,14 +1,19 @@
-import Image from "next/image";
+"use client";
 
 import { useCart } from "@/providers/CartProvider";
 import { formatCurrency } from "@/common/helpers/UtilKit";
 
 import QuantityButton from "@/components/shared/QuantityButton";
+import { useTranslation } from "react-i18next";
 
 function ProductCartItem({ cartItem }) {
   const { removeFromCart } = useCart();
   const calculateDiscount = (price, discountRate) =>
     price - (price * discountRate) / 100;
+
+  const { i18n } = useTranslation();
+  const name =
+    cartItem?.product?.name[i18n.language] || cartItem?.product?.name;
 
   return (
     <div className="border rounded-lg w-full mb-4 bg-white p-3 flex justify-center gap-2 flex-col">
@@ -17,9 +22,7 @@ function ProductCartItem({ cartItem }) {
         <div className="w-full space-y-1">
           <div className="flex">
             <p className="text-base">
-              <span className="font-bold text-base">
-                {cartItem?.product?.name}
-              </span>
+              <span className="font-bold text-base">{name}</span>
             </p>
           </div>
           {cartItem?.product?.colors.length > 0 ? (

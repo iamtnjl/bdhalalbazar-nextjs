@@ -10,12 +10,15 @@ import { useQuery } from "@tanstack/react-query";
 import APIKit from "@/common/helpers/APIKit";
 import ProductCard from "./ProductCard";
 import HomePageSkeleton from "../skeleton/HomePageSkeleton";
+import { useSearchParams } from "next/navigation";
 
 const ProductSlider = () => {
   const [cardHeight, setCardHeight] = useState(0);
   const swiperRef = useRef(null);
   const containerRef = useRef(null);
   const resizeObserver = useRef(null);
+  const searchParams = useSearchParams();
+  const categories = searchParams.get("category");
 
   useEffect(() => {
     const calculateCardHeight = () => {
@@ -40,8 +43,9 @@ const ProductSlider = () => {
   }, []);
 
   const { data: productsData, isLoading } = useQuery({
-    queryKey: ["/products"],
-    queryFn: () => APIKit.public.getProducts().then(({ data }) => data),
+    queryKey: ["/products", categories],
+    queryFn: () =>
+      APIKit.public.getProducts({ categories }).then(({ data }) => data),
   });
 
   const handleClick = () => {

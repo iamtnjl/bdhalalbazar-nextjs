@@ -41,8 +41,20 @@ const APIKit = {
       const url = "/public/categories";
       return client.get(url, { params });
     },
+    getSubCategoriesList: (params) => {
+      const url = "/public/sub-categories";
+      return client.get(url, { params });
+    },
     createCategory: (payload) => {
       const url = "/we/categories";
+      return client.post(url, payload);
+    },
+    createTags: (payload) => {
+      const url = "/we/tags";
+      return client.post(url, payload);
+    },
+    createSubCategory: (payload) => {
+      const url = "/we/sub-categories";
       return client.post(url, payload);
     },
     getBrandsList: (params) => {
@@ -68,6 +80,10 @@ const APIKit = {
     createMaterial: (payload) => {
       const url = "/we/materials";
       return client.post(url, payload);
+    },
+    getTags: () => {
+      const url = "/we/tags-option";
+      return client.get(url);
     },
   },
 
@@ -155,6 +171,28 @@ const APIKit = {
       createAdminOrder: (payload) => {
         const url = `/we/cart`;
         return client.post(url, payload);
+      },
+    },
+    tags: {
+      createTag: (payload) => {
+        const url = `/we/tag`;
+        return client.post(url, payload);
+      },
+      getTag: () => {
+        const url = `/we/tags`;
+        return client.get(url);
+      },
+      getTagDetail: (id) => {
+        const url = `/we/tag/${id}`;
+        return client.get(url);
+      },
+      updateTag: (id, payload) => {
+        const url = `/we/tag/${id}`;
+        return client.patch(url, payload);
+      },
+      deleteTag: (id) => {
+        const url = `/we/tag/${id}`;
+        return client.delete(url);
       },
     },
     products: {

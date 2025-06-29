@@ -21,6 +21,7 @@ import { useFormik } from "formik";
 import FormikErrorBox from "@/components/from/FormikErrorBox";
 import { useCart } from "@/providers/CartProvider";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 const yupAddressAddSchema = object({
   name: string().required("Please enter your name"),
@@ -49,8 +50,9 @@ const CheckOut = () => {
   const [user, setUser] = useState({});
   const { clearCart } = useCart();
   const router = useRouter();
+  const { t } = useTranslation();
 
-  const payment = [{ slug: "cash-on-deliver", name: "Cash on delivery" }];
+  const payment = [{ slug: "cash-on-deliver", name: t("checkout.cashOnDelivery") }];
 
   // Get Cart
   const { data, refetch } = useQuery({
@@ -189,10 +191,8 @@ const CheckOut = () => {
   return (
     <div className="px-2 py-4 flex flex-col gap-6">
       <div className="flex flex-col gap-1">
-        <SectionTitle title={"Checkout"} />
-        <p className="text-sm text-gray-600">
-          Please Review All Details before Placing Order
-        </p>
+        <SectionTitle title={t("checkout.title")} />
+        <p className="text-sm text-gray-600">{t("checkout.subTitle")}</p>
       </div>
       <div className="flex flex-col gap-2">
         <ExpandAbleProductCardList cart={data} />
@@ -201,7 +201,7 @@ const CheckOut = () => {
         ) : (
           <>
             <h3 className="font-semibold text-base text-grey-500 mt-2">
-              Customer information
+              {t("checkout.customerInformation")}
             </h3>
             <div>
               <TextInputField
@@ -209,8 +209,8 @@ const CheckOut = () => {
                 value={formik.values.name}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                label="Name"
-                placeholder="E.g: John Doe"
+                label={t("checkout.customerName")}
+                placeholder={t("checkout.customerNamePlaceholder")}
               />
               <FormikErrorBox formik={formik} field="name" />
             </div>
@@ -220,14 +220,14 @@ const CheckOut = () => {
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                label="Email (Optional)"
+                label={t("checkout.customerEmail")}
                 placeholder="someone@example.com"
               />
               <FormikErrorBox formik={formik} field="email" />
             </div>
             <div>
               <PhoneInputField
-                label="Phone"
+                label={t("checkout.customerPhone")}
                 name="phone"
                 value={formik.values.phone}
                 onChange={formik.handleChange}
@@ -240,7 +240,7 @@ const CheckOut = () => {
         )}
         <div className="flex flex-col gap-2 mt-2">
           <h3 className="font-semibold text-base text-grey-500">
-            Delivery Address
+            {t("checkout.deliveryAddress")}
           </h3>
         </div>
         <div className="flex flex-col gap-4">
@@ -285,7 +285,7 @@ const CheckOut = () => {
           {/* Payment Method Section */}
           <div className="flex flex-col gap-2">
             <h3 className="font-semibold text-base text-grey-500 mt-2">
-              Payment Method
+              {t("checkout.paymentMethod")}
             </h3>
             <Payment
               payment={payment}

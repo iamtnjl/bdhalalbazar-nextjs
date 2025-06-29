@@ -10,11 +10,7 @@ export default function ErrorAlert({ errors = {}, field }) {
           <XCircleIcon className="h-5 w-5 text-red-400" aria-hidden="true" />
         </div>
         <div className="ml-3">
-          {errors[field].map((msg) => (
-            <p key={msg} className="text-sm text-red-800">
-              {msg}
-            </p>
-          ))}
+          <p className="text-sm text-red-800">{errors[field]}</p>
         </div>
       </div>
     </div>

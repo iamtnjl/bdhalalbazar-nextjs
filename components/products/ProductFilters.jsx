@@ -12,26 +12,25 @@ import {
 } from "@/common/helpers/UtilKit";
 import PaginatedSelect from "../from/PaginatedSelect";
 import { useFilters } from "@/providers/FiltersProvider";
+import { useTranslation } from "react-i18next";
 
 const ProductFilters = (props) => {
-  const {
-    params,
-    updateParams,
-    closeFilterModal,
-    triggerURLUpdate,
-    setFilterModal,
-  } = useFilters();
+  const { params, updateParams, closeFilterModal, triggerURLUpdate } =
+    useFilters();
   const {
     selectedCategories,
     selectedBrands,
     selectedColors,
     selectedMaterials,
+    selectedSubcategories,
   } = props;
+  const { t } = useTranslation();
+
   return (
     <div>
       <div className="flex items-center justify-between border-b border-gray-200 pb-2">
         <Dialog.Title className="text-xl text-primary font-semibold">
-          <p>Filters</p>
+          <p>{t("product.filter.title")}</p>
         </Dialog.Title>
 
         <div className="flex h-7 ml-5 items-center">
@@ -59,8 +58,8 @@ const ProductFilters = (props) => {
       </div>
       <div className="flex flex-col gap-4 pt-4 pb-8">
         <PaginatedSelect
-          label="Select Categories"
-          placeholder="Select categories"
+          label={t("product.filter.categories")}
+          placeholder={t("product.filter.categories")}
           loadOptions={(inputValue, _, page) =>
             loadOptions(inputValue, _, page, APIKit.tags.getCategoriesList)
           }
@@ -72,8 +71,21 @@ const ProductFilters = (props) => {
           )}
         />
         <PaginatedSelect
-          label="Select Brands"
-          placeholder="Select brands"
+          label={t("product.filter.subcategories")}
+          placeholder={t("product.filter.subcategories")}
+          loadOptions={(inputValue, _, page) =>
+            loadOptions(inputValue, _, page, APIKit.tags.getSubCategoriesList)
+          }
+          additional={{ page: 1 }}
+          isMulti={true}
+          onChange={(items) => updateParams("subCategory", items)}
+          value={selectedSubcategories?.filter((option) =>
+            params?.subCategory?.includes(option.value)
+          )}
+        />
+        <PaginatedSelect
+          label={t("product.filter.brands")}
+          placeholder={t("product.filter.brands")}
           loadOptions={(inputValue, _, page) =>
             loadOptions(inputValue, _, page, APIKit.tags.getBrandsList)
           }
@@ -85,8 +97,8 @@ const ProductFilters = (props) => {
           )}
         />
         <PaginatedSelect
-          label="Select Colors"
-          placeholder="Select colors"
+          label={t("product.filter.colors")}
+          placeholder={t("product.filter.colors")}
           loadOptions={(inputValue, _, page) =>
             loadOptions(inputValue, _, page, APIKit.tags.getColorList)
           }
@@ -98,8 +110,8 @@ const ProductFilters = (props) => {
           )}
         />
         <PaginatedSelect
-          label="Select Materials"
-          placeholder="Select materials"
+          label={t("product.filter.materials")}
+          placeholder={t("product.filter.materials")}
           loadOptions={(inputValue, _, page) =>
             loadOptions(inputValue, _, page, APIKit.tags.getMaterialList)
           }
@@ -114,7 +126,7 @@ const ProductFilters = (props) => {
 
       <div className="flex flex-shrink-0 justify-end border-t border-gray-200 pt-4 items-center gap-4">
         <Button variant="white" onClick={() => closeFilterModal()}>
-          Cancel
+          {t("ctaButton.cancel")}
         </Button>
         <Button
           variant="primary"
@@ -122,7 +134,7 @@ const ProductFilters = (props) => {
             triggerURLUpdate();
           }}
         >
-          Apply Filters
+          {t("ctaButton.applyFilter")}
         </Button>
       </div>
     </div>

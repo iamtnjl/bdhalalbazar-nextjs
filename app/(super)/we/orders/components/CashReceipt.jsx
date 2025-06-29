@@ -2,8 +2,11 @@
 
 import React, { forwardRef } from "react";
 import { formatCurrency, formatDateTime } from "@/common/helpers/UtilKit";
+import { useTranslation } from "react-i18next";
 
 const CashReceipt = forwardRef(({ order }, ref) => {
+  const { i18n } = useTranslation();
+
   return (
     <div className="font-mono text-grey-700 p-4" ref={ref}>
       <header className="flex flex-col gap-1 justify-between items-start border-b-2 border-dashed border-grey-300 py-2">
@@ -54,7 +57,6 @@ const CashReceipt = forwardRef(({ order }, ref) => {
               <th className="text-sm">Pri.</th>
               {!order?.isPriceEdited ? (
                 <>
-                  <th className="text-sm">Disc.</th>
                   <th className="text-sm">Subt.</th>
                 </>
               ) : null}
@@ -62,28 +64,25 @@ const CashReceipt = forwardRef(({ order }, ref) => {
           </thead>
 
           <tbody>
-            {order?.products.map((item, i) => (
-              <tr key={i} className="font-normal text-sm">
-                <td className="text-left">{item?.product?.name}</td>
-                <td>{item?.quantity}</td>
-                <td>{`${item?.weight} ${item?.unit}`}</td>
-                {!order?.isPriceEdited ? (
-                  <>
-                    <td>{formatCurrency(item?.price * item?.quantity, ",")}</td>
-                    <td>
-                      {formatCurrency(
-                        item?.price * item?.quantity -
-                          item?.discount_price * item?.quantity,
-                        ","
-                      )}
-                    </td>
+            {order?.products.map((item, i) => {
+              const name =
+                item.product.name[i18n.language] || item.product.name;
+              return (
+                <tr key={i} className="font-normal text-sm">
+                  <td className="text-left">{name}</td>
+                  <td>{item?.quantity}</td>
+                  <td>{`${item?.weight} ${item?.unit}`}</td>
+                  {!order?.isPriceEdited ? (
+                    <>
+                      <td>{formatCurrency(item?.discounted_price, ",")}</td>
+                      <td>{formatCurrency(item?.total_price, ",")}</td>
+                    </>
+                  ) : (
                     <td>{formatCurrency(item?.total_price, ",")}</td>
-                  </>
-                ) : (
-                  <td>{formatCurrency(item?.total_price, ",")}</td> 
-                )}
-              </tr>
-            ))}
+                  )}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

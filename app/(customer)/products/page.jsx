@@ -15,6 +15,8 @@ import SectionTitle from "@/components/shared/SectionTitle";
 import HomePageSkeleton from "@/components/skeleton/HomePageSkeleton";
 import { useFilters } from "@/providers/FiltersProvider";
 import { ShoppingBasket, SlidersHorizontal } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
 
 const sortOptions = [
@@ -32,11 +34,12 @@ const ProductContainer = () => {
     isFilterApplied,
     paramsInURL,
     updateParams,
-    removeFilterItems,
   } = useFilters();
+  const [search, setSearch] = useState("");
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useProducts(paramsInURL);
+  const { t } = useTranslation();
 
   const allProducts = data?.pages.flatMap((page) => page.results) || [];
 
@@ -73,26 +76,31 @@ const ProductContainer = () => {
     queryFn: APIKit.tags.getMaterialList,
     queryValue: params.materials,
   });
+  const { data: selectedSubcategories } = useSelectedData({
+    queryKey: ["slugs"],
+    queryFn: APIKit.tags.getSubCategoriesList,
+    queryValue: params.subCategory,
+  });
+
+  useEffect(() => {
+    setTimeout(() => {
+      updateParams("search", search);
+    }, 500);
+  }, [search]);
 
   return (
     <div className="w-full px-2 py-4 flex flex-col gap-6">
       <SearchByKey
-        placeholders={[
-          "Start Typing....",
-          "Search by Product Name",
-          "Search By Brand",
-          "Start Typing....",
-          "Search by Manufacturer",
-        ]}
-        value={params.search}
+        placeholders={[t("sectionTitle.homeSearch")]}
+        value={search}
         onChange={(event) => {
-          updateParams("search", event.target.value);
+          setSearch(event.target.value);
         }}
-        onReset={() => removeFilterItems("search")}
+        onReset={() => setSearch("")}
       />
       <div className="flex items-end gap-2 w-full justify-between">
         <SearchAndSelect
-          label="Sort by"
+          label={t("product.sortBy")}
           name="sort-by"
           options={sortOptions}
           value={sortOptions.filter((item) => item?.value === params?.sort_by)}
@@ -100,7 +108,7 @@ const ProductContainer = () => {
             updateParams("sort_by", items?.value);
           }}
           isClearable={params.sort_by}
-          placeholder="All Orders"
+          placeholder={t("product.allOrders")}
         />
         <Button
           onClick={() => setFilterModal(true)}
@@ -112,7 +120,7 @@ const ProductContainer = () => {
             width={15}
             className="text-gray-700 mr-2"
           />
-          Filters
+          {t("ctaButton.filter")}
         </Button>
       </div>
 
@@ -122,12 +130,13 @@ const ProductContainer = () => {
           selectedBrands={selectedBrands}
           selectedColors={selectedColors}
           selectedMaterials={selectedMaterials}
+          selectedSubcategories={selectedSubcategories}
         />
       ) : null}
 
       <div className="flex items-center gap-2">
-        <ShoppingBasket height={30} widths={30} className="text-primary" />
-        <SectionTitle title="All Products" />
+        <ShoppingBasket height={30} widths={30} className="text-gray-700" />
+        <SectionTitle title={t("product.sectionTitle")} />
       </div>
 
       {/* Product Grid */}
@@ -162,6 +171,7 @@ const ProductContainer = () => {
           selectedBrands={selectedBrands}
           selectedColors={selectedColors}
           selectedMaterials={selectedMaterials}
+          selectedSubcategories={selectedSubcategories}
         />
       </Modal>
     </div>

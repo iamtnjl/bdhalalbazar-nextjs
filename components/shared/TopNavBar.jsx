@@ -21,26 +21,14 @@ import APIKit from "@/common/helpers/APIKit";
 import LogoCartSkeleton from "../skeleton/LogoCartSkeleton";
 import { AUTH_TOKEN_KEY } from "@/common/helpers/KeyChain";
 import { useRouter } from "next/navigation";
-import TabsInModal from "./TabsInModal";
-
-const languageTabs = [
-  {
-    name: "",
-    key: "bn",
-    flag: "/images/bn.webp",
-  },
-  {
-    name: "",
-    key: "en",
-    flag: "/images/en.webp",
-  },
-];
+import { useTranslation } from "react-i18next";
+import clsx from "clsx";
 
 const TopNavbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [token, setToken] = useState();
-  const [selectedLanguage, setSelectedLanguage] = useState(languageTabs[0].key);
   const router = useRouter();
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     if (typeof window !== undefined) {
@@ -58,14 +46,19 @@ const TopNavbar = () => {
   if (isLoading) {
     return <LogoCartSkeleton />;
   }
+  const changeLanguage = (lang) => {
+    if (i18n.language === lang) return;
+
+    i18n.changeLanguage(lang);
+  };
 
   return (
     <div className="sticky top-0 z-50">
       <nav className="px-4 py-3 bg-white shadow-sm flex items-center justify-between rounded-bl-md rounded-br-md">
         <div className="flex items-center justify-between w-full">
           <Link href={"/home"} className="flex gap-1 items-center">
-            <Image alt="logo" src={"/logo/logo.png"} width={50} height={50} />
-            <p className="bg-gradient-to-tr from-primary-700 to-cyan-600 bg-clip-text text-transparent text-3xl font-semibold">
+            <Image alt="logo" src={"/logo/logo.png"} width={40} height={40} />
+            <p className="bg-gradient-to-tr from-primary-700 to-cyan-600 bg-clip-text text-transparent text-2xl font-semibold">
               BDHalalBazar
             </p>
           </Link>
@@ -85,7 +78,7 @@ const TopNavbar = () => {
               </div>
             </Link>
           </div> */}
-          <div className="flex gap-1">
+          {/* <div className="flex gap-1">
             <TabsInModal
               horizontalTabsOnly={true}
               tabs={languageTabs}
@@ -99,9 +92,40 @@ const TopNavbar = () => {
               width={32}
               className="text-primary"
             />
+          </div> */}
+          <div className="flex items-center border border-gray-200 rounded-full p-1 w-fit">
+            <button
+              onClick={() => changeLanguage("bn")}
+              className={clsx(
+                "text-sm font-semibold py-1 px-2 rounded-full",
+                i18n.language === "bn"
+                  ? "text-white bg-primary"
+                  : "text-primary bg-transparent"
+              )}
+            >
+              BN
+            </button>
+            <button
+              onClick={() => changeLanguage("en")}
+              className={clsx(
+                "text-sm font-semibold py-1 px-2 rounded-full",
+                i18n.language === "en"
+                  ? "text-white bg-primary"
+                  : "text-primary bg-transparent"
+              )}
+            >
+              EN
+            </button>
+            <Menu
+              onClick={() => setOpenMenu(true)}
+              height={22}
+              width={22}
+              className="text-gray-700 mx-1"
+            />
           </div>
         </div>
       </nav>
+
       <RightSideDrawer open={openMenu} setOpen={setOpenMenu}>
         <div className="border-b border-gray-200 pb-2">
           <SectionTitle title={me === undefined ? "Menu" : "My Profile"} />

@@ -8,7 +8,29 @@
     "vegetables": "শাক সবজি",
     "rice": "চাউল",
     "spice": "মশলা",
-    "trendingProducts": "জনপ্রিয় পণ্য"
+    "trendingProducts": "জনপ্রিয় পণ্য",
+    "grocery": "কাঁচা বাজার",
+    "baby": "শিশু পণ্য",
+    "daily": "মুদি পণ্য",
+    "babyFood": "শিশু খাদ্য",
+    "babyCare": "শিশুর যত্ন",
+    "bread": "পাউরুটি ও বান",
+    "biscuits": "বিস্কুট ও কুকিজ",
+    "snacks": "স্ন্যাকস ও চিপস",
+    "drinks": "সফট ড্রিংক",
+    "tea": "চা ও কফি",
+    "dairy": "দুধ ও দুগ্ধজাত পণ্য",
+    "eggs": "ডিম",
+    "instant": "ইনস্ট্যান্ট খাবার",
+    "butter": "ঘি ও মাখন",
+    "sauces": "সস ও ক্যাচআপ",
+    "condensed": "কনডেন্সড ও গুঁড়ো দুধ",
+    "oil": "তেল",
+    "gas": "গ্যাস সিলিন্ডার",
+    "sweet": "মিষ্টি",
+    "paradise": "প্যারাডাইস",
+    "lakshmi": "লক্ষী",
+    "stationary": "স্টেশনারি"
   },
   "subTitle": {
     "seeAll": "সব দেখুন",
@@ -19,12 +41,97 @@
     "spices": "খাঁটি মসলা"
   },
   "ctaButton": {
-    "addToCart": "ব্যাগে যোগ করুন"
+    "addToCart": "ব্যাগে যোগ করুন",
+    "filter": "ফিল্টার",
+    "cancel": "বাতিল",
+    "applyFilter": " ফিল্টার করুন",
+    "checkoutNow": "এখনই অর্ডার করুন",
+    "orderNow": "অর্ডার করুন"
   },
   "navigation": {
     "home": "হোম",
     "cart": "ব্যাগ",
     "categories": "ক্যাটেগরি",
     "products": "সব পণ্য"
+  },
+  "product": {
+    "sortBy": "ক্রম অনুযায়ী",
+    "allOrders": "সব অর্ডার",
+    "sectionTitle": "সব পণ্য",
+    "filter": {
+      "title": "ফিল্টার",
+      "categories": "ক্যাটাগরি নির্বাচন করুন",
+      "subcategories": "সাব ক্যাটাগরি নির্বাচন করুন",
+      "brands": "ব্র্যান্ড নির্বাচন করুন",
+      "colors": "রঙ নির্বাচন করুন",
+      "materials": "উপাদান নির্বাচন করুন"
+    }
+  },
+  "productDetail": {
+    "weight": "ওজন",
+    "description": "বর্ণনা",
+    "brand": "ব্র্যান্ড",
+    "category": "ক্যাটেগরি",
+    "color": "রঙ",
+    "material": "উপাদান"
+  },
+  "cart": {
+    "count": "টি পণ্য যোগ হয়েছে",
+    "paymentBreakDown": "মূল্য পরিশোধের বিবরণ",
+    "subTotal": "উপমোট",
+    "discount": "ছাড়",
+    "deliveryCharge": "ডেলিভারি চার্জ",
+    "platformFee": "প্ল্যাটফর্ম ফি",
+    "totalCost": "মোট খরচ"
+  },
+  "checkout": {
+    "title": "অর্ডার সম্পন্ন করুন",
+    "subTitle": "দয়া করে অর্ডার দেওয়ার আগে সব তথ্য যাচাই করুন",
+    "shoppingCart": "শপিং কার্ট",
+    "expand": "বিস্তারিত দেখুন",
+    "collapse": "সংক্ষিপ্ত করুন",
+    "customerHelpingText": "আমাদের ডেলিভারি ম্যান এই নাম ও ফোন নম্বরে যোগাযোগ করবে।",
+    "customerInformation": "গ্রাহকের তথ্য",
+    "customerName": "নাম",
+    "customerNamePlaceholder": "যেমন: রহিম, করিম",
+    "customerEmail": "ইমেইল (ঐচ্ছিক)",
+    "customerPhone": "মোবাইল",
+    "deliveryAddress": "ডেলিভারি ঠিকানা",
+    "streetHouse": "রাস্তা/বাসার ঠিকানা",
+    "houseAddressPlaceholder": "বাড়ির ঠিকানা / রোড নম্বর",
+    "city": "শহর",
+    "cityPlaceholder": "আপনার শহরের নাম লিখুন",
+    "zipCode": "পোস্ট কোড",
+    "paymentMethod": "পেমেন্ট পদ্ধতি",
+    "cashOnDelivery": "ক্যাশ অন ডেলিভারি",
+    "orderPriceBreakDown": "অর্ডারের দাম বিবরণ",
+    "subTotal": "উপমোট",
+    "discount": "ছাড়",
+    "deliveryCharge": "ডেলিভারি চার্জ",
+    "platformFee": "প্ল্যাটফর্ম ফি",
+    "totalCost": "মোট খরচ",
+    "paymentWarning": "দয়া করে অর্ডার দেওয়ার আগে পেমেন্ট পদ্ধতি নির্বাচন করুন।"
+  },
+  "orders": {
+    "title": "আমার অর্ডারসমূহ",
+    "search": "অর্ডার আইডি দিয়ে খুঁজুন",
+    "filter": "ফিল্টার করুন",
+    "filterPlaceholder": "সব স্ট্যাটাস",
+    "order": "অর্ডার",
+    "orderDetails": "বিস্তারিত দেখুন"
+  },
+  "orderDetails": {
+    "allOrders": "সব অর্ডার",
+    "orderStatus": "অর্ডারের অবস্থা",
+    "customerDetail": "গ্রাহকের বিস্তারিত",
+    "customerHelpingText": "এই নাম ও ফোন নম্বরটি ডেলিভারি ম্যান দেখতে পারবেন।",
+    "deliveryAddress": "ডেলিভারি ঠিকানা",
+    "products": "পণ্য",
+    "orderPriceBreakDown": "অর্ডারের দাম বিবরণ",
+    "subTotal": "উপমোট",
+    "discount": "ছাড়",
+    "deliveryCharge": "ডেলিভারি চার্জ",
+    "platformFee": "প্ল্যাটফর্ম ফি",
+    "totalCost": "মোট খরচ"
   }
 }

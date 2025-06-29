@@ -43,7 +43,7 @@ function SearchByKey({ onChange, value, onReset, placeholders }) {
         <input
           id="search-company"
           autoComplete="false"
-          className="block w-full rounded-lg border border-gray-300 bg-white py-[10px] pl-10 pr-3 leading-5 text-gray-900 placeholder-gray-500 focus:border-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-sky-600 sm:text-sm"
+          className="block w-full rounded-lg border border-gray-300 bg-white py-[10px] pl-10 pr-3 leading-5 text-gray-900 placeholder-gray-500 focus:border-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-600 sm:text-sm"
           placeholder={currentPlaceholder}
           type="search-company"
           name="search-company"

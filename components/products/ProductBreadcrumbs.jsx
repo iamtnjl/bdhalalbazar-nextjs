@@ -1,7 +1,10 @@
+"use client";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
-export default function ProductBreadcrumbs({productName}) {
-    
+export default function ProductBreadcrumbs({ productName }) {
+  const { t } = useTranslation();
+
   return (
     <div>
       <ul className="flex items-center gap-1">
@@ -10,7 +13,7 @@ export default function ProductBreadcrumbs({productName}) {
             href={`/`}
             className="text-sm text-gray-700 hover:text-primary-500  font-medium"
           >
-            Home
+            {t("navigation.home")}
           </Link>
         </li>
         <li>/</li>
@@ -19,7 +22,7 @@ export default function ProductBreadcrumbs({productName}) {
             href={"/products"}
             className="text-sm text-gray-700 hover:text-primary-500 font-medium"
           >
-            Products
+            {t("navigation.products")}
           </Link>
         </li>
         <li>/</li>

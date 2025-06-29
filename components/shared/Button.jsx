@@ -11,7 +11,7 @@ const variants = {
   light: defaultWhite,
   white: defaultWhite,
   "border-less":
-    "bg-white px-4 py-2 font-medium text-primary shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 rounded-md",
+    "bg-white px-4 py-2 font-medium text-gray-600 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 rounded-md",
 };
 
 const Button = ({

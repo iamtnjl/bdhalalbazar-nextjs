@@ -1,12 +1,14 @@
+"use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { formatCurrency, formatDateTime } from "@/common/helpers/UtilKit";
 import Button from "@/components/shared/Button";
+import { useTranslation } from "react-i18next";
 
 const OrderItemCard = ({ order }) => {
   const router = useRouter();
-
+  const { t } = useTranslation();
   return (
     <div
       onClick={() => router.push(`/me/orders/${order?._id}`)}
@@ -16,7 +18,7 @@ const OrderItemCard = ({ order }) => {
       <div className="divide-y">
         <div className="p-4">
           <h2 className="text-base font-bold mb-2 text-grey-700">
-            Order #{order?.order_id}
+            {t("orders.order")} #{order?.order_id}
           </h2>
           <p className="py-1 font-semibold text-gray-400">
             {formatDateTime(order?.created_at, true)}
@@ -70,7 +72,7 @@ const OrderItemCard = ({ order }) => {
                   d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
                 />
               </svg>
-              View Details
+             {t("orders.orderDetails")}
             </Button>
           </Link>
         </div>

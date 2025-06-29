@@ -1,11 +1,15 @@
+"use client";
 import APIKit from "@/common/helpers/APIKit";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 const CustomerDetailsFormCard = ({ address }) => {
   const { data, isLoading } = useQuery({
     queryKey: [`/me`],
     queryFn: () => APIKit.me.getProfile().then(({ data }) => data),
   });
+
+  const { t } = useTranslation();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -20,13 +24,13 @@ const CustomerDetailsFormCard = ({ address }) => {
         <div className="flex flex-col gap-2">
           <div className="flex flex-col gap-2">
             <h2 className="font-semibold text-base text-grey-500">
-              Customer Details
+              {t("orderDetails.customerDetail")}
             </h2>
             <div className="rounded-lg border border-gray-300 py-3 px-4 flex flex-col gap-2 text-grey-700">
               <span className="text-base font-bold">{data?.user?.name}</span>
               <span className="text-base">{data?.user?.phone}</span>
               <p className="text-sm text-grey-400">
-                This name & phone will be visible to the deliverer.
+                {t("orderDetails.customerHelpingText")}
               </p>
             </div>
           </div>
@@ -35,7 +39,7 @@ const CustomerDetailsFormCard = ({ address }) => {
               htmlFor="customerName"
               className="font-semibold text-base text-grey-500"
             >
-              Delivery Address
+              {t("orderDetails.deliveryAddress")}
             </label>
             {Object?.keys(address)?.length > 0 ? (
               <div className="rounded-lg bg-white border px-4 py-3 border-gray-300 flex flex-col">

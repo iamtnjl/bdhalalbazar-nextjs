@@ -4,9 +4,11 @@ import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 import CheckoutProductCard from "./CheckoutProdcutCard";
+import { useTranslation } from "react-i18next";
 
 function ExpandAbleProductCardList({ cart }) {
   const router = useRouter();
+  const { t } = useTranslation();
   const [expand, setExpand] = useState(false);
   const [animate, setAnimation] = useState(false);
 
@@ -15,7 +17,9 @@ function ExpandAbleProductCardList({ cart }) {
   return (
     <div className="sm:bg-white sm:border sm:px-4 sm:py-5 sm:rounded-lg sm:self-start flex flex-col gap-3 w-full">
       <div className="flex items-center justify-between">
-        <h3 className="font-semibold text-base text-grey-500">Shopping Cart</h3>
+        <h3 className="font-semibold text-base text-grey-500">
+          {t("checkout.shoppingCart")}
+        </h3>
         <div
           onClick={() => {
             setExpand(!expand);
@@ -41,7 +45,7 @@ function ExpandAbleProductCardList({ cart }) {
               />
             </svg>
             <span className="text-sm font-medium">
-              {expand ? "Collapse" : "Expand"}
+              {expand ? t("checkout.collapse") : t("checkout.expand")}
             </span>
           </div>
         </div>

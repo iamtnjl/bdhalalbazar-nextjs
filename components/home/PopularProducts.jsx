@@ -9,11 +9,14 @@ import { useProducts } from "@/common/hooks/useProducts";
 import { useInView } from "react-intersection-observer";
 import HomePageSkeleton from "../skeleton/HomePageSkeleton";
 import { useTranslation } from "react-i18next";
+import { useSearchParams } from "next/navigation";
 
 const PopularProducts = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation();
+  const searchParams = useSearchParams();
+  const categories = searchParams.get("category");
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
-    useProducts();
+    useProducts({ categories });
 
   // Intersection Observer to trigger fetching the next page
   const { ref } = useInView({
@@ -35,7 +38,7 @@ const PopularProducts = () => {
           <ChartNoAxesCombined
             height={25}
             width={25}
-            className="text-primary"
+            className="text-gray-700"
           />
           <SectionTitle title={t("sectionTitle.trendingProducts")} />
         </div>

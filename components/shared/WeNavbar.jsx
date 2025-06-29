@@ -15,7 +15,7 @@ import {
 import Button from "./Button";
 import LeftSideDrawer from "./LeftSideDrawer";
 import Image from "next/image";
-import { Settings, ShoppingCartIcon } from "lucide-react";
+import { Settings, ShoppingCartIcon, TagIcon } from "lucide-react";
 
 const navigation = [
   { name: "Dashboard", icon: HomeIcon, href: "/we" },
@@ -43,6 +43,11 @@ const navigation = [
     name: "All Products",
     icon: CubeIcon,
     href: "/we/products",
+  },
+  {
+    name: "Tags",
+    icon: TagIcon,
+    href: "/we/tags",
   },
   {
     name: "Settings",

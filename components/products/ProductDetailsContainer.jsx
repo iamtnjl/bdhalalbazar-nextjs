@@ -15,12 +15,16 @@ import { ShoppingCart } from "lucide-react";
 import { useCart } from "@/providers/CartProvider";
 import QuantityButton from "../shared/QuantityButton";
 import APIKit from "@/common/helpers/APIKit";
+import { useTranslation } from "react-i18next";
 
 export default function ProductDetailsContainer({ data }) {
   // Lightbox states
   const [open, setOpen] = useState(false);
   const [currentImageIndex, setCurrentIndex] = useState(0);
   const { addToCart, cart } = useCart();
+  const { t, i18n } = useTranslation();
+  const name = data.name[i18n.language] || data.name;
+  const description = data.description[i18n.language] || data.description;
 
   const pics = data?.images?.map((image) => {
     return {
@@ -103,10 +107,10 @@ export default function ProductDetailsContainer({ data }) {
         {data?.name ? (
           <div className="mt-10 space-y-4">
             <h1 className="text-2xl font-semibold tracking-tight text-gray-900">
-              {data.name}
+              {name}
             </h1>
             <h1 className="text-base font-semibold tracking-tight text-gray-600">
-              {`Weight: ${data.weight} ${data.unit}`}
+              {`${t("productDetail.weight")}: ${data.weight} ${data.unit}`}
             </h1>
             <div className="flex items-end gap-2">
               <h1 className="text-xl font-semibold tracking-tight  text-gray-600">
@@ -132,7 +136,7 @@ export default function ProductDetailsContainer({ data }) {
                   variant="primary"
                 >
                   <ShoppingCart className="w-[18px] h-[18px] mr-2 mb-[3px]" />
-                  Add to Cart
+                  {t("ctaButton.addToCart")}
                 </Button>
               ) : (
                 <QuantityButton cartItem={cartItem} product={data} />
@@ -140,20 +144,18 @@ export default function ProductDetailsContainer({ data }) {
             </div>
             <section>
               <h2 className="text-md text-gray-700 font-semibold">
-                Description
+                {t("productDetail.description")}
               </h2>
               <h2 className="text-sm font-medium text-gray-700">
-                {data?.description ? (
-                  data?.description
-                ) : (
-                  <p className="text-gray-500">No Description</p>
-                )}
+                {description}
               </h2>
             </section>
             <section>
               {data?.brand.length > 0 ? (
                 <>
-                  <h2 className="text-md text-gray-700 font-semibold">Brand</h2>
+                  <h2 className="text-md text-gray-700 font-semibold">
+                    {t("productDetail.brand")}
+                  </h2>
                   <h2 className="text-sm font-medium text-gray-700">
                     {data.brand.map((brand) => brand.name).join(", ")}
                   </h2>
@@ -164,7 +166,7 @@ export default function ProductDetailsContainer({ data }) {
               {data?.categories.length > 0 ? (
                 <>
                   <h2 className="text-md text-gray-700 font-semibold">
-                    Categories
+                    {t("productDetail.category")}
                   </h2>
                   <div className="flex items-center flex-wrap pt-2 gap-1 text-sm ">
                     {data?.categories.map((item, key) => (
@@ -183,7 +185,7 @@ export default function ProductDetailsContainer({ data }) {
               {data.colors.length > 0 ? (
                 <>
                   <h2 className="text-md text-gray-700 font-semibold">
-                    Colors
+                    {t("productDetail.color")}
                   </h2>
                   <div className="flex items-center flex-wrap pt-2 gap-1 text-sm ">
                     {data?.colors.map((item, key) => (
@@ -202,7 +204,7 @@ export default function ProductDetailsContainer({ data }) {
               {data?.materials.length > 0 ? (
                 <>
                   <h2 className="text-md text-gray-700 font-semibold">
-                    Materials
+                    {t("productDetail.material")}
                   </h2>
                   <div className="flex items-center flex-wrap pt-2 gap-1 text-sm ">
                     {data?.materials.map((item, key) => (

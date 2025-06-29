@@ -9,6 +9,7 @@ import OrderStatusCard from "./components/OrderStatusCard";
 import CustomerDetailsFormCard from "./components/CustomerDetailsFormCard";
 import ShoppingCart from "./components/ShoppingCart";
 import OrderDetailsSkeleton from "@/components/skeleton/OrderDetailsSkeleton";
+import { useTranslation } from "react-i18next";
 
 const OrderDetails = () => {
   const { id } = useParams();
@@ -17,6 +18,7 @@ const OrderDetails = () => {
     queryFn: () => APIKit.me.getOrderDetails(id).then(({ data }) => data),
     keepPreviousData: true,
   });
+   const { t } = useTranslation();
 
   if (isLoading) {
     return <OrderDetailsSkeleton />;
@@ -26,7 +28,7 @@ const OrderDetails = () => {
     <div className="px-2 py-4">
       <div className="flex flex-col gap-4 -m-4 p-4">
         <BackButton
-          buttonText={"All Orders"}
+          buttonText={t("orderDetails.allOrders")}
           backToURL={"/me/orders"}
           titleText={data?.order_id}
         />

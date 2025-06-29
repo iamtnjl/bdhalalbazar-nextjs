@@ -1,6 +1,10 @@
+"use client";
+
 import { InformationCircleIcon } from "@heroicons/react/24/solid";
+import { useTranslation } from "react-i18next";
 
 function ConfirmOrder({ addresses, paymentMethod, handlePlaceOrder }) {
+  const { t } = useTranslation();
   if (!paymentMethod?.slug) {
     return (
       <div className="flex flex-col gap-2">
@@ -8,7 +12,7 @@ function ConfirmOrder({ addresses, paymentMethod, handlePlaceOrder }) {
           <div className="flex justify-start items-center gap-2 bg-red-50 border-red-300 border p-2 rounded-md">
             <InformationCircleIcon className="w-6 text-warning" />
             <p className="text-warning text-sm">
-              Please select Payment Method before placing an order.
+              {t("checkout.paymentWarning")}
             </p>
           </div>
         )}
@@ -17,7 +21,7 @@ function ConfirmOrder({ addresses, paymentMethod, handlePlaceOrder }) {
           disabled
           className="w-full flex justify-center rounded-md border border-transparent bg-primary py-2 px-4 text-sm font-semibold text-white shadow-sm cursor-not-allowed"
         >
-          PLACE ORDER
+          {t("ctaButton.orderNow")}
         </button>
       </div>
     );
@@ -31,7 +35,7 @@ function ConfirmOrder({ addresses, paymentMethod, handlePlaceOrder }) {
           }}
           className="w-full flex justify-center rounded-md border border-transparent bg-primary py-2 px-4 text-sm font-semibold text-white shadow-sm hover:bg-primary-700"
         >
-          PLACE ORDER
+          {t("ctaButton.orderNow")}
         </button>
       </div>
     </>

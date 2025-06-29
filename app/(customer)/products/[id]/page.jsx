@@ -7,9 +7,11 @@ import ProductSkeleton from "@/components/skeleton/ProductSkeleton";
 // import ProductDetailsContainer from "@/components/products/ProductDetailsContainer";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 const ProductDetails = ({ params }) => {
   const { id } = useParams();
+  const { i18n } = useTranslation();
 
   const { data, isLoading } = useQuery({
     queryKey: ["/product-details"],
@@ -19,9 +21,10 @@ const ProductDetails = ({ params }) => {
   if (isLoading) {
     return <ProductSkeleton />;
   }
+  const name = data?.name[i18n.language] || data?.name;
   return (
     <div className="px-2 py-4 flex flex-col gap-4">
-      <ProductBreadcrumbs productName={data.name} />
+      <ProductBreadcrumbs productName={name} />
       <ProductDetailsContainer data={data} />
     </div>
   );

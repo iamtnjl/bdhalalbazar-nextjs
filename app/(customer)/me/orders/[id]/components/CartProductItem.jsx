@@ -1,14 +1,17 @@
+"use client";
+
 import { formatCurrency } from "@/common/helpers/UtilKit";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 const CartProductItem = ({ product }) => {
   const calculateDiscount = (price, discount) =>
     price - (price * discount) / 100;
 
-  const isPriceEdited =
-    calculateDiscount(product.product.price, product.product.discount) *
-      product.quantity !==
-    product.total_price;
+  const isPriceEdited = product.product.weight !== product.weight;
+
+  const { i18n } = useTranslation();
+  const name = product?.product?.name[i18n.language] || product?.product?.name;
 
   return (
     <div className="border rounded-lg w-full gap-3 border-gray-300 justify-between flex-col flex p-3 bg-white">
@@ -23,9 +26,7 @@ const CartProductItem = ({ product }) => {
         <div className="w-full">
           <div className="flex flex-shrink">
             <p className="text-base">
-              <span className="font-bold text-base">
-                {product?.product?.name}
-              </span>
+              <span className="font-bold text-base">{name}</span>
             </p>
           </div>
 
@@ -44,21 +45,32 @@ const CartProductItem = ({ product }) => {
         <div>
           {product.discount === 0 ? (
             <p className="text-sm font-bold text-gray-600 flex gap-1">
-              <span>৳{formatCurrency(product.product.price, ",")}</span>
+              <span>
+                ৳
+                {formatCurrency(
+                  product.selling_price || product.product.price,
+                  ","
+                )}
+              </span>
               <span className="text-gray-600">X {product.quantity}</span>
             </p>
           ) : (
             <p className="text-sm font-bold text-gray-600 flex gap-3">
               <span className="line-through">
-                ৳ {formatCurrency(product.product.price, ",")}
+                ৳{" "}
+                {formatCurrency(
+                  product.selling_price || product.product.price,
+                  ","
+                )}
               </span>{" "}
               <span className="text-primary font-bold text-sm">
                 ৳
                 {formatCurrency(
-                  calculateDiscount(
-                    product.product.price,
-                    product.product.discount
-                  ),
+                  product.discounted_price ||
+                    calculateDiscount(
+                      product.product.price,
+                      product.product.discount
+                    ),
                   ","
                 )}
                 <span className="text-grey-500"></span>{" "}

@@ -18,6 +18,7 @@ const ProductsLayout = ({ children }) => {
         colors: [],
         brands: [],
         materials: [],
+        subCategory: [],
       }}
     >
       {children}

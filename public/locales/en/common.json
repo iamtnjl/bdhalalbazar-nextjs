@@ -8,7 +8,29 @@
     "vegetables": "Vegetables",
     "rice": "Rice",
     "spice": "Spices",
-    "trendingProducts": "Trending Products"
+    "trendingProducts": "Trending Products",
+    "grocery": "Grocery",
+    "baby": "Baby Items",
+    "daily": "Essentials",
+    "babyFood": "Baby Food",
+    "babyCare": "Baby Care",
+    "bread": "Bread & Buns",
+    "biscuits": "Biscuits & Cookies",
+    "snacks": "Snacks & Chips",
+    "drinks": "Soft Drinks",
+    "tea": "Tea & Coffee",
+    "dairy": "Milk & Dairy",
+    "eggs": "Eggs",
+    "instant": "Instant Foods",
+    "butter": "Ghee & Butter",
+    "sauces": "Sauces & Ketchup",
+    "condensed": "Condensed & Powder Milk",
+    "oil": "Oil",
+    "gas": "Gas Cylinder",
+    "sweet": "Sweets",
+    "paradise": "Paradise",
+    "lakshmi": "Lakshmi",
+    "stationary": "Stationary"
   },
   "subTitle": {
     "seeAll": "See All",
@@ -19,12 +41,98 @@
     "spices": "Pure Spices"
   },
   "ctaButton": {
-    "addToCart": "Add to Cart"
+    "addToCart": "Add to Cart",
+    "filter": "Filter",
+    "sectionTitle": "All Products",
+    "cancel": "Cancel",
+    "applyFilter": "Apply Filter",
+    "checkoutNow": "Checkout now",
+    "orderNow": "PLACE ORDER"
   },
   "navigation": {
     "home": "Home",
     "cart": "Cart",
     "categories": "Categories",
     "products": "Products"
+  },
+  "product": {
+    "sortBy": "Sort By",
+    "sectionTitle": "All Products",
+    "allOrders": "All orders",
+    "filter": {
+      "title": "Filters",
+      "categories": "Select Categories",
+      "subcategories": "Select Sub Categories",
+      "brands": "Select Brands",
+      "colors": "Select Colors",
+      "materials": "Select Materials"
+    }
+  },
+  "productDetail": {
+    "weight": "Weight",
+    "description": "Description",
+    "brand": "Brand",
+    "category": "Category",
+    "color": "Color",
+    "material": "Material"
+  },
+  "cart": {
+    "count": "Products added",
+    "paymentBreakDown": "Payment Breakdown",
+    "subTotal": "Sub total",
+    "discount": "Discount",
+    "deliveryCharge": "Delivery Charge",
+    "platformFee": "Platform fee",
+    "totalCost": "Total cost"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "subTitle": "Please Review All Details before Placing Order",
+    "shoppingCart": "Shopping Cart",
+    "expand": "Expand",
+    "collapse": "Collapse",
+    "customerHelpingText": "Our Deliverer will contact this name & phone number.",
+    "customerInformation": "Customer information",
+    "customerName": "Name",
+    "customerNamePlaceholder": "E.g: John Doe",
+    "customerEmail": "Email (Optional)",
+    "customerPhone": "Phone",
+    "deliveryAddress": "Delivery Address",
+    "streetHouse": "Street/House",
+    "houseAddressPlaceholder": "House Address/Street No",
+    "city": "City",
+    "cityPlaceholder": "Type your city name",
+    "zipCode": "Zip/Post Code",
+    "paymentMethod": "Payment Method",
+    "cashOnDelivery": "CASH ON DELIVERY",
+    "orderPriceBreakDown": "Order Price Breakdown",
+    "subTotal": "Sub total",
+    "discount": "Discount",
+    "deliveryCharge": "Delivery Charge",
+    "platformFee": "Platform fee",
+    "totalCost": "Total order amount",
+    "paymentWarning": "Please select Payment Method before placing an order."
+  },
+  "orders": {
+    "title": "My Orders",
+    "search": "Search by order ID",
+    "filter": "Filter by Status",
+    "filterPlaceholder": "All status",
+    "order": "Order",
+    "orderDetails": "View order"
+  },
+  "orderDetails": {
+    "allOrders": "All orders",
+    "orderStatus": "Order status",
+    "customerDetail": "Customer Detail",
+    "customerHelpingText": "This name & phone will be visible to the deliverer.",
+    "deliveryAddress": "Delivery Address",
+    "products": "Products",
+    "orderPriceBreakDown": "Order Price Breakdown",
+    "subTotal": "Sub total",
+    "discount": "Discount",
+    "deliveryCharge": "Delivery Charge",
+    "platformFee": "Platform fee",
+    "totalCost": "Total order amount"
   }
 }

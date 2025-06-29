@@ -12,7 +12,7 @@ const BestDeals = () => {
     <div className="px-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <BadgePercent height={30} widths={30} className="text-primary" />
+          <BadgePercent height={30} widths={30} className="text-gray-700" />
           <SectionTitle title={t("sectionTitle.goodDiscount")} />
         </div>
         <Button variant="border-less"> {t("subTitle.seeAll")} </Button>

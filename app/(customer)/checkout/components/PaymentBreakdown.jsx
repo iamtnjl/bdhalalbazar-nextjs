@@ -1,19 +1,24 @@
+"use client";
+
 import { formatCurrency } from "@/common/helpers/UtilKit";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const PaymentBreakdown = ({ data }) => {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
         <h2 className="font-semibold text-base text-grey-500 mt-2">
-          Order Price Breakdown
+          {t("checkout.orderPriceBreakDown")}
         </h2>
         <div className="flex justify-between items-center text-base font-medium text-grey-700">
-          <p>Sub Total</p>৳ {formatCurrency(data?.sub_total, ", ")}
+          <p>{t("checkout.subTotal")}</p>৳{" "}
+          {formatCurrency(data?.sub_total, ", ")}
           {/* <p>৳{formatCurrency(totalPriceWithOutDiscount?.toFixed(2))}</p> */}
         </div>
         <div className="flex justify-between items-center text-base font-medium text-grey-700">
-          <p>Discount</p>
+          <p>{t("checkout.discount")}</p>
           <p className="flex">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -30,13 +35,16 @@ const PaymentBreakdown = ({ data }) => {
         </div>
 
         <div className="flex justify-between items-center text-base font-medium text-grey-700">
-          <p>Delivery Charge</p>৳ {formatCurrency(data?.delivery_charge, ", ")}
+          <p>{t("checkout.deliveryCharge")}</p>৳{" "}
+          {formatCurrency(data?.delivery_charge, ", ")}
         </div>
         <div className="flex justify-between items-center text-base font-medium text-grey-700">
-          <p>Platform Fee</p>৳ {formatCurrency(data?.platform_fee, ", ")}
+          <p>{t("checkout.platformFee")}</p>৳{" "}
+          {formatCurrency(data?.platform_fee, ", ")}
         </div>
         <div className="flex justify-between items-center text-base font-bold text-grey-700">
-          <p>Total Order Price</p>৳ {formatCurrency(data?.grand_total, ", ")}
+          <p>{t("checkout.totalCost")}</p>৳{" "}
+          {formatCurrency(data?.grand_total, ", ")}
         </div>
       </div>
     </div>

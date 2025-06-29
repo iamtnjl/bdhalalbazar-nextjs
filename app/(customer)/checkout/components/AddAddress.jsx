@@ -1,19 +1,23 @@
+"use client";
+
 import { useState } from "react";
 import TextInputField from "@/components/from/TextInputField";
 import FormikErrorBox from "@/components/from/FormikErrorBox";
 import Button from "@/components/shared/Button";
 import SearchAndSelect from "@/components/from/SearchAndSelect";
 import TextAreaField from "@/components/from/TextAreaField";
+import { useTranslation } from "react-i18next";
 
 function AddAddress({ formik, setShowForm, Cancel, setShowAddress }) {
+  const { t } = useTranslation();
   return (
     <form className="flex flex-col gap-3" onSubmit={formik.handleSubmit}>
       <div>
         <TextAreaField
-          label="Street/House"
+          label={t("checkout.streetHouse")}
           name="street"
           id="street"
-          placeholder="House Address/Street No"
+          placeholder={t("checkout.houseAddressPlaceholder")}
           value={formik.values.street}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -22,10 +26,10 @@ function AddAddress({ formik, setShowForm, Cancel, setShowAddress }) {
       </div>
       <div>
         <TextInputField
-          label="City"
+          label={t("checkout.city")}
           name="city"
           id="city"
-          placeholder="Type your city name"
+          placeholder={t("checkout.cityPlaceholder")}
           value={formik.values.city}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -34,10 +38,10 @@ function AddAddress({ formik, setShowForm, Cancel, setShowAddress }) {
       </div>
       <div>
         <TextInputField
-          label="Zip/Post code"
+          label={t("checkout.zipCode")}
           name="zip"
           id="zip"
-          placeholder="Street/House number"
+          placeholder="6600"
           value={formik.values.zip}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}

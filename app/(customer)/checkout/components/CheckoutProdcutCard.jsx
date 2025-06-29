@@ -3,11 +3,13 @@
 import { formatCurrency } from "@/common/helpers/UtilKit";
 import { Transition } from "@headlessui/react";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 const CheckoutProductCard = ({ product, expand, animate }) => {
   const calculateDiscount = (price, discount) =>
     price - (price * discount) / 100;
-
+  const { i18n } = useTranslation();
+  const name = product?.product?.name[i18n.language] || product?.product?.name;
   return (
     <Transition.Root show={true}>
       <Transition
@@ -42,9 +44,7 @@ const CheckoutProductCard = ({ product, expand, animate }) => {
                 {expand && (
                   <div className="flex flex-shrink">
                     <p className="text-base">
-                      <span className="font-bold text-base">
-                        {product?.product?.name}
-                      </span>
+                      <span className="font-bold text-base">{name}</span>
                     </p>
                   </div>
                 )}
@@ -136,7 +136,7 @@ const CheckoutProductCard = ({ product, expand, animate }) => {
                 <div className="flex flex-shrink">
                   <p className="text-base">
                     <span className="font-bold text-base">
-                      {product?.product?.name}
+                      {name}
                     </span>
                     <span className="text-base font-semibold text-grey-500 ml-4">
                       x {product?.quantity}

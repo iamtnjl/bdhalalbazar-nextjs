@@ -11,8 +11,9 @@ import { useTranslation } from "react-i18next";
 
 const ProductCard = ({ product }) => {
   const { addToCart, cart } = useCart();
-  const { t } = useTranslation();
   const cartItem = cart.find((item) => item.productId === product._id);
+  const { t, i18n } = useTranslation();
+  const name = product.name[i18n.language] || product.name;
 
   return (
     <div className="bg-white p-2 rounded-md shadow-sm">
@@ -30,9 +31,7 @@ const ProductCard = ({ product }) => {
             alt="popular-product"
           />
           <div className="flex flex-col pointer-events-none whitespace-nowrap">
-            <h3 className="font-medium text-gray-900 truncate">
-              {product?.name}
-            </h3>
+            <h3 className="font-medium text-gray-900 truncate">{name}</h3>
             <div className="flex items-end gap-2">
               <p className="text-lg text-gray-600 line-through">৳</p>
               <p className="text-lg text-primary font-bold ">

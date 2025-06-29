@@ -9,47 +9,8 @@ import Link from "next/link";
 import CategorySliderSkeleton from "../skeleton/CategorySliderSkeleton";
 import { useTranslation } from "react-i18next";
 
-const CategorySlider = () => {
+const CategorySlider = ({ categories }) => {
   const [loading, setLoading] = useState(true);
-  const { t } = useTranslation();
-
-  const categories = [
-    {
-      name: t("sectionTitle.fish"),
-      desc: t("subTitle.fish"),
-      icon: "/icons/fish.png",
-      href: "fish",
-      color: "bg-orange-50",
-    },
-    {
-      name: t("sectionTitle.meat"),
-      desc: t("subTitle.meat"),
-      icon: "/icons/meat.png",
-      href: "beef%2Cchicken%2Cmutton%2Cmeat",
-      color: "bg-rose-50",
-    },
-    {
-      name: t("sectionTitle.vegetables"),
-      desc: t("subTitle.vegetables"),
-      icon: "/icons/vegetable.png",
-      href: "vegetable",
-      color: "bg-emerald-50",
-    },
-    {
-      name: t("sectionTitle.rice"),
-      desc: t("subTitle.rice"),
-      icon: "/icons/rice.png",
-      href: "rice",
-      color: "bg-yellow-50",
-    },
-    {
-      name: t("sectionTitle.spice"),
-      desc: t("subTitle.spices"),
-      icon: "/icons/moshla.png",
-      href: "moshla",
-      color: "bg-amber-50",
-    },
-  ];
 
   // Simulate loading (or use real data fetch if needed)
   useEffect(() => {
@@ -63,30 +24,28 @@ const CategorySlider = () => {
     <div className="relative px-2">
       <Swiper
         spaceBetween={12}
-        slidesPerView={3.2}
+        slidesPerView="auto" // changed from 3.2 to auto
         allowTouchMove={true}
         className="!pb-6"
       >
         {categories.map((category, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide key={index} className="!w-auto">
+            {" "}
+            {/* Make slide take content width */}
             <Link
               href={`/products?categories=${category.href}`}
-              className={`${category.color} p-2 rounded-lg flex flex-col gap-4 h-full`}
+              className={`${category.color} py-2 px-2 rounded-full flex items-center gap-2 h-full w-full whitespace-nowrap`} // prevent wrapping
             >
-              <div className="flex flex-col gap-2">
-                <p className="text-base font-medium text-gray-700">
-                  {category.name}
-                </p>
-                <p className="text-xs text-gray-400">{category.desc}</p>
-              </div>
-              <div className="flex items-center justify-center w-full">
-                <Image
-                  alt="category-icon"
-                  src={category.icon}
-                  width={50}
-                  height={50}
-                />
-              </div>
+              <Image
+                alt="category-icon"
+                src={category.icon}
+                width={600}
+                height={600}
+                className="object-cover object-center rounded-full h-[50px] w-[50px] bg-white p-2"
+              />
+              <p className="text-lg font-medium  text-white whitespace-nowrap mr-4">
+                {category.name}
+              </p>
             </Link>
           </SwiperSlide>
         ))}
