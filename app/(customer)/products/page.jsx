@@ -91,7 +91,10 @@ const ProductContainer = () => {
           setSearchKey(event.target.value);
           updateParams("search", event.target.value);
         }}
-        onReset={() => updateParams("search", "")}
+        onReset={() => {
+          setSearchKey("");
+          updateParams("search", "");
+        }}
       />
       <div className="flex items-end gap-2 w-full justify-between">
         <SearchAndSelect
