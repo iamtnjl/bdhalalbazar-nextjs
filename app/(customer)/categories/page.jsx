@@ -247,7 +247,7 @@ const Categories = () => {
         <Link
           href={
             category.type === "category"
-              ? `/products?category=${category.href}`
+              ? `/products?categories=${category.href}`
               : `/products?subCategory=${category.href}`
           }
           key={index}
