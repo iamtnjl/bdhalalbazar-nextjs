@@ -35,12 +35,11 @@ const ProductContainer = () => {
     paramsInURL,
     updateParams,
   } = useFilters();
+  const [searchKey, setSearchKey] = useState(params.search);
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useProducts(paramsInURL);
   const { t } = useTranslation();
-
-  console.log(paramsInURL);
 
   const allProducts = data?.pages.flatMap((page) => page.results) || [];
 
@@ -87,8 +86,9 @@ const ProductContainer = () => {
     <div className="w-full px-2 py-4 flex flex-col gap-6">
       <SearchByKey
         placeholders={[t("sectionTitle.homeSearch")]}
-        value={params.search || ""}
+        value={searchKey || ""}
         onChange={(event) => {
+          setSearchKey(event.target.value);
           updateParams("search", event.target.value);
         }}
         onReset={() => updateParams("search", "")}
