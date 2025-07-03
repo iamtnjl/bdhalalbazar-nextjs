@@ -251,13 +251,13 @@ const Categories = () => {
               : `/products?subCategory=${category.href}`
           }
           key={index}
-          className={`${category.color} py-2 px-2 rounded-md flex items-center justify-between gap-2 h-full w-full whitespace-nowrap`}
+          className={`${category.color} py-2 px-2 rounded-md flex items-center justify-between gap-2 h-full w-full`}
         >
           <div>
-            <p className="text-base font-medium  text-gray-700 whitespace-nowrap mr-4">
+            <p className="text-base font-medium  text-gray-700 mr-4">
               {category.name}
             </p>
-            <p className="text-xs font-medium  text-gray-500 whitespace-nowrap mr-4">
+            <p className="text-xs font-medium  text-gray-500 mr-4">
               {category.desc}
             </p>
           </div>
