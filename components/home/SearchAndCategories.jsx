@@ -208,7 +208,7 @@ const SearchAndCategories = () => {
     },
     {
       label: t("sectionTitle.cosmetics"),
-      key: "fruits",
+      key: "cosmetics",
       icon: "/icons/cosmetics.jpg",
       tabs: [],
       bg: "bg-amber-50",
