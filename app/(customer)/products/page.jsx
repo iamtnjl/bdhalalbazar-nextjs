@@ -20,8 +20,8 @@ import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
 
 const sortOptions = [
-  { label: "Price High", value: "price_asc" },
-  { label: "Price Low", value: "price_desc" },
+  { label: "Price Low", value: "price_asc" },
+  { label: "Price High", value: "price_desc" },
   { label: "Newest", value: "newest" },
   { label: "Oldest", value: "oldest" },
 ];
