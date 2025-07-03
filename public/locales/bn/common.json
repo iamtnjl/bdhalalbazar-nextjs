@@ -31,7 +31,7 @@
     "paradise": "প্যারাডাইস",
     "lakshmi": "লক্ষী",
     "stationary": "স্টেশনারি",
-    "fruits":"ফল",
+    "fruits": "ফল",
     "cosmetics": "কসমেটিকস"
   },
   "subTitle": {
@@ -48,7 +48,9 @@
     "cancel": "বাতিল",
     "applyFilter": " ফিল্টার করুন",
     "checkoutNow": "এখনই অর্ডার করুন",
-    "orderNow": "অর্ডার করুন"
+    "orderNow": "অর্ডার করুন",
+    "signIn": "লগইন",
+    "signUp": "রেজিস্ট্রার"
   },
   "navigation": {
     "home": "হোম",
@@ -135,5 +137,43 @@
     "deliveryCharge": "ডেলিভারি চার্জ",
     "platformFee": "প্ল্যাটফর্ম ফি",
     "totalCost": "মোট খরচ"
+  },
+  "myProfile": {
+    "menu": "মেনু",
+    "title": "ব্যক্তিগত তথ্য",
+    "accountInformation": "অ্যাকাউন্ট তথ্য",
+    "name": "নাম",
+    "email": "ই-মেইল",
+    "phone": "মোবাইল",
+    "address": "ঠিকানা",
+    "login": "লগইন করুন",
+    "register": "সাইন আপ করুন",
+    "myOrder": "আমার অর্ডার",
+    "editProfile": "প্রোফাইল ইডিট করুন",
+    "addAddress": "ঠিকানা যোগ/ইডিট করুন",
+    "adminPanel": "অ্যাডমিন প্যানেল",
+    "logOut": "লগআউট",
+    "privacy": "প্রাইভেসি ও নীতিমালা"
+  },
+  "login": {
+    "title": "লগইন",
+    "phone": "মোবাইল",
+    "password": "পাসওয়ার্ড",
+    "passwordPlaceholder": "পাসওয়ার্ড লিখুন",
+    "noAccount": "একাউন্ট নেই",
+    "createAccount": "একাউন্ট খুলুন"
+  },
+  "register": {
+    "title": "একাউন্ট খুলুন",
+    "name": "নাম",
+    "namePlaceholder": "সম্পূর্ণ নাম লিখুন",
+    "phone": "মোবাইল",
+    "email": "ইমেইল (ঐচ্ছিক)",
+    "emailPlaceholder": "যেমন: someone@example.com",
+    "password": "পাসওয়ার্ড",
+    "passwordPlaceholder": "সর্বনিম্ন ৬ সংখ্যা",
+    "retypePassword": "আবার পাসওয়ার্ড লিখুন",
+    "hasAccount": "একাউন্ট আছে",
+    "login": "লগইন করুন"
   }
 }

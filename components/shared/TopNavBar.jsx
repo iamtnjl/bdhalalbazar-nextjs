@@ -28,7 +28,7 @@ const TopNavbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [token, setToken] = useState();
   const router = useRouter();
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   useEffect(() => {
     if (typeof window !== undefined) {
@@ -38,7 +38,8 @@ const TopNavbar = () => {
   }, [token]);
   const { data: me, isLoading } = useQuery({
     queryKey: [`/me`, token],
-    queryFn: () => APIKit.me.getProfile().then(({ data }) => data.user),
+    queryFn: () =>
+      APIKit.me.getPublicProfile(token).then(({ data }) => data.user),
     retry: false,
     enabled: !!token,
   });
@@ -128,7 +129,9 @@ const TopNavbar = () => {
 
       <RightSideDrawer open={openMenu} setOpen={setOpenMenu}>
         <div className="border-b border-gray-200 pb-2">
-          <SectionTitle title={me === undefined ? "Menu" : "My Profile"} />
+          <SectionTitle
+            title={me === undefined ? t("myProfile.menu") : t("myProfile.title")}
+          />
         </div>
         <div className="py-4 w-full flex flex-col gap-6">
           {me && (
@@ -152,20 +155,20 @@ const TopNavbar = () => {
             <div className="flex flex-col gap-2">
               <div>
                 <p className="text-lg font-bold text-gray-700 pb-1">
-                  Account Information
+                  {t("myProfile.accountInformation")}
                 </p>
                 <div className="border border-gray-200 w-full" />
               </div>
               <div className="flex flex-col mt-3">
                 <label className="text-gray-500 font-medium text-base">
-                  Name
+                  {t("myProfile.name")}
                 </label>
                 <p className="text-gray-700 font-bold text-lg">{me.name}</p>
               </div>
               {me.email ? (
                 <div className="flex flex-col mt-3">
                   <label className="text-gray-500 font-medium text-base">
-                    Email
+                    {t("myProfile.email")}
                   </label>
                   <p className="text-gray-700 font-bold text-lg">{me.email}</p>
                 </div>
@@ -173,14 +176,14 @@ const TopNavbar = () => {
 
               <div className="flex flex-col mt-3">
                 <label className="text-gray-500 font-medium text-base">
-                  Phone
+                  {t("myProfile.phone")}
                 </label>
                 <p className="text-gray-700 font-bold text-lg">{me.phone}</p>
               </div>
               {me.address.length > 0 ? (
                 <div className="flex flex-col mt-3">
                   <label className="text-gray-500 font-medium text-base">
-                    Address
+                    {t("myProfile.address")}
                   </label>
                   <p className="text-gray-700 font-bold text-lg">{`${me.address[0].street}, ${me.address[0].city}, ${me.address[0].zip}`}</p>
                 </div>
@@ -195,7 +198,9 @@ const TopNavbar = () => {
                 href="/me/orders"
                 className=" px-4 py-2 cursor-pointer bg-white rounded-md w-full hover:text-primary  flex items-center justify-between border border-gray-200"
               >
-                <p className="text-lg font-medium  text-primary">My orders</p>
+                <p className="text-lg font-medium  text-primary">
+                  {t("myProfile.myOrder")}
+                </p>
                 <ListOrdered height={20} width={20} className="text-primary" />
               </Link>
               <Link
@@ -204,7 +209,7 @@ const TopNavbar = () => {
                 className=" px-4 py-2 cursor-pointer bg-white rounded-md w-full hover:text-primary  flex items-center justify-between border border-gray-200"
               >
                 <p className="text-lg font-medium  text-primary">
-                  Edit Profile
+                  {t("myProfile.editProfile")}
                 </p>
                 <UserPen height={20} width={20} className="text-primary" />
               </Link>
@@ -214,7 +219,7 @@ const TopNavbar = () => {
                 className=" px-4 py-2 cursor-pointer bg-white rounded-md w-full hover:text-primary  flex items-center justify-between border border-gray-200"
               >
                 <p className="text-lg font-medium  text-primary">
-                  Add/Edit Address
+                  {t("myProfile.addAddress")}
                 </p>
                 <MapPinHouse height={20} width={20} className="text-primary" />
               </Link>
@@ -226,7 +231,7 @@ const TopNavbar = () => {
                   className=" px-4 py-2 cursor-pointer bg-white rounded-md w-full hover:text-primary  flex items-center justify-between border border-gray-200"
                 >
                   <p className="text-lg font-medium  text-primary">
-                    Admin panel
+                    {t("myProfile.adminPanel")}
                   </p>
                   <ArrowRight height={20} width={20} className="text-primary" />
                 </Link>
@@ -241,7 +246,9 @@ const TopNavbar = () => {
                 }}
                 className=" px-4 py-2 cursor-pointer bg-white rounded-md w-full hover:text-primary  flex items-center justify-between border border-warning"
               >
-                <p className="text-lg font-medium  text-warning">Logout</p>
+                <p className="text-lg font-medium  text-warning">
+                  {t("myProfile.logOut")}
+                </p>
                 <LogOut height={20} width={20} className="text-warning" />
               </div>
             </div>
@@ -254,7 +261,9 @@ const TopNavbar = () => {
                   href="/login"
                   className=" px-4 py-2 cursor-pointer bg-white rounded-md w-full hover:text-primary  flex items-center justify-between border border-gray-200"
                 >
-                  <p className="text-lg font-medium  text-primary">Login</p>
+                  <p className="text-lg font-medium  text-primary">
+                    {t("myProfile.login")}
+                  </p>
                   <LogIn height={20} width={20} className="text-primary" />
                 </Link>
                 <Link
@@ -262,7 +271,9 @@ const TopNavbar = () => {
                   href="/register"
                   className=" px-4 py-2 cursor-pointer bg-white rounded-md w-full hover:text-primary  flex items-center justify-between border border-gray-200"
                 >
-                  <p className="text-lg font-medium  text-primary">Register</p>
+                  <p className="text-lg font-medium  text-primary">
+                    {t("myProfile.register")}
+                  </p>
                   <UserPlus height={20} width={20} className="text-primary" />
                 </Link>
               </div>
@@ -273,7 +284,7 @@ const TopNavbar = () => {
               className=" px-4 py-2 cursor-pointer bg-white rounded-md w-full hover:text-primary  flex items-center justify-between border border-gray-200 mt-2"
             >
               <p className="text-lg font-medium  text-primary">
-                Privacy & Policy
+                {t("myProfile.privacy")}
               </p>
               <BookCheck height={20} width={20} className="text-primary" />
             </Link>

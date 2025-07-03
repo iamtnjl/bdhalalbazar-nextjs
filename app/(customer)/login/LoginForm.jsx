@@ -14,6 +14,7 @@ import { useState } from "react";
 import FormikErrorBox from "@/components/from/FormikErrorBox";
 import toast from "react-hot-toast";
 import { setJWTokenAndRedirect } from "@/components/HOC/UserAuthGuard";
+import { useTranslation } from "react-i18next";
 
 const yupSchema = object({
   phone: string().required("Please enter your phone number"),
@@ -31,6 +32,8 @@ const LoginForm = () => {
   const searchParams = useSearchParams();
   const previousURL = searchParams.get("next");
   const router = useRouter();
+
+  const { t } = useTranslation();
 
   const formik = useFormik({
     initialValues,
@@ -95,7 +98,7 @@ const LoginForm = () => {
     <div className="max-w-3xl mx-auto">
       <div className="flex flex-col justify-center gap-10 items-center py-24">
         <div className="flex flex-col justify-center">
-          <h1 className="text-center text-4xl font-bold">Login</h1>
+          <h1 className="text-center text-4xl font-bold">{t("login.title")}</h1>
         </div>
         <form
           className="space-y-1 w-11/12 lg:w-1/2 mx-auto"
@@ -103,7 +106,7 @@ const LoginForm = () => {
         >
           <div>
             <PhoneInputField
-              label="Phone"
+              label={t("login.title.phone")}
               name="phone"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -114,13 +117,13 @@ const LoginForm = () => {
           </div>
           <div>
             <PasswordInputField
-              label="Password"
+              label={t("login.password")}
               name="password"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.password}
               autoComplete="phone"
-              placeholder="Enter your Password"
+              placeholder={t("login.passwordPlaceholder")}
             />
             <FormikErrorBox formik={formik} field="password" />
           </div>
@@ -138,13 +141,13 @@ const LoginForm = () => {
           </div> */}
 
           <Button type="submit" variant="primary" extraClassName="w-full">
-            Sign in
+            {t("ctaButton.signIn")}
           </Button>
         </form>
         <div className="flex flex-col justify-center items-center gap-3">
-          <p className="text-gray text-sm">Do not have an Account yet?</p>
+          <p className="text-gray text-sm">{t("login.noAccount")}?</p>
           <Link href="/register" className="text-primary font-semibold">
-            Create Account
+            {t("login.createAccount")}
           </Link>
         </div>
       </div>

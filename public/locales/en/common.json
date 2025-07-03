@@ -49,7 +49,9 @@
     "cancel": "Cancel",
     "applyFilter": "Apply Filter",
     "checkoutNow": "Checkout now",
-    "orderNow": "PLACE ORDER"
+    "orderNow": "PLACE ORDER",
+    "signIn": "Sign in",
+    "signUp": "Register"
   },
   "navigation": {
     "home": "Home",
@@ -136,5 +138,43 @@
     "deliveryCharge": "Delivery Charge",
     "platformFee": "Platform fee",
     "totalCost": "Total order amount"
+  },
+  "myProfile": {
+    "menu": "Menu",
+    "title": "My Profile",
+    "accountInformation": "Account information",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Mobile",
+    "address": "Address",
+    "login": "Login",
+    "register": "Sign Up",
+    "myOrder": "My Orders",
+    "editProfile": "Edit Profile",
+    "addAddress": "Add/Edit Address",
+    "adminPanel": "Admin Panel",
+    "logOut": "Logout",
+    "privacy": "Privacy & Policy"
+  },
+  "login": {
+    "title": "Login",
+    "phone": "Phone",
+    "password": "Password",
+    "passwordPlaceholder": "Enter password",
+    "noAccount": "Do not have an account",
+    "createAccount": "Create account"
+  },
+  "register": {
+    "title": "Create Account",
+    "name": "Name",
+    "namePlaceholder": "Enter your full name",
+    "phone": "Phone",
+    "email": "Email(Optional)",
+    "emailPlaceholder": "Ex: someone@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "Minimum 6 digits",
+    "retypePassword": "Re-type Password",
+    "hasAccount": "Already have an account",
+    "login": "login Instead"
   }
 }

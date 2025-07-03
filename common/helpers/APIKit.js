@@ -115,6 +115,14 @@ const APIKit = {
       const url = `/me`;
       return client.get(url);
     },
+    getPublicProfile: (token) => {
+      const url = `/me`;
+      return client.get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    },
     patchProfile: (payload) => {
       const url = `/me`;
       return client.patch(url, payload);

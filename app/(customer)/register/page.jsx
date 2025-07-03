@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { object, ref, string } from "yup";
 
 const yupSchema = object({
@@ -29,6 +30,7 @@ const yupSchema = object({
 
 const Register = () => {
   const router = useRouter();
+  const { t } = useTranslation();
   const [backendErrors, setBackendErrors] = useState({});
   const [initialValues, setInitialValues] = useState({
     name: "",
@@ -85,7 +87,9 @@ const Register = () => {
     <div className="max-w-3xl mx-auto">
       <div className="flex flex-col justify-center gap-10 items-center py-6">
         <div className="flex flex-col justify-center">
-          <h1 className="text-center text-4xl font-bold">Register</h1>
+          <h1 className="text-center text-4xl font-bold">
+            {t("register.title")}
+          </h1>
         </div>
         <form
           onSubmit={formik.handleSubmit}
@@ -93,21 +97,21 @@ const Register = () => {
         >
           <div>
             <TextInputField
-              label="Name"
+              label={t("register.name")}
               name="name"
               type="text"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.first_name}
               autoComplete="name"
-              placeholder="Enter your Name"
+              placeholder={t("register.namePlaceholder")}
               errors={backendErrors}
             />
             <FormikErrorBox formik={formik} field="name" />
           </div>
           <div>
             <PhoneInputField
-              label="Phone Number"
+              label={t("register.phone")}
               name="phone"
               type="text"
               onChange={formik.handleChange}
@@ -121,23 +125,23 @@ const Register = () => {
 
           <div>
             <TextInputField
-              label="Email (Optional)"
+              label={t("register.email")}
               name="email"
               type="email"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
               autoComplete="email"
-              placeholder="Enter your Email"
+              placeholder={t("register.emailPlaceholder")}
               errors={backendErrors}
             />
             <FormikErrorBox formik={formik} field="email" />
           </div>
           <div>
             <PasswordInputField
-              label="Password"
+              label={t("register.password")}
               name="password"
-              placeholder="Minimum 8 characters"
+              placeholder={t("register.passwordPlaceholder")}
               onChange={formik.handleChange}
               value={formik.values.password}
               errors={backendErrors}
@@ -146,9 +150,9 @@ const Register = () => {
           </div>
           <div>
             <PasswordInputField
-              label="Retype Password"
+              label={t("register.retypePassword")}
               name="retype_password"
-              placeholder="Retype the password"
+              placeholder={t("register.retypePassword")}
               onChange={formik.handleChange}
               value={formik.values.retype_password}
               errors={backendErrors}
@@ -163,12 +167,12 @@ const Register = () => {
           </div>
 
           <Button type="submit" variant="primary" extraClassName="w-full">
-            Register
+            {t("ctaButton.signUp")}
           </Button>
           <p>
-            Have an Account?{" "}
+            {t("register.hasAccount")}?{" "}
             <Link href="/login" className="text-primary font-semibold ml-2">
-              Login Instead
+              {t("register.login")}
             </Link>
           </p>
         </form>{" "}
