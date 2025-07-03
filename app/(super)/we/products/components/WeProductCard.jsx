@@ -6,7 +6,7 @@ import {
   PencilSquareIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import ProductStatusToggle from "./ProductStatusToggle";
 import ConfirmationModal from "@/components/shared/ConfirmationModal";
@@ -17,16 +17,16 @@ import { useTranslation } from "react-i18next";
 const WeProductCard = ({ item, refetch }) => {
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const router = useRouter();
-  
+
   const handleDeleteProduct = (id) => {
     const promise = APIKit.we.products
-    .deleteProduct(item?._id)
-    .then(() => {
-      refetch();
-    })
-    .catch((e) => {
-      throw e;
-    });
+      .deleteProduct(item?._id)
+      .then(() => {
+        refetch();
+      })
+      .catch((e) => {
+        throw e;
+      });
     return toast.promise(promise, {
       loading: "Deleting...",
       success: "Successfully deleted.",
@@ -35,6 +35,14 @@ const WeProductCard = ({ item, refetch }) => {
   };
   const { i18n } = useTranslation();
   const name = item.name[i18n.language] || item.name;
+  const searchParams = useSearchParams();
+
+  const handleEdit = () => {
+    const current = new URLSearchParams(searchParams.toString());
+    current.set("id", item?._id);
+
+    router.push(`/we/products/edit?${current.toString()}`);
+  };
 
   return (
     <div className="col-span-1 rounded-lg bg-white shadow border">
@@ -144,9 +152,7 @@ const WeProductCard = ({ item, refetch }) => {
           <div className="-ml-px flex w-0 flex-1">
             <button
               className={`flex justify-start items-center w-full px-4 py-3 text-sm font-medium text-gray-700 gap-2 border-t`}
-              onClick={() => {
-                router.push(`/we/products/edit?id=${item?._id}`);
-              }}
+              onClick={handleEdit}
             >
               <PencilSquareIcon className="h-5 w-5 text-gray-400" />
               Edit

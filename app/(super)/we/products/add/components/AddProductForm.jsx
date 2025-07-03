@@ -10,7 +10,7 @@ import TextAreaField from "@/components/from/TextAreaField";
 import TextInputField from "@/components/from/TextInputField";
 import Button from "@/components/shared/Button";
 import { useFormik } from "formik";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { number, object, string } from "yup";
@@ -85,6 +85,7 @@ const AddProductForm = () => {
   const [primaryImage, setPrimaryImage] = useState([]);
   const [images, setImages] = useState([]);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const formik = useFormik({
     initialValues: {
@@ -124,6 +125,11 @@ const AddProductForm = () => {
           formData.append(key, payload[key]);
         }
       });
+
+      const handleRedirect = () => {
+        const current = new URLSearchParams(searchParams.toString());
+        router.push(`/we/products?${current.toString()}`);
+      };
 
       const promise = APIKit.we.products
         .createProduct(formData)
@@ -436,7 +442,7 @@ const AddProductForm = () => {
         <Button type="submit" variant="primary">
           Add Product
         </Button>
-        <Button onClick={() => router.push("/we/products")} variant="light">
+        <Button onClick={() => router.back()} variant="light">
           Cancel
         </Button>
       </div>

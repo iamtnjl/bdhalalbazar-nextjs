@@ -11,7 +11,7 @@ export default function FiltersProvider({ children, initialParams = {} }) {
   const pathName = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const didPushInitialParams = useRef(false);
+  const searchDebounceRef = useRef(null);
 
   // Extracts query params from the URL.
   const getParamsFromURL = () => Object.fromEntries(searchParams.entries());
@@ -148,10 +148,12 @@ export default function FiltersProvider({ children, initialParams = {} }) {
           fieldNameOrFields === "search" ||
           fieldNameOrFields === "order_id"
         ) {
-          // Debounce search updates
-          setTimeout(() => {
+          if (searchDebounceRef.current)
+            clearTimeout(searchDebounceRef.current);
+
+          searchDebounceRef.current = setTimeout(() => {
             triggerURLUpdate(newParams);
-          }, 300);
+          }, 500);
         }
 
         return newParams;

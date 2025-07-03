@@ -119,11 +119,17 @@ const AdminProductEditForm = ({ data, refetch }) => {
         }
       });
 
+      const handleRedirect = () => {
+        const current = new URLSearchParams(searchParams.toString());
+        current.delete("id");
+        router.push(`/we/products?${current.toString()}`);
+      };
+
       const promise = APIKit.we.products
         .updateProduct(id, formData)
         .then(() => {
           refetch();
-          router.push("/we/products");
+          handleRedirect();
         })
         .catch((err) => {
           console.error(err);
@@ -397,7 +403,7 @@ const AdminProductEditForm = ({ data, refetch }) => {
         <Button type="submit" variant="primary">
           Edit Product
         </Button>
-        <Button onClick={() => router.push("/we/products")} variant="light">
+        <Button onClick={() => router.back()} variant="light">
           Cancel
         </Button>
       </div>

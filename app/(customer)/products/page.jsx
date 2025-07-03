@@ -35,11 +35,12 @@ const ProductContainer = () => {
     paramsInURL,
     updateParams,
   } = useFilters();
-  const [search, setSearch] = useState("");
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useProducts(paramsInURL);
   const { t } = useTranslation();
+
+  console.log(paramsInURL);
 
   const allProducts = data?.pages.flatMap((page) => page.results) || [];
 
@@ -82,21 +83,15 @@ const ProductContainer = () => {
     queryValue: params.subCategory,
   });
 
-  useEffect(() => {
-    setTimeout(() => {
-      updateParams("search", search);
-    }, 500);
-  }, [search]);
-
   return (
     <div className="w-full px-2 py-4 flex flex-col gap-6">
       <SearchByKey
         placeholders={[t("sectionTitle.homeSearch")]}
-        value={search}
+        value={params.search || ""}
         onChange={(event) => {
-          setSearch(event.target.value);
+          updateParams("search", event.target.value);
         }}
-        onReset={() => setSearch("")}
+        onReset={() => updateParams("search", "")}
       />
       <div className="flex items-end gap-2 w-full justify-between">
         <SearchAndSelect

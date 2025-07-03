@@ -7,7 +7,7 @@ import SectionTitle from "@/components/shared/SectionTitle";
 import { useQuery } from "@tanstack/react-query";
 import { Plus, SlidersHorizontal } from "lucide-react";
 import WeProductCard from "./components/WeProductCard";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Pagination from "@/components/shared/Pagination";
 import EmptyState from "@/components/shared/EmptyState";
 import { useFilters } from "@/providers/FiltersProvider";
@@ -27,6 +27,7 @@ const WeProduct = () => {
     removeFilterItems,
   } = useFilters();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["/admin-products", paramsInURL],
@@ -59,14 +60,16 @@ const WeProduct = () => {
     queryValue: params.materials,
   });
 
+  const handleRedirect = () => {
+    const current = new URLSearchParams(searchParams.toString());
+    router.push(`/we/products/add?${current.toString()}`);
+  };
+
   return (
     <div className="px-2 py-4 flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <SectionTitle title={"Products"} />
-        <Button
-          onClick={() => router.push("/we/products/add")}
-          variant="primary"
-        >
+        <Button onClick={handleRedirect} variant="primary">
           {" "}
           <Plus width={20} height={20} className="text-white" /> Add Product
         </Button>
