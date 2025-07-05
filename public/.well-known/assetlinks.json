@@ -1,0 +1,15 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.bdhalalbazar.doo",
+      "sha256_cert_fingerprints": [
+        "99:FA:37:C9:CC:AE:7E:B5:27:5A:D1:63:93:CB:AC:A9:97:7B:0E:54:A7:FC:61:F3:0F:59:CD:71:CE:52:98:37"
+      ]
+    }
+  }
+]
