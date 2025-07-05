@@ -65,10 +65,6 @@ const WeProduct = () => {
     router.push(`/we/products/add?${current.toString()}`);
   };
 
-  if (isLoading) {
-    return "Loading..";
-  }
-
   return (
     <div className="px-2 py-4 flex flex-col gap-4">
       <div className="flex items-center justify-between">
@@ -108,7 +104,7 @@ const WeProduct = () => {
           selectedMaterials={selectedMaterials}
         />
       ) : null}
-      {data?.count > 0 ? (
+      {!isLoading && data?.count > 0 ? (
         <>
           {data?.results?.map((item, i) => (
             <WeProductCard key={i} item={item} refetch={refetch} />
@@ -121,6 +117,8 @@ const WeProduct = () => {
             page={+paramsInURL.page}
           />
         </>
+      ) : isLoading ? (
+        <p>Loading..</p>
       ) : (
         <>
           <EmptyState>No products found</EmptyState>
