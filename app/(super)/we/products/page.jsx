@@ -65,6 +65,10 @@ const WeProduct = () => {
     router.push(`/we/products/add?${current.toString()}`);
   };
 
+  if (isLoading) {
+    return "Loading..";
+  }
+
   return (
     <div className="px-2 py-4 flex flex-col gap-4">
       <div className="flex items-center justify-between">
@@ -104,7 +108,7 @@ const WeProduct = () => {
           selectedMaterials={selectedMaterials}
         />
       ) : null}
-      {!isLoading && data?.count > 0 ? (
+      {data?.count > 0 ? (
         <>
           {data?.results?.map((item, i) => (
             <WeProductCard key={i} item={item} refetch={refetch} />
