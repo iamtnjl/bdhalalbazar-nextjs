@@ -103,7 +103,7 @@ const AddProductForm = () => {
       colors: [],
       materials: [],
       tags: {},
-      mrp_price: "",
+      mrp_price: 0,
     },
     validationSchema,
     onSubmit: (values) => {

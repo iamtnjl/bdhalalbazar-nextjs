@@ -79,7 +79,10 @@ const WeOrderCard = ({ data, refetch }) => {
         </div>
         <div className="text-grey-700">
           <address className="text-sm whitespace-pre-wrap">
-            Profit: <span className="text-primary">&#2547; {data?.profit}</span>
+            Profit:{" "}
+            <span className="text-primary">
+              &#2547; {Number(data?.profit).toFixed(2)}
+            </span>
           </address>
         </div>
       </div>
