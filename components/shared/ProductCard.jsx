@@ -22,14 +22,16 @@ const ProductCard = ({ product }) => {
           href={`/products/${product._id}`}
           className="group flex flex-col gap-2 justify-between h-full"
         >
-          <img
-            className="cursor-pointer group-hover:scale-[1.01] group-hover:opacity-75 rounded-md w-full  object-cover object-center"
-            src={
-              product?.primary_image.original ||
-              "/placeholders/no-image-square.jpg"
-            }
-            alt="popular-product"
-          />
+          <div className="w-full h-[225px]">
+            <img
+              className="cursor-pointer group-hover:scale-[1.01] group-hover:opacity-75 rounded-md w-full h-full object-cover object-center"
+              src={
+                product?.primary_image.original ||
+                "/placeholders/no-image-square.jpg"
+              }
+              alt="popular-product"
+            />
+          </div>
           <div className="flex flex-col pointer-events-none whitespace-nowrap">
             <h3 className="font-medium text-gray-900 truncate">{name}</h3>
             <div className="flex items-end gap-2">
