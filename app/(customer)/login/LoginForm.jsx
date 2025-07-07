@@ -106,7 +106,7 @@ const LoginForm = () => {
         >
           <div>
             <PhoneInputField
-              label={t("login.title.phone")}
+              label={t("login.phone")}
               name="phone"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
