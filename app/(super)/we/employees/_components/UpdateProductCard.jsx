@@ -65,16 +65,18 @@ const UpdateProductCard = ({ item }) => {
         />
       </div>
       <div className="px-4 pb-4 flex flex-col gap-1">
-        {item?.changes.map((change, i) => (
-          <p key={i} className="text-sm font-medium text-gray-500">
-            <span className="font-bold capitalize">
-              {getReadableFieldName(change.field)}
-            </span>{" "}
-            has been changed to{" "}
-            <span className="font-bold text-primary">{change?.newValue}</span>{" "}
-            from <span className="font-bold">{change?.oldValue}</span>.
-          </p>
-        ))}
+        {item?.changes
+          ?.filter((change) => change.field !== "updatedBy")
+          ?.map((change, i) => (
+            <p key={i} className="text-sm font-medium text-gray-500">
+              <span className="font-bold capitalize">
+                {getReadableFieldName(change.field)}
+              </span>{" "}
+              has been changed to{" "}
+              <span className="font-bold text-primary">{change?.newValue}</span>{" "}
+              from <span className="font-bold">{change?.oldValue}</span>.
+            </p>
+          ))}
       </div>
     </div>
   );
