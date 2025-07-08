@@ -17,7 +17,7 @@ const EmployeeTable = ({ data }) => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item) => {
+          {data?.map((item) => {
             return (
               <tr key={item._id} className="border-b">
                 <td className="px-4 py-2 text-sm font-medium text-gray-700 flex flex-col gap-1">
