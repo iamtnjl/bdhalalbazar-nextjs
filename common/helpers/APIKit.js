@@ -181,6 +181,16 @@ const APIKit = {
         return client.post(url, payload);
       },
     },
+    employees: {
+      getAllEmployees: () => {
+        const url = `/we/admin-users`;
+        return client.get(url);
+      },
+      getAllEmployeeActivity: (id) => {
+        const url = `/we/product-log/${id}`;
+        return client.get(url);
+      },
+    },
     tags: {
       createTag: (payload) => {
         const url = `/we/tag`;
