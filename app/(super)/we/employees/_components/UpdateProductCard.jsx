@@ -72,9 +72,10 @@ const UpdateProductCard = ({ item }) => {
               <span className="font-bold capitalize">
                 {getReadableFieldName(change.field)}
               </span>{" "}
-              has been changed to{" "}
+              has been changed from{" "}
+              <span className="font-bold">{change?.oldValue}</span> to{" "}
               <span className="font-bold text-primary">{change?.newValue}</span>{" "}
-              from <span className="font-bold">{change?.oldValue}</span>.
+              .
             </p>
           ))}
       </div>
