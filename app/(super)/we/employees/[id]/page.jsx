@@ -24,7 +24,7 @@ const UserActivity = () => {
   const [tab, setTab] = useState("updated_product");
   const { id } = useParams();
   const { data, isLoading } = useQuery({
-    queryKey: ["/admin-users"],
+    queryKey: ["/admin-users", id],
     queryFn: () =>
       APIKit.we.employees.getAllEmployeeActivity(id).then(({ data }) => data),
   });
