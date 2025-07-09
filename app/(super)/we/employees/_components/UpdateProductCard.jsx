@@ -32,9 +32,55 @@ function getReadableFieldName(field) {
   return map[field] || field; // fallback to field itself if no mapping found
 }
 
+function formatChangeValue(value, field) {
+  // If it’s an array
+  if (Array.isArray(value)) {
+    if (value.length === 0) return "Empty";
+    if (typeof value[0] === "object" && value[0] !== null) {
+      return (
+        <div className="flex gap-1">
+          {value.map((img, idx) => (
+            <img
+              key={img._id || idx}
+              src={img.thumbnail || img.original || ""}
+              alt=""
+              className="inline-block h-8 w-8 rounded border"
+            />
+          ))}
+        </div>
+      );
+    }
+    return value.join(", ");
+  }
+
+  // If the value is a single object (rare here)
+  if (typeof value === "object" && value !== null) {
+    return <code>{JSON.stringify(value)}</code>;
+  }
+
+  // ✅ Special: If the field is an image path and value is a URL → render as image
+  if (
+    typeof value === "string" &&
+    field.startsWith("primary_image") &&
+    value.startsWith("http")
+  ) {
+    return (
+      <img src={value} alt="" className="inline-block h-8 w-8 rounded border" />
+    );
+  }
+
+  // ✅ Special: If the field is `is_published` → map boolean to label
+  if (field === "is_published") {
+    return value ? "Published" : "Unpublished";
+  }
+
+  return value !== undefined && value !== null ? String(value) : "N/A";
+}
 const UpdateProductCard = ({ item }) => {
   const { i18n } = useTranslation();
   const name = item.name[i18n.language] || item.name;
+
+  console.log(item);
 
   return (
     <div className="col-span-1 rounded-lg bg-white shadow border">
@@ -67,17 +113,33 @@ const UpdateProductCard = ({ item }) => {
       <div className="px-4 pb-4 flex flex-col gap-1">
         {item?.changes
           ?.filter((change) => change.field !== "updatedBy")
-          ?.map((change, i) => (
-            <p key={i} className="text-sm font-medium text-gray-500">
-              <span className="font-bold capitalize">
-                {getReadableFieldName(change.field)}
-              </span>{" "}
-              has been changed from{" "}
-              <span className="font-bold">{change?.oldValue}</span> to{" "}
-              <span className="font-bold text-primary">{change?.newValue}</span>{" "}
-              .
-            </p>
-          ))}
+          ?.map((change, i) => {
+            const oldVal = formatChangeValue(change.oldValue, change.field);
+            const newVal = formatChangeValue(change.newValue, change.field);
+            const hasOld =
+              change.oldValue !== undefined &&
+              change.oldValue !== null &&
+              change.oldValue !== "";
+
+            return (
+              <div key={i} className="text-sm font-medium text-gray-500">
+                <span className="font-bold capitalize">
+                  {getReadableFieldName(change.field)}
+                </span>{" "}
+                {hasOld ? (
+                  <>
+                    changed from <span className="font-bold">{oldVal}</span> to{" "}
+                    <span className="font-bold text-primary">{newVal}</span>
+                  </>
+                ) : (
+                  <>
+                    set to{" "}
+                    <span className="font-bold text-primary">{newVal}</span>.
+                  </>
+                )}
+              </div>
+            );
+          })}
       </div>
     </div>
   );
