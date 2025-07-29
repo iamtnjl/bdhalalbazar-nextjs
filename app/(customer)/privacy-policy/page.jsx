@@ -1,4 +1,5 @@
 import SectionTitle from "@/components/shared/SectionTitle";
+import Link from "next/link";
 import React from "react";
 
 const PrivacyAndPolicy = () => {
@@ -148,6 +149,7 @@ const PrivacyAndPolicy = () => {
           </p>
         </div>
       </div>
+      <Link className="text-primary" href={"/check-agent"}>Check Agent</Link>
     </div>
   );
 };
